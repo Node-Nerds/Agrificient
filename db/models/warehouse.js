@@ -1,7 +1,7 @@
 const { pool, shouldAbort } = require("../conn");
 
 class Warehouse {
-  constructor(warehouse_name, x, y, pincode, phone, address) {
+  constructor(warehouse_name, phone, x, y, pincode, address) {
     this.warehouse_name = warehouse_name;
     this.phone = phone;
     this.x = x;

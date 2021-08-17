@@ -6,6 +6,8 @@ router.get("/addwarehouse", (req, res) => {
 });
 
 router.post("/addwarehouse", (req, res) => {
+  console.log(req.body);
+
   const warehouse = new Warehouse(
     req.body.name,
     req.body.phone,
