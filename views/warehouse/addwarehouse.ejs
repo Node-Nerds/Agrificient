@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<style>
+  #map {
+    height: 600px;
+    width: 70%;
+    margin: auto;
+  }
+
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+<body>
+
+  <h1>NEW ADD</h1>
+
+  <form action="/addwarehouse" method="post">
+
+    <label for="name">Name</label> <input name="name" type="text">
+    <label for="phone">Phone</label> <input name="phone" type="text">
+    <label for="x">X</label> <input id="latitude" name="x" type="text">
+    <label for="y">Y</label> <input id="longitude" name="y" type="text">
+    <label for="pincode">Pincode</label> <input name="pincode" type="text">
+    <label for="address">Address</label> <input name="address" type="text">
+
+    <button type="submit"> Submit </button>
+
+  </form>
+
+  <br>
+  <br>
+
+  <div id="map"></div>
+
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtLZdve7jf15PETQYF6TgR05sHZnVdFc4">
+  </script>
+
+  <script>
+    //Map Function
+    function initMap() {
+      var options = {
+        center: {
+          lat: -34.397,
+          lng: 150.644
+        },
+        zoom: 10,
+      }
+
+      let map = new google.maps.Map(document.getElementById("map"), options);
+    }
+
+    //Map Function with Coordinates
+    function initMapWithCoords(latitude, longitude) {
+      var options = {
+        center: {
+          lat: latitude,
+          lng: longitude
+        },
+        zoom: 10,
+      }
+
+      let map = new google.maps.Map(document.getElementById("map"), options);
+    }
+
+    //Success Callback 
+    const successCallback = (position) => {
+      document.getElementById("latitude").value = position.coords.latitude;
+      document.getElementById("longitude").value = position.coords.longitude;
+
+      initMapWithCoords(position.coords.latitude, position.coords.longitude);
+    }
+
+    //Error Callback
+    const errorCallback = (error) => {
+      console.log(error);
+      initMap();
+    }
+
+    //Get User's Location
+    const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback, {
+      enableHighAccuracy: true,
+      timeout: 5000,
+    });
+  </script>
+
+</body>
+
+</html>
