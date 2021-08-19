@@ -12,7 +12,7 @@ class Warehouse {
 
   save(callback) {
     const queryText =
-      "insert into agrificient.warehouse(warehouse_name, phone, x, y, pincode, address) values ($1,$2,$3,$4,$5,$6);";
+      "insert into agrificient.warehouse(warehouse_name, phone, latitude, longitude, pincode, address) values ($1,$2,$3,$4,$5,$6);";
 
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
@@ -60,15 +60,41 @@ class Warehouse {
     });
   }
 
-  find(callback) {
-    var searchQuery = "select * from agrificient.warehouse;";
+  findByPos(latitude, longitude, callback) {
+    var searchQuery =
+      "select * from agrificient.warehouse order by |/ ((latitude-$1)^2 + (longitude-$2)^2) limit 5";
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
         callback(err, null);
       }
 
       client
-        .query(searchQuery)
+        .query(searchQuery, [latitude, longitude])
+        .then((res) => {
+          // console.log(res);
+          if (res.rowCount == 0) {
+            callback(null, null);
+          } else {
+            callback(null, res.rows);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          callback("error");
+        });
+      done();
+    });
+  }
+
+  findByPincode(pincode, callback) {
+    var searchQuery = "select * from agrificient.warehouse where pincode = $1";
+    pool.connect((err, client, done) => {
+      if (shouldAbort(err, done)) {
+        callback(err, null);
+      }
+
+      client
+        .query(searchQuery, [pincode])
         .then((res) => {
           // console.log(res);
           if (res.rowCount == 0) {

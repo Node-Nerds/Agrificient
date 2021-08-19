@@ -45,60 +45,9 @@
 
   <div id="map"></div>
 
+  <!-- Google Map Script -->
   <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtLZdve7jf15PETQYF6TgR05sHZnVdFc4">
   </script>
-
-  <!-- <script>
-    //Map Function with Coordinates
-    function initMapWithCoords(latitude, longitude) {
-      var options = {
-        center: {
-          lat: latitude,
-          lng: longitude
-        },
-        zoom: 10,
-      }
-
-      //New Map
-      let map = new google.maps.Map(document.getElementById("map"), options);
-
-      //Marker
-      function addMarker(latitude, longitude) {
-        const marker = new google.maps.Marker({
-          position: {
-            lat: latitude,
-            lng: longitude
-          },
-          map: map,
-        })
-      }
-
-      console.log(latitude);
-      console.log(longitude);
-      addMarker(latitude, longitude);
-      addMarker(37.992, -1.1307);
-
-    }
-
-    //Success Callback 
-    const successCallback = (position) => {
-      document.getElementById("latitude").value = position.coords.latitude;
-      document.getElementById("longitude").value = position.coords.longitude;
-
-      initMapWithCoords(position.coords.latitude, position.coords.longitude);
-    }
-
-    //Error Callback
-    const errorCallback = (error) => {
-      console.log(error);
-    }
-
-    //Get User's Location
-    const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback, {
-      enableHighAccuracy: true,
-      timeout: 5000,
-    });
-  </script> -->
 
   <script>
     window.addEventListener('load', (event) => {
@@ -122,11 +71,13 @@
         console.log(error);
       }
 
+      //Get Location
       const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback, {
         enableHighAccuracy: true,
         timeout: 5000,
       });
 
+      //Initialise
       function initialize() {
         var latlng = new google.maps.LatLng(position[0], position[1]);
         var myOptions = {

@@ -12,6 +12,103 @@
 
   <h1>NEW SEARCH</h1>
 
+  <button onclick="useLocation()">Use my Location</button>
+  <br>
+  <input id="pincode" type="text" name="pincode" required>
+  <button onclick="usePincode()">Use pincode</button>
+
+  <br>
+  <br>
+
+  <div id="myOutput"></div>
+
+  <!-- Google Map Script -->
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtLZdve7jf15PETQYF6TgR05sHZnVdFc4">
+  </script>
+
+  <!-- Jquery Script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    function useLocation() {
+
+      //Success Callback 
+      const successCallback = (coords) => {
+        console.log("Hello");
+        let data = {
+          latitude: coords.coords.latitude,
+          longitude: coords.coords.longitude
+        }
+
+        $.post("/searchwarehouse", data, function (data, status) {
+          var mainContainer = document.getElementById("myOutput");
+          mainContainer.innerHTML = "";
+
+          for (var i = 0; i < data.length; i++) {
+            var div = document.createElement("div");
+            div.innerHTML = 'WarehouseName: ' + data[i].warehouse_name + ' Phone: ' + data[i]
+              .phone + ' Pincode: ' + data[i].pincode + ' Address: ' + data[i]
+              .address;
+
+            var link = document.createElement('a');
+            link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
+              data[i].longitude;
+            link.target = "_Blank"
+            link.innerText = "Location";
+
+            mainContainer.appendChild(div);
+            mainContainer.appendChild(link);
+          }
+        })
+
+        navigator.geolocation.clearWatch(watchId);
+
+      }
+
+      //Error Callback
+      const errorCallback = (error) => {
+        console.log(error);
+      }
+
+      //Get Location
+      const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback);
+    }
+
+    function usePincode() {
+
+      let pincode = $("#pincode").val();
+
+      let data = {
+        pincode: pincode,
+      }
+
+      if (pincode.length != 6) {
+        alert("Invalid Pincode");
+      } else {
+        $.post("/searchwarehouse", data, function (data, status) {
+          var mainContainer = document.getElementById("myOutput");
+          mainContainer.innerHTML = "";
+
+          for (var i = 0; i < data.length; i++) {
+            var div = document.createElement("div");
+            div.innerHTML = 'WarehouseName: ' + data[i].warehouse_name + ' Phone: ' + data[i]
+              .phone + ' Pincode: ' + data[i].pincode + ' Address: ' + data[i]
+              .address;
+
+            var link = document.createElement('a');
+            link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
+              data[i].longitude;
+            link.target = "_Blank"
+            link.innerText = "Location";
+
+            mainContainer.appendChild(div);
+            mainContainer.appendChild(link);
+          }
+        })
+      }
+
+    }
+  </script>
+
 </body>
 
 </html>
