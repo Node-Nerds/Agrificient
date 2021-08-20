@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.render("home.ejs");
+  res.render("warehouse/home.ejs");
 });
 
 //  Connect all our routes to our application
