@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
+var ejs = require("ejs");
 
 const routes = require("./routes/");
 require("./db/conn.js");
@@ -18,6 +19,8 @@ app.use(
 app.use(cors());
 
 app.use(bodyParser.json());
+
+app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
