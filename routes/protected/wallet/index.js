@@ -16,7 +16,7 @@ const get_sender_info = require("./get_sender_info");
 router.use("/", get_wallet_details);
 router.use("/", add_money);
 router.use("/", get_pending_transacrtion);
-router.use("/",update_trans_status);
+router.use("/", update_trans_status);
 router.use("/", quick_transact);
 router.use("/", withdraw_money);
 router.use("/", block_unblock_money);

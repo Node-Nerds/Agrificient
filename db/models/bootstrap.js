@@ -79,9 +79,9 @@ function bootstrap(callback){
                                         callback(null, null);
                                       } else {
 
-                                        query = "CREATE  TABLE if not exists public.bid ( id                   uuid DEFAULT uuid_generate_v4() NOT NULL ,user_id              uuid  NOT NULL ,product_name         varchar(100)  NOT NULL ,quantity             bigint  NOT NULL ,unit                 public.quantity_unit  NOT NULL ,base_price           numeric(12,2)  NOT NULL ,description          varchar(256)  NOT NULL ,start_dt             date  NOT NULL ,end_dt               date  NOT NULL ,pin_code             numeric(6,0)  NOT NULL ,city                 varchar(64)  NOT NULL ,state_name           varchar(64)  NOT NULL ,result_status        char(1) DEFAULT 0 NOT NULL ,rating               numeric(5,1) DEFAULT 0 NOT NULL ,no_rating            bigint DEFAULT 0 NOT NULL ,district             varchar(64)  NOT NULL ,product_cat          public.product_types  NOT NULL ,latitude             numeric   ,longitude            numeric   ,CONSTRAINT pk_bid_id PRIMARY KEY ( id ));"
-                                        alter_query = "ALTER TABLE public.bid DROP CONSTRAINT if exists fk_bid_users"
-                                        alter_query1 = "ALTER TABLE public.bid ADD CONSTRAINT fk_bid_users FOREIGN KEY ( user_id ) REFERENCES public.users( id ) ON DELETE CASCADE ON UPDATE CASCADE;"
+                                        query = "CREATE  TABLE if not exists public.products ( id                   uuid DEFAULT uuid_generate_v4() NOT NULL ,user_id              uuid  NOT NULL ,product_name         varchar(100)  NOT NULL ,quantity             bigint  NOT NULL ,unit                 public.quantity_unit  NOT NULL ,base_price           numeric(12,2)  NOT NULL ,description          varchar(256)  NOT NULL ,start_dt             date  NOT NULL ,end_dt               date  NOT NULL ,pin_code             numeric(6,0)  NOT NULL ,city                 varchar(64)  NOT NULL ,state_name           varchar(64)  NOT NULL ,result_status        char(1) DEFAULT 0 NOT NULL ,rating               numeric(5,1) DEFAULT 0 NOT NULL ,no_rating            bigint DEFAULT 0 NOT NULL ,district             varchar(64)  NOT NULL ,product_cat          public.product_types  NOT NULL ,latitude             numeric   ,longitude            numeric   ,CONSTRAINT pk_bid_id PRIMARY KEY ( id ));"
+                                        alter_query = "ALTER TABLE public.products DROP CONSTRAINT if exists fk_bid_users"
+                                        alter_query1 = "ALTER TABLE public.products ADD CONSTRAINT fk_bid_users FOREIGN KEY ( user_id ) REFERENCES public.users( id ) ON DELETE CASCADE ON UPDATE CASCADE;"
 
                                         client
                                         .query(query)
@@ -106,10 +106,72 @@ function bootstrap(callback){
                                               if (res.rowCount == 0) {
                                                 callback(null, null);
                                               } else {
+
+                                                // callback(null, res);
+                                                query =  "CREATE  TABLE IF NOT EXISTS public.bid ( id                   uuid DEFAULT uuid_generate_v4() NOT NULL ,user_id              uuid  NOT NULL ,product_id           uuid  NOT NULL ,min_quantity         bigint  NOT NULL ,max_quantity         bigint  NOT NULL ,rate                 numeric(12,2)  NOT NULL ,amount               numeric(12,2)  NOT NULL ,bid_date             date  NOT NULL ,bid_time             time  NOT NULL ,status               char(1) DEFAULT 0 NOT NULL ,CONSTRAINT pk_bid_id_0 PRIMARY KEY ( id ) );"
+                                                alter_query = "ALTER TABLE public.bid DROP CONSTRAINT IF EXISTS fk_bid_users" 
+                                                let alter_query2 = "ALTER TABLE public.bid ADD CONSTRAINT fk_bid_users FOREIGN KEY ( user_id ) REFERENCES public.users( id ) ON DELETE CASCADE ON UPDATE CASCADE;"
+                                                alter_query1 = "ALTER TABLE public.bid DROP CONSTRAINT IF EXISTS fk_bid_products"
+                                                let alter_query3 = "ALTER TABLE public.bid ADD CONSTRAINT fk_bid_products FOREIGN KEY ( product_id ) REFERENCES public.products( id ) ON DELETE CASCADE ON UPDATE CASCADE;"
+                                                client
+                                        .query(query)
+                                        .then((res) => {
+                                          // console.log(res);
+                                          if (res.rowCount == 0) {
+                                            callback(null, null);
+                                          } else {
+                                        
+                                            client
+                                            .query(alter_query)
+                                            .then((res) => {
+                                              // console.log(res);
+                                              if (res.rowCount == 0) {
+                                                callback(null, null);
+                                              } else {
                                             
+                                                client
+                                            .query(alter_query1)
+                                            .then((res) => {
+                                              // console.log(res);
+                                              if (res.rowCount == 0) {
+                                                callback(null, null);
+                                              } else {
+                                                
+                                                // callback(null, res);
+                                                client.query(alter_query2)
+                                            .then((res) => {
+                                              // console.log(res);
+                                              if (res.rowCount == 0) {
+                                                callback(null, null);
+                                              } else {
+                                            
+                                                client
+                                            .query(alter_query3)
+                                            .then((res) => {
+                                              // console.log(res);
+                                              if (res.rowCount == 0) {
+                                                callback(null, null);
+                                              } else {
                                                 
                                                 callback(null, res);
         
+                                            
+                                            }
+                                            })
+                                            .catch((e) => {
+                                              console.log(e);
+                                              callback("error");
+                                            });
+                                                
+        
+                                            
+                                            }
+                                            })
+                                            .catch((e) => {
+                                              console.log(e);
+                                              callback("error");
+                                            });
+
                                             
                                             }
                                             })
@@ -134,6 +196,32 @@ function bootstrap(callback){
                                           console.log(e);
                                           callback("error");
                                         });
+                                                
+        
+                                            
+                                            }
+                                            })
+                                            .catch((e) => {
+                                              // //console.log(e);
+                                              callback("error");
+                                            });
+                                                
+        
+                                            
+                                            }
+                                            })
+                                            .catch((e) => {
+                                              // //console.log(e);
+                                              callback("error");
+                                            });
+        
+                                        
+                                        }
+                                        })
+                                        .catch((e) => {
+                                          // //console.log(e);
+                                          callback("error");
+                                        });
                                         
                                         
 
@@ -141,7 +229,7 @@ function bootstrap(callback){
                                     }
                                     })
                                     .catch((e) => {
-                                      console.log(e);
+                                      // //console.log(e);
                                       callback("error");
                                     });
                                         
@@ -150,7 +238,7 @@ function bootstrap(callback){
                                     }
                                     })
                                     .catch((e) => {
-                                      console.log(e);
+                                      // //console.log(e);
                                       callback("error");
                                     });
 
@@ -158,26 +246,26 @@ function bootstrap(callback){
                                 }
                                 })
                                 .catch((e) => {
-                                  console.log(e);
+                                  //console.log(e);
                                   callback("error");
                                 });
 
                         }
                         })
                         .catch((e) => {
-                          console.log(e);
+                          //console.log(e);
                           callback("error");
                         });
                   }
                 })
                 .catch((e) => {
-                  console.log(e);
+                  //console.log(e);
                   callback("error");
                 });
             }
           })
           .catch((e) => {
-            console.log(e);
+            //console.log(e);
             callback("error");
           });
         done();
@@ -226,23 +314,23 @@ function bootstrap_enum(callback){
                                         callback(null, res);
                                   }})
                                   .catch((e) => {
-                                    console.log(e);
+                                    //console.log(e);
                                     callback("error");
                                   });
                           }})
                           .catch((e) => {
-                            console.log(e);
+                            //console.log(e);
                             callback("error");
                           });
                   }})
                   .catch((e) => {
-                    console.log(e);
+                    //console.log(e);
                     callback("error");
                   });
 
           }})
           .catch((e) => {
-            console.log(e);
+            //console.log(e);
             callback("error");
           });
         done();

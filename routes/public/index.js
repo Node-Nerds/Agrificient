@@ -11,7 +11,7 @@ router.use("/otpLogin", otpLogin);
 router.use("/signup", signup);
 router.use("/", login);
 router.use("/verify_phno", verify_phno);
-router.use("/forgotPassword", forgot_password);
+router.use("/forgotassword", forgot_password);
 
 
 

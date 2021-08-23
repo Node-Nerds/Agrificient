@@ -1,0 +1,166 @@
+HI
+<%=  user.fname  %>
+<hr>
+<h1>open Bids</h1>
+
+<button onclick="useLocation()">Use my Location</button>
+  <br>
+  <input id="pincode" type="text" name="pincode" required>
+  <button onclick="usePincode()">Use pincode</button>
+
+  <br>
+  <br>
+
+  <div id="myOutput"></div>
+
+<hr>
+
+<h1>
+    Your box
+</h1>
+
+
+<h3>Bid History</h3>
+
+<div id="bid_history">
+
+</div>
+
+<h3>Your products</h3>
+
+<div id="user_products">
+
+</div>
+
+
+<form action="/bidbox/add_product">
+    <button type="submit"> Sell product </button>
+</form>
+
+
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtLZdve7jf15PETQYF6TgR05sHZnVdFc4">
+</script>
+
+<!-- Jquery Script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $.get("/bidbox/bid_history", function (data, status) {
+        console.log(data);
+        var mainContainer = document.getElementById("bid_history");
+        mainContainer.innerHTML = "";
+
+        for (var i = 0; i < data.length; i++) {
+          var div = document.createElement("div");
+          div.innerHTML = JSON.stringify(data[i]);
+
+          var link1 = document.createElement('a');
+          link1.href = "/bidbox/bid_history/"+data[i].id;
+          link1.innerText = "View More";
+
+          mainContainer.appendChild(div);
+          mainContainer.appendChild(link1);
+        }
+      })
+
+    $.get("/bidbox/fetch_user_products", function (data, status) {
+      console.log(data);
+      var mainContainer = document.getElementById("user_products");
+      mainContainer.innerHTML = "";
+      for (var i = 0; i < data.length; i++) {
+        var div = document.createElement("div");
+        div.innerHTML = JSON.stringify(data[i]);
+        var link1 = document.createElement('a');
+        link1.href = "/bidbox/fetch_user_products/"+data[i].id;
+        link1.innerText = "View More";
+        mainContainer.appendChild(div);
+        mainContainer.appendChild(link1);
+      }
+    })
+
+  function useLocation() {
+
+    //Success Callback 
+    const successCallback = (coords) => {
+      console.log(coords);
+      let data = {
+        latitude: coords.coords.latitude,
+        longitude: coords.coords.longitude
+      }
+
+      $.post("/bidbox/search_open_bid", data, function (data, status) {
+          console.log(data);
+        var mainContainer = document.getElementById("myOutput");
+        mainContainer.innerHTML = "";
+
+        for (var i = 0; i < data.length; i++) {
+          var div = document.createElement("div");
+          div.innerHTML = JSON.stringify(data[i]);
+
+          var link = document.createElement('a');
+          link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
+            data[i].longitude;
+          link.target = "_Blank"
+          link.innerText = "Location";
+
+          var link1 = document.createElement('a');
+          link1.href = "/bidbox/product/"+data[i].id;
+          link1.innerText = "View More";
+
+          mainContainer.appendChild(div);
+          mainContainer.appendChild(link);
+          mainContainer.appendChild(link1);
+        }
+      })
+
+      navigator.geolocation.clearWatch(watchId);
+
+    }
+
+    //Error Callback
+    const errorCallback = (error) => {
+      console.log(error);
+    }
+
+    //Get Location
+    const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback);
+  }
+
+  function usePincode() {
+
+    let pincode = $("#pincode").val();
+
+    let data = {
+      pincode: pincode,
+    }
+
+    if (pincode.length != 6) {
+      alert("Invalid Pincode");
+    } else {
+      $.post("/bidbox/search_open_bid", data, function (data, status) {
+        console.log(data);
+        var mainContainer = document.getElementById("myOutput");
+        mainContainer.innerHTML = "";
+
+        for (var i = 0; i < data.length; i++) {
+          var div = document.createElement("div");
+          div.innerHTML = JSON.stringify(data[i]);
+
+          var link = document.createElement('a');
+          link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
+            data[i].longitude;
+          link.target = "_Blank"
+          link.innerText = "Location";
+          var link1 = document.createElement('a');
+          link1.href = "/bidbox/product/"+data[i].id;
+          link1.innerText = "View More";
+
+          mainContainer.appendChild(div);
+          mainContainer.appendChild(link);
+          mainContainer.appendChild(link1);
+        }
+      })
+    }
+
+  }
+</script>
+

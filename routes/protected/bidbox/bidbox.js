@@ -2,10 +2,9 @@
 const router = require("express").Router();
 
 
-router.get("/home",(req, res) => {
-    console.log(req.isAuthenticated())
+router.get("/",(req, res) => {
     if(req.isAuthenticated()){
-        res.render("home");
+        res.render("bidbox/dashboard", {user: req.user});
     }
     else{
         res.redirect("/login");
