@@ -150,6 +150,30 @@ class User {
     });
   }
 
+  update_pan(pan,id, callback){
+    var searchQuery = "update public.users set pan_no=$1 where id=$2;";
+    pool.connect((err, client, done) => {
+      if (shouldAbort(err, done)) {
+        callback(err, null);
+      }
+
+      client
+        .query(searchQuery,[pan, id])
+        .then((res) => {
+          if (res.rowCount == 0) {
+            callback(null, null);
+          } else {
+            callback(null, res.rows);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          callback("error");
+        });
+      done();
+    });
+  }
+
 }
 
 module.exports = User;

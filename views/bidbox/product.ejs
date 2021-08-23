@@ -1,0 +1,13 @@
+<%=JSON.stringify(product)%>
+
+<br>
+<br>
+<a href="https://www.google.com/maps/search/?api=1&query=<%=product[0].latitude%>%2C<%=product[0].longitude%>" target="_blank"> Location</a>
+<br>
+Subscibed = <%=quantity/product[0].quantity%> times
+<br>
+Current price = <%=max_bid%>
+<br>
+<a href="/bidbox/">bidbox</a>
+<br>
+<a href="/bidbox/create_bid/<%=product[0].id%>"> Create Bid </a>
