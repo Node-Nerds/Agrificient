@@ -2,11 +2,11 @@ const { response } = require("express");
 const User = require("./../../db/models/user");
 const router = require("express").Router();
 
-router.get("/signup", (req,res)=>{
+router.get("/", (req,res)=>{
     res.render("signup");
 })
 
-router.post("/signup", (req, res) => {
+router.post("/", (req, res) => {
     let {fname, lname, phno, aadhar_no, password} = req.body;
     phno
     let users = new User(fname, lname, phno, aadhar_no, null, password);

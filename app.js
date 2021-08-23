@@ -3,6 +3,31 @@ const express = require("express");
 const bodyParser = require("body-parser");
 var cors = require("cors");
 var ejs = require("ejs");
+const {bootstrap, bootstrap_enum} = require("./db/models/bootstrap");
+
+bootstrap_enum((err, done)=>{
+  if(err){
+    console.log(err);
+    bootstrap((err, done)=>{
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log("DB ready");
+      }
+    })
+  }
+  else{
+    bootstrap((err, done)=>{
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log("DB ready");
+      }
+    })
+  }
+})
 
 const routes = require("./routes/");
 require("./db/conn.js");
@@ -24,9 +49,9 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  res.render("warehouse/home.ejs");
-});
+// app.get("/", (req, res) => {
+//   res.render("warehouse/home.ejs");
+// });
 
 //  Connect all our routes to our application
 app.use("/", routes);

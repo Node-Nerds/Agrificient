@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Sign-in</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyDbA9p5XOXj321flJ3uvoVd6c3aIYxNUNw",
+        authDomain: "agrificient-82f1f.firebaseapp.com",
+        projectId: "agrificient-82f1f",
+        storageBucket: "agrificient-82f1f.appspot.com",
+        messagingSenderId: "253867993686",
+        appId: "1:253867993686:web:7697f7eb91932d01dfe9f7",
+        measurementId: "G-C0C26TR2V3"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+
+
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin">
+      <img class="mb-3" src="logo.svg" alt="" width="250" height="250">
+      <div class="form-group text-left" id="phoneNumber">
+        <label for="phonenumber">Phone Number</label>
+        <input type="tel" id="inputPhoneNumber" value="+91" name="phno" class="form-control" onkeyup="check_ph()" placeholder="Phone Number" required>
+      </div>
+
+      <div class="input-group mb-3 text-left">
+        <input type="number" class="form-control" id="verificationcode" placeholder="Enter The OTP">
+          <div class="input-group-append">
+            <button class="btn btn-sm btn-secondary" id="sendCode" type="button">Send OTP</button>
+            <button class="btn btn-sm btn-success"  type="button" onclick="myFunction()">Verify OTP</button>
+          </div>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+      <div class="separator">or</div>
+      <a type="button" href="/login" class="btn btn-lg btn-success btn-block mt-2">Log In Using Password</a>
+      
+      <a type="button" href="/signup" class="btn btn-lg btn-secondary btn-block">Create new account?</a>
+      <p class="mt-3 mb-3 text-muted">&copy; 2021</p>
+    </form>
+  </body>
+
+  <script>
+    let otp_verified = false;
+    let password_confirmed = false;
+    document.getElementById("sign_up").disabled = true;
+    // firebase.auth().languageCode = 'it';
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sendCode', {
+      'size': 'invisible',
+      'callback': function (recapchaToken) {
+        // reCAPTCHA solved, send recapchaToken and phone number to backend.
+        console.log(recapchaToken);
+        console.log({
+            phoneNumber: document.getElementById('inputPhoneNumber').value,
+            recapchaToken: recapchaToken
+          });
+        let phoneNumber= document.getElementById('inputPhoneNumber').value
+        sendOtp(phoneNumber);
+    }})
+
+// render the rapchaVerifier. 
+    window.recaptchaVerifier.render().then(function (widgetId) {
+      window.recaptchaWidgetId = widgetId;
+    });
+
+    function sendOtp(phno){
+        const appVerifier = window.recaptchaVerifier;
+        firebase.auth().signInWithPhoneNumber(phno, appVerifier)
+            .then((confirmationResult) => {
+              // SMS sent. Prompt user to type the code from the message, then sign the
+              // user in with confirmationResult.confirm(code).
+              window.confirmationResult = confirmationResult;
+              if(confirmationResult.hasOwnProperty('code')){
+                  if(confirmationResult.code == "auth/invalid-verification-code"){
+                      alert("Incorrect otp");
+                  }
+                  else{
+                      alert("Error! try after some time");
+                  }
+              }
+              else{
+                  if(password_confirmed == true){
+                    document.getElementById("sign_up").disabled = false;
+                  }
+                  otp_verified = true;
+
+              }
+              
+              // ...
+            }).catch((error) => {
+              // Error; SMS not sent
+              // ...
+              alert("Error! try refershing the page");
+            });
+    }
+
+    var myFunction = function() {
+        console.log(document.getElementById("verificationcode").value);
+      window.confirmationResult.confirm(document.getElementById("verificationcode").value)
+      .then(function(result) {
+        console.log(result);
+      }).catch(function(error) {
+        console.log(error);
+      });
+    };
+
+    function check(){
+        let pass = document.getElementById("password").value;
+        let confirm_pass = document.getElementById("confirm_password").value;
+        console.log(pass, confirm_pass);
+        console.log(pass == confirm_pass && otp_verified==true);
+        console.log(pass == confirm_pass)
+        if(pass == confirm_pass && otp_verified==true){
+            document.getElementById("sign_up").disabled = false;
+            password_confirmed = true;
+        }
+        else if(pass == confirm_pass){
+            password_confirmed = true;
+            document.getElementById("sign_up").disabled = true;
+        }
+        else{
+            document.getElementById("sign_up").disabled = true;
+        }
+    }
+
+    function check_form(){
+        if(otp_verified == true && password_confirmed == true && document.getElementById('inputPhoneNumber').value==13){
+           return true;
+        }
+        else{
+            alert("Please check the input information");
+            return false;
+        }
+    }
+</script>
+
+</html>

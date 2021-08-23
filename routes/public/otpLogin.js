@@ -5,7 +5,7 @@ const passport = require("passport");
 
 router.get("/",(req, res) => {
     
-    res.render("login");
+    res.render("otpLogin");
 })
 
 router.post("/", passport.authenticate('local'), (req, res) => {

@@ -5,7 +5,7 @@ const passport = require("passport");
 
 router.get("/",(req, res) => {
     
-    res.render("login");
+    res.render("forgot_password");
 })
 
 router.post("/", passport.authenticate('local'), (req, res) => {

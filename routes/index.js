@@ -1,8 +1,6 @@
 const router = require("express").Router();
 
-const signup = require("./public/signup");
-const login = require("./public/login");
-const verify_phno = require("./public/verify_phno");
+const public = require("./public/index");
 
 const home = require("./protected/home");
 const addwarehouse = require("./protected/addWarehouse");
@@ -11,9 +9,8 @@ const get_user_profile = require("./protected/get_user_profile");
 
 const wallet = require("./protected/wallet");
 
-router.use("/", signup);
-router.use("/", login);
-router.use("/", verify_phno);
+router.use("/", public);
+
 
 router.use("/", home);
 router.use("/", addwarehouse);
