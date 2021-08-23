@@ -21,9 +21,9 @@ router.get("/",(req, res) => {
 //     })(req, res);
 // })
 
-router.post('/login',
+router.post('/',
   passport.authenticate('local', { successRedirect: '/home',
-                                   failureRedirect: '/login',
+                                   failureRedirect: '/',
                                    failureFlash: true })
 );
 
