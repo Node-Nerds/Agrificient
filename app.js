@@ -125,9 +125,9 @@ bootstrap_enum((err, done)=>{
   }
 })
 
-app.get("/", (req, res) => {
-  res.render("home.ejs");
-});
+// app.get("/", (req, res) => {
+//   res.render("home.ejs");
+// });
 
 //  Connect all our routes to our application
 app.use("/", routes);
