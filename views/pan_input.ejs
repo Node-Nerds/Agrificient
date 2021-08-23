@@ -1,0 +1,20 @@
+<form action="/update_pan" onsubmit="return check()" method="POST">
+    Pan no:
+    <input type="text" id="pan" maxlength="10" name="pan">
+
+    <input type="text" name="product_id" value="<%=product_id%>" hidden>
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    function check(){
+        if(document.getElementById("pan").value.length == 10){
+            return true;
+        }
+        else{
+            alert("Pan no should be of 10 character");
+            return false;
+        }
+    }
+</script>

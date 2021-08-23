@@ -68,7 +68,7 @@
           <input type="tel" id="inputPhoneNumber" value="+91" name="phno" class="form-control" onkeyup="check_ph()" placeholder="Phone Number" required>
         </div>
 
-        <div class="input-group mb-3 text-left">
+        <div class="input-group mb-3 text-left" id="otp_div">
           <input type="number" class="form-control" id="verificationcode" placeholder="Enter The OTP">
             <div class="input-group-append">
               <button class="btn btn-sm btn-secondary" id="sendCode" type="button">Send OTP</button>
@@ -94,6 +94,8 @@
       <p class="mt-3 mb-3 text-muted">&copy; 2021</p>
     </form>
   </body>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
         let otp_verified = false;
         let password_confirmed = false;
@@ -124,21 +126,7 @@
                   // SMS sent. Prompt user to type the code from the message, then sign the
                   // user in with confirmationResult.confirm(code).
                   window.confirmationResult = confirmationResult;
-                  if(confirmationResult.hasOwnProperty('code')){
-                      if(confirmationResult.code == "auth/invalid-verification-code"){
-                          alert("Incorrect otp");
-                      }
-                      else{
-                          alert("Error! try after some time");
-                      }
-                  }
-                  else{
-                      if(password_confirmed == true){
-                        document.getElementById("sign_up").disabled = false;
-                      }
-                      otp_verified = true;
-
-                  }
+                  
                   
                   // ...
                 }).catch((error) => {
@@ -153,6 +141,25 @@
           window.confirmationResult.confirm(document.getElementById("verificationcode").value)
           .then(function(result) {
             console.log(result);
+            if(result.hasOwnProperty('code')){
+                      if(result.code == "auth/invalid-verification-code"){
+                          alert("Incorrect otp");
+                      }
+                      else{
+                          alert("Error! try after some time");
+                      }
+                  }
+                  else if(result.hasOwnProperty('user')){
+                      if(password_confirmed == true){
+                        document.getElementById("sign_up").disabled = false;
+                        
+                      }
+                      otp_verified = true;
+                      $("#otp_div").hide();
+                      document.getElementById("inputPhoneNumber").readOnly = true;
+                     
+
+                  }
           }).catch(function(error) {
             console.log(error);
           });
@@ -178,11 +185,23 @@
         }
 
         function check_form(){
-            if(otp_verified == true && password_confirmed == true && document.getElementById('inputPhoneNumber').value==13){
+            if(otp_verified == true && password_confirmed == true && document.getElementById('inputPhoneNumber').value.length==13 && document.getElementById('aadhar_no').value.length==12){
                return true;
             }
             else{
-                alert("Please check the input information");
+                if(otp_verified != true){
+                  alert("OTP verification failed");
+                }
+                if(password_confirmed != true){
+                  alert("Password does not matched to confirm password");
+                }
+                if(document.getElementById('inputPhoneNumber').value.length!=13){
+                  alert("Phone no should be 13 digits long including (+91)");
+                }
+                if(document.getElementById('aadhar_no').value.length!=12){
+                  alert("Aadhar no should be 12 digits long");
+                }
+                
                 return false;
             }
         }
