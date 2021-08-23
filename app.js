@@ -49,9 +49,6 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
-// app.get("/", (req, res) => {
-//   res.render("warehouse/home.ejs");
-// });
 
 //  Connect all our routes to our application
 app.use("/", routes);

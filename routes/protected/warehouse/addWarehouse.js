@@ -1,4 +1,4 @@
-const Warehouse = require("../../db/models/warehouse");
+const Warehouse = require("./../../../db/models/warehouse");
 const router = require("express").Router();
 
 router.get("/addwarehouse", (req, res) => {
