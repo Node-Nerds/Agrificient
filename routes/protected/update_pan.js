@@ -27,7 +27,7 @@ router.post("/",(req, res) => {
 
     }
     else{
-        res.redirect("/login");
+        res.redirect("/");
     }
 })
 

@@ -37,7 +37,7 @@ router.get("/product/:product_id",(req, res) => {
         })
     }
     else{
-        res.redirect("/login");
+        res.redirect("/");
     }
 })
 

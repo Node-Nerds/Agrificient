@@ -7,7 +7,7 @@ router.get("/",(req, res) => {
         res.render("bidbox/dashboard", {user: req.user});
     }
     else{
-        res.redirect("/login");
+        res.redirect("/");
     }
 })
 

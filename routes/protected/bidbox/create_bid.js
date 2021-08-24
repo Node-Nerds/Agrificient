@@ -56,7 +56,7 @@ router.get("/create_bid/:product_id",(req, res) => {
         }
     }
     else{
-        res.redirect("/login");
+        res.redirect("/");
     }
 })
 
@@ -87,7 +87,7 @@ router.post("/create_bid/:product_id",(req, res) => {
         })
     }
     else{
-        res.redirect("/login");
+        res.redirect("/");
     }
 })
 

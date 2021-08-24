@@ -19,7 +19,7 @@ router.get("/bid_history",(req, res) => {
         })
     }
     else{
-        res.redirect("/login");
+        res.redirect("/");
     }
 })
 

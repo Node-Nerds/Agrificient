@@ -2,7 +2,7 @@
 const router = require("express").Router();
 
 
-router.get("/dashboard",(req, res) => {
+router.get("/",(req, res) => {
     
     res.render("dashboard");
 })

@@ -19,7 +19,7 @@ router.get("/fetch_user_products",(req, res) => {
         })
     }
     else{
-        res.redirect("/login");
+        res.redirect("/");
     }
 })
 
