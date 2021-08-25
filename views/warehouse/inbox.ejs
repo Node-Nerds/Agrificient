@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Inbox</h1>
+
+    <% inboxes.forEach(function (inbox) {%>
+
+    <div>
+        <a href="">User</a>: <%=inbox.fname%> Warehouse_name: <%=inbox.warehouse_name%> Start_Date:
+        <%=inbox.start_date%> End_Date: <%=inbox.end_date%>
+
+        <% if(inbox.status){%>
+        <span style="color: green;"> Approved </span>
+        <%}else{ %>
+        <button id=<%=inbox.id%> class="approve">Approve</button>
+        <% } %>
+
+
+    </div>
+
+    <%})%>
+
+    <!-- Jquery Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $(".approve").click(function () {
+
+            var button = this;
+
+            var pid = button.id;
+
+            var data = {};
+            data.pid = pid;
+
+            $.post("/warehouse/inbox", data, function (data, status) {
+
+                button.innerHTML = "Approved";
+                button.class = "";
+
+            })
+        })
+    </script>
+</body>
+
+</html>

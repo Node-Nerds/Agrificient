@@ -6,7 +6,7 @@ router.get("/:id", (req, res) => {
   if (req.isAuthenticated()) {
     var warehouse = new Warehouse();
 
-    warehouse.findById([req.params.id], (err, data) => {
+    warehouse.findById(req.params.id, (err, data) => {
       if (err) {
         console.log(err);
         res.sendStatus(500);

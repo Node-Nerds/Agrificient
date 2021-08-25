@@ -6,35 +6,13 @@ router.get("/", (req, res) => {
   var proposal = new Proposal();
   var warehouse = new Warehouse();
 
-  proposal.findById(req.user.id, (err, data) => {
+  proposal.findMyProposal(req.user.id, (err, data) => {
     if (err) {
       console.log(err);
       res.sendStatus(500);
     } else {
-      var warehouse_ids = [];
-      var map = {};
-
-      for (var i = 0; i < data.length; i++) {
-        warehouse_ids.push(data[i].warehouse_id);
-      }
-
-      warehouse.findById(warehouse_ids, (err, output) => {
-        if (err) {
-          console.log(err);
-          res.sendStatus(500);
-        } else {
-          for (var i = 0; i < output.length; i++) {
-            map[output[i].id] = output[i].warehouse_name;
-          }
-
-          for (var i = 0; i < data.length; i++) {
-            data[i].warehouse_name = map[data[i].warehouse_id];
-          }
-
-          res.render("warehouse/proposals.ejs", {
-            proposals: data,
-          });
-        }
+      res.render("warehouse/proposals.ejs", {
+        proposals: data,
       });
     }
   });

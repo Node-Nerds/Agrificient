@@ -63,14 +63,7 @@ class Warehouse {
   }
 
   findById(id, callback) {
-    var searchQuery =
-      "select * from public.warehouse where id = any('{" + id[0];
-
-    for (var i = 1; i < id.length; i++) {
-      searchQuery += "," + id[i];
-    }
-
-    searchQuery += "}')";
+    var searchQuery = "select * from public.warehouse where id = $1";
 
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
@@ -78,7 +71,32 @@ class Warehouse {
       }
 
       client
-        .query(searchQuery)
+        .query(searchQuery, [id])
+        .then((res) => {
+          if (res.rowCount == 0) {
+            callback(null, null);
+          } else {
+            callback(null, res.rows);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          callback("error");
+        });
+      done();
+    });
+  }
+
+  findByUserId(id, callback) {
+    var searchQuery = "select * from public.warehouse where user_id = $1";
+
+    pool.connect((err, client, done) => {
+      if (shouldAbort(err, done)) {
+        callback(err, null);
+      }
+
+      client
+        .query(searchQuery, [id])
         .then((res) => {
           if (res.rowCount == 0) {
             callback(null, null);

@@ -59,8 +59,9 @@ class Proposal {
     });
   }
 
-  findById(id, callback) {
-    var searchQuery = "select * from public.proposal where user_id = $1";
+  findInbox(id, callback) {
+    var searchQuery =
+      "select p.id,fname,warehouse_name,start_date,end_date,quantity,status,phno from public.proposal as p INNER JOIN public.users as u ON p.user_id = u.id  INNER JOIN public.warehouse as w ON p.warehouse_id = w.id where p.warehouse_id IN (select id from public.warehouse where user_id = $1)";
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
         callback(err, null);
@@ -84,85 +85,56 @@ class Proposal {
     });
   }
 
-  // findByPincode(pincode, callback) {
-  //   var searchQuery = "select * from agrificient.warehouse where pincode = $1";
-  //   pool.connect((err, client, done) => {
-  //     if (shouldAbort(err, done)) {
-  //       callback(err, null);
-  //     }
+  findMyProposal(id, callback) {
+    var searchQuery =
+      "select * from public.proposal as p INNER JOIN public.warehouse as w on p.warehouse_id = w.id where p.user_id = $1";
+    pool.connect((err, client, done) => {
+      if (shouldAbort(err, done)) {
+        callback(err, null);
+      }
 
-  //     client
-  //       .query(searchQuery, [pincode])
-  //       .then((res) => {
-  //         // console.log(res);
-  //         if (res.rowCount == 0) {
-  //           callback(null, null);
-  //         } else {
-  //           callback(null, res.rows);
-  //         }
-  //       })
-  //       .catch((e) => {
-  //         console.log(e);
-  //         callback("error");
-  //       });
-  //     done();
-  //   });
-  // }
+      client
+        .query(searchQuery, [id])
+        .then((res) => {
+          // console.log(res);
+          if (res.rowCount == 0) {
+            callback(null, null);
+          } else {
+            callback(null, res.rows);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          callback("error");
+        });
+      done();
+    });
+  }
 
-  //   fetchByYear(callback) {
-  //     var searchQuery =
-  //       "select * from finportal.bank_statement_personal where for_year=$1 and user_id=$2;";
-  //     pool.connect((err, client, done) => {
-  //       if (shouldAbort(err, done)) {
-  //         callback(err, null);
-  //       }
+  approve(id, callback) {
+    var searchQuery = "update public.proposal set status = true where id = $1";
+    pool.connect((err, client, done) => {
+      if (shouldAbort(err, done)) {
+        callback(err, null);
+      }
 
-  //       client
-  //         .query(searchQuery, [this.for_year, this.user_id])
-  //         .then((res) => {
-  //           if (res.rowCount == 0) {
-  //             callback(null, null);
-  //           } else {
-  //             callback(null, res.rows);
-  //           }
-  //         })
-  //         .catch((e) => {
-  //           console.log(e);
-  //           callback("error");
-  //         });
-  //       done();
-  //     });
-  //   }
-
-  //   update(callback) {
-  //     var queryText =
-  //       "Update finportal.bank_statement_personal set stat=$1 where user_id=$2 and for_year=$3";
-  //     pool.connect((err, client, done) => {
-  //       if (shouldAbort(err, done)) {
-  //         callback(err, null);
-  //       }
-
-  //       client
-  //         .query(queryText, [this.stat, this.user_id, this.for_year])
-  //         .then((res) => {
-  //           if (shouldAbort(err, done)) {
-  //             callback(err, null);
-  //           }
-
-  //           client
-  //             .query("COMMIT")
-  //             .then(() => {
-  //               callback(null, res.rows[0]);
-  //             })
-  //             .catch((e) => {
-  //               callback(e, null);
-  //             });
-  //         })
-  //         .catch((e) => {
-  //           callback(e, null);
-  //         });
-  //     });
-  //   }
+      client
+        .query(searchQuery, [id])
+        .then((res) => {
+          // console.log(res);
+          if (res.rowCount == 0) {
+            callback(null, null);
+          } else {
+            callback(null, res.rows);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          callback("error");
+        });
+      done();
+    });
+  }
 }
 
 module.exports = Proposal;
