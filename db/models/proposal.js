@@ -1,18 +1,18 @@
 const { pool, shouldAbort } = require("../conn");
 
-class Warehouse {
-  constructor(warehouse_name, phone, x, y, pincode, address) {
-    this.warehouse_name = warehouse_name;
+class Proposal {
+  constructor(warehouse_id, user_name, phone, start_date, end_date, quantity) {
+    this.warehouse_id = warehouse_id;
+    this.user_name = user_name;
     this.phone = phone;
-    this.x = x;
-    this.y = y;
-    this.pincode = pincode;
-    this.address = address;
+    this.start_date = start_date;
+    this.end_date = end_date;
+    this.quantity = quantity;
   }
 
   save(callback) {
     const queryText =
-      "insert into public.warehouse(warehouse_name, phone, latitude, longitude, pincode, address) values ($1,$2,$3,$4,$5,$6);";
+      "insert into agrificient.proposal(warehouse_id, user_name, phone, start_date, end_date, quantity ,status) values ($1,$2,$3,$4,$5,$6,$7);";
 
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
@@ -27,12 +27,13 @@ class Warehouse {
 
           client
             .query(queryText, [
-              this.warehouse_name,
+              this.warehouse_id,
+              this.user_name,
               this.phone,
-              this.x,
-              this.y,
-              this.pincode,
-              this.address,
+              this.start_date,
+              this.end_date,
+              this.quantity,
+              0,
             ])
             .then((res) => {
               if (shouldAbort(err, done)) {
@@ -61,7 +62,7 @@ class Warehouse {
   }
 
   findById(id, callback) {
-    var searchQuery = "select * from agrificient.warehouse where id=$1";
+    var searchQuery = "select * from agrificient.proposal where user_name = $1";
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
         callback(err, null);
@@ -70,31 +71,6 @@ class Warehouse {
       client
         .query(searchQuery, [id])
         .then((res) => {
-          if (res.rowCount == 0) {
-            callback(null, null);
-          } else {
-            callback(null, res.rows);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          callback("error");
-        });
-      done();
-    });
-  }
-
-  findByPos(latitude, longitude, callback) {
-    var searchQuery =
-      "select * from public.warehouse order by |/ ((latitude-$1)^2 + (longitude-$2)^2) limit 5";
-    pool.connect((err, client, done) => {
-      if (shouldAbort(err, done)) {
-        callback(err, null);
-      }
-
-      client
-        .query(searchQuery, [latitude, longitude])
-        .then((res) => {
           // console.log(res);
           if (res.rowCount == 0) {
             callback(null, null);
@@ -110,30 +86,30 @@ class Warehouse {
     });
   }
 
-  findByPincode(pincode, callback) {
-    var searchQuery = "select * from public.warehouse where pincode = $1";
-    pool.connect((err, client, done) => {
-      if (shouldAbort(err, done)) {
-        callback(err, null);
-      }
+  // findByPincode(pincode, callback) {
+  //   var searchQuery = "select * from agrificient.warehouse where pincode = $1";
+  //   pool.connect((err, client, done) => {
+  //     if (shouldAbort(err, done)) {
+  //       callback(err, null);
+  //     }
 
-      client
-        .query(searchQuery, [pincode])
-        .then((res) => {
-          // console.log(res);
-          if (res.rowCount == 0) {
-            callback(null, null);
-          } else {
-            callback(null, res.rows);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          callback("error");
-        });
-      done();
-    });
-  }
+  //     client
+  //       .query(searchQuery, [pincode])
+  //       .then((res) => {
+  //         // console.log(res);
+  //         if (res.rowCount == 0) {
+  //           callback(null, null);
+  //         } else {
+  //           callback(null, res.rows);
+  //         }
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //         callback("error");
+  //       });
+  //     done();
+  //   });
+  // }
 
   //   fetchByYear(callback) {
   //     var searchQuery =
@@ -191,4 +167,4 @@ class Warehouse {
   //   }
 }
 
-module.exports = Warehouse;
+module.exports = Proposal;

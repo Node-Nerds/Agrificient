@@ -3,7 +3,7 @@ const User = require("./../../db/models/user");
 const router = require("express").Router();
 
 router.get("/", (req,res)=>{
-    res.render("signup");
+    res.render("signup", {e: ""});
 })
 
 router.post("/", (req, res) => {
@@ -15,10 +15,10 @@ router.post("/", (req, res) => {
         if(err){
             if(err.code == '23505'){
                 if(err.constraint == "idx_users_phno"){
-                    res.send("account with phone no already exists");
+                    res.render("signup", {e: "account with phone already exist"});
                 }
                 else if(err.constraint == "idx_users_aadhar"){
-                    res.send("account with aadhar no already exists");
+                    res.render("signup", {e: "account with aadhar already exist"});
                 }
 
             }

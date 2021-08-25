@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1><%=warehouse_name%></h1>
+
+    <form action="/warehouse/<%=id%>" method="POST">
+
+        <label for="name">Name</label> <input id="name" name="name" type="text">
+        <label for="phone">Phone</label> <input id="phone" name="phone" type="text">
+        <label for="start_date">Start_Date</label> <input id="start_date" name="start_date" type="date">
+        <label for="end_date">End_Date</label> <input id="end_date" name="end_date" type="date">
+        <label for="quantity">Quantity</label> <input id="quantity" name="quantity" type="number">
+
+        <button type="submit">Send Proposal</button>
+
+    </form>
+
+</body>
+
+
+</html>

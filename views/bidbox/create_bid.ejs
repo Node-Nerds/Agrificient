@@ -24,15 +24,15 @@ Minimum amount = <%=max_bid%>
 </form>
 <script>
     function check(){
-        let balance = '<%-wallet[0].available_amt%>';
-        let min_amt = '<%-max_bid%>';
+        let balance = parseFloat('<%-wallet[0].available_amt%>');
+        let min_amt = parseFloat('<%-max_bid%>');
         let amount = document.getElementById("amount").value;
         let min_quantity = document.getElementById("min_quantity").value;
         let max_quantity = document.getElementById("max_quantity").value;
         let rate = document.getElementById("rate").value;
 
         if(max_quantity >= min_quantity){
-            if(rate>min_amt){
+            if(rate>=min_amt){
                 if(amount == (rate*max_quantity)){
                     if(parseFloat(amount) <= parseFloat(balance)){
                         return true;
@@ -43,7 +43,7 @@ Minimum amount = <%=max_bid%>
                 alert("error try again2");
             
             }
-            alert("error try again1");
+            // alert("error try again1");
             
         }
         // alert("error try again");

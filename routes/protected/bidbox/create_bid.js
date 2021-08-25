@@ -52,7 +52,7 @@ router.get("/create_bid/:product_id",(req, res) => {
         }
 
         else{
-            res.render("pan_input", {product_id: req.params.product_id});
+            res.render("pan_input", {e: "", product_id: req.params.product_id});
         }
     }
     else{

@@ -8,9 +8,12 @@ router.get("/",(req, res) => {
     res.render("otpLogin");
 })
 
-router.post("/", passport.authenticate('local'), (req, res) => {
-    console.log(req.user);
-    res.send(req.user);
+router.post("/", passport.authenticate('otp', { successRedirect: '/dashboard',
+failureRedirect: '/',
+failureFlash: true }),
+(req, res) => {
+    console.log(req.body);
+  
 })
 
 

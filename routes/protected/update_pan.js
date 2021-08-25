@@ -11,8 +11,14 @@ router.post("/",(req, res) => {
 
         user.update_pan(pan, req.user.id, (err, done)=>{
             if(err){
-                console.log(err);
-                res.render("error500");
+                if(err.constraint == 'idx_users_pan'){
+                    res.render("pan_input", {e: "account with pan exists", product_id: product_id});
+                }
+                else{
+                    console.log(err);
+                    res.render("error500");
+                }
+                
             }
             else{
                 if(typeof(product_id) != "undefined" || product_id != "undefined" || product_id != ""){

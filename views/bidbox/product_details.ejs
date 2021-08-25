@@ -1,0 +1,30 @@
+<%= JSON.stringify(product)%>;
+
+<hr>
+
+<div id="bids" >
+    <%if(bid !=null){ bid.forEach((b)=>{ %>
+        <%=JSON.stringify(b)%>
+        <hr>
+    <% })} %>
+</div>
+
+<%if(product[0].result_status == '0'){%>
+<button onclick="get_result()">Finailze result</button>
+<%}%>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    let product_id = '<%-product[0].id%>'
+    function get_result(){
+        $.get("/bidbox/bid_result/"+product_id, function (data, status) {
+           document.getElementById("bids").innerHTML = "";
+            data.forEach(element => {
+                document.getElementById("bids").innerHTML += JSON.stringify(element);
+                document.getElementById("bids").innerHTML += "<hr>";
+                
+                
+           });
+        })
+    }
+</script>
