@@ -15,13 +15,8 @@
     <% proposals.forEach(function (proposal) {%>
 
     <div>
-        WarehouseName: <%=proposal.warehouse_id%> Phone: <%= proposal.phone %> Start_Date: <%=proposal.start_date%>
-        End_Date: <%=proposal.end_date%> Status: <%=proposal.status%>
-    </div>
-
-    <%})%>
-
-
+        <a href="/warehouse/custom/<%=proposal.warehouse_id%>">Warehouse </a>: <%=proposal.warehouse_name%> Start_Date:
+        <%=proposal.start_date%> End_Date: <%=proposal.end_date%> Status: <%=proposal.status%> </div> <%})%>
 </body>
 
 </html>

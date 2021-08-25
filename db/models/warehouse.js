@@ -1,8 +1,9 @@
 const { pool, shouldAbort } = require("../conn");
 
 class Warehouse {
-  constructor(warehouse_name, phone, x, y, pincode, address) {
+  constructor(warehouse_name, user_id, phone, x, y, pincode, address) {
     this.warehouse_name = warehouse_name;
+    this.user_id = user_id;
     this.phone = phone;
     this.x = x;
     this.y = y;
@@ -12,7 +13,7 @@ class Warehouse {
 
   save(callback) {
     const queryText =
-      "insert into public.warehouse(warehouse_name, phone, latitude, longitude, pincode, address) values ($1,$2,$3,$4,$5,$6);";
+      "insert into public.warehouse(warehouse_name, user_id, phone, latitude, longitude, pincode, address) values ($1,$2,$3,$4,$5,$6,$7);";
 
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
@@ -28,6 +29,7 @@ class Warehouse {
           client
             .query(queryText, [
               this.warehouse_name,
+              this.user_id,
               this.phone,
               this.x,
               this.y,
@@ -61,14 +63,22 @@ class Warehouse {
   }
 
   findById(id, callback) {
-    var searchQuery = "select * from agrificient.warehouse where id=$1";
+    var searchQuery =
+      "select * from public.warehouse where id = any('{" + id[0];
+
+    for (var i = 1; i < id.length; i++) {
+      searchQuery += "," + id[i];
+    }
+
+    searchQuery += "}')";
+
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
         callback(err, null);
       }
 
       client
-        .query(searchQuery, [id])
+        .query(searchQuery)
         .then((res) => {
           if (res.rowCount == 0) {
             callback(null, null);

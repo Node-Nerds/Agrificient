@@ -1,10 +1,9 @@
 const { pool, shouldAbort } = require("../conn");
 
 class Proposal {
-  constructor(warehouse_id, user_name, phone, start_date, end_date, quantity) {
+  constructor(user_id, warehouse_id, start_date, end_date, quantity) {
+    this.user_id = user_id;
     this.warehouse_id = warehouse_id;
-    this.user_name = user_name;
-    this.phone = phone;
     this.start_date = start_date;
     this.end_date = end_date;
     this.quantity = quantity;
@@ -12,7 +11,7 @@ class Proposal {
 
   save(callback) {
     const queryText =
-      "insert into agrificient.proposal(warehouse_id, user_name, phone, start_date, end_date, quantity ,status) values ($1,$2,$3,$4,$5,$6,$7);";
+      "insert into public.proposal(user_id, warehouse_id, start_date, end_date, quantity, status) values ($1,$2,$3,$4,$5,$6);";
 
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
@@ -27,9 +26,8 @@ class Proposal {
 
           client
             .query(queryText, [
+              this.user_id,
               this.warehouse_id,
-              this.user_name,
-              this.phone,
               this.start_date,
               this.end_date,
               this.quantity,
@@ -62,7 +60,7 @@ class Proposal {
   }
 
   findById(id, callback) {
-    var searchQuery = "select * from agrificient.proposal where user_name = $1";
+    var searchQuery = "select * from public.proposal where user_id = $1";
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
         callback(err, null);
