@@ -10,7 +10,7 @@ const bidbox = require("./bidbox");
 router.use("/dashboard", dashboard);
 router.use("/get_user_profile", get_user_profile);
 router.use("/wallet", wallet);
-router.use("./warehouse", warehouse);
+router.use("/warehouse", warehouse);
 router.use("/update_pan", update_pan);
 router.use("/bidbox",bidbox);
 

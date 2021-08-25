@@ -6,19 +6,36 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="/warehouse/searchwarehouse.css">
 </head>
 
-<body>
+<body class="text-center">
 
-  <h1>NEW SEARCH</h1>
+  <form class="form-add">
+    <img src="/logo.svg" alt="" width="150" height="150">
+    <h3 class="text-primary mb-3">Search Warehouse</h3>
+  
+    <div class="form-group text-left">
+      <label for="pincode">Pincode</label>
+      <input type="text" id="pincode" name="pincode" class="form-control" placeholder="Pincode" required>
+    </div>
 
-  <button onclick="useLocation()">Use my Location</button>
-  <br>
-  <input id="pincode" type="text" name="pincode" required>
-  <button onclick="usePincode()">Use pincode</button>
+    <button class="btn btn-lg btn-primary btn-block mb-1" onclick="usePincode()"> Use Pincode </button>
 
-  <br>
-  <br>
+    
+  </form>
+  <form class="form-add">
+    <div class="separator">or</div>
+
+  <button class="btn btn-lg btn-success btn-block mt-1"  onclick="useLocation()"> Use My Location </button>
+  </form>
+  
+
 
   <div id="myOutput"></div>
 
@@ -28,6 +45,7 @@
 
   <!-- Jquery Script -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   <script>
     function useLocation() {
 

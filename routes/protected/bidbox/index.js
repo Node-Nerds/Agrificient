@@ -13,7 +13,7 @@ const get_product_details = require("./get_product_details");
 const bid_result = require("./bid_result");
 
 router.use("/", add_product);
-router.use("/",bidbox);
+router.use("/", bidbox);
 router.use("/", search_open_bid);
 router.use("/", product);
 router.use("/", create_bid);

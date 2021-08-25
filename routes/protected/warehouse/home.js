@@ -2,7 +2,7 @@
 const router = require("express").Router();
 
 
-router.get("/home",(req, res) => {
+router.get("/",(req, res) => {
     console.log(req.isAuthenticated())
     if(req.isAuthenticated()){
         res.render("home");

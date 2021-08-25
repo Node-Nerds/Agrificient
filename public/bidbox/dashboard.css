@@ -1,0 +1,284 @@
+html,
+body {
+  height: 100%;
+  background-color: #f5f5f5;
+}
+
+/* body {
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;    
+    background-color: #f5f5f5;
+} */
+
+.form-add {
+    width: 100%;
+    margin: 0;
+  }
+
+/*
+ * Globals
+ */
+
+/* Links */
+/* a,
+a:focus,
+a:hover {
+  color: #333;
+} */
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+  border-radius: 0.5;
+}
+
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  background-color: #f5f5f5;
+}
+
+body {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  color: #333;
+  text-shadow: 0 .05rem .1rem rgba(245, 245, 245, .5);
+  box-shadow: inset 0 0 5rem rgba(245, 245, 245, .5);
+}
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+/*
+ * Header
+ */
+.masthead {
+  /* margin-bottom: 10rem; */
+}
+
+.masthead-brand {
+  margin-bottom: 0;
+  color: #4267B2;
+}
+
+.masthead-brand:hover{
+    color: #6283C5;
+}
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(0, 0, 0, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(0, 0, 0, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #333;
+  border-bottom-color: #333;
+}
+
+@media (min-width: 48em) {
+  .masthead-brand {
+    float: left;
+  }
+  .nav-masthead {
+    float: right;
+  }
+}
+
+
+/*
+ * Cover
+ */
+.cover {
+  padding: 1rem 1rem;
+}
+.cover .btn-lg {
+  padding: .75rem 1.25rem;
+  margin: 1rem;
+  font-weight: 700;
+}
+
+
+/*
+ * Footer
+ */
+.mastfoot {
+  color: rgba(0, 0, 0, .5);
+}
+
+/* buttons */
+
+a.custom-button {
+  font-weight: 600;
+  border: solid 2px rgb(66, 103, 178);
+  outline: 0;
+  color: rgb(66, 103, 178);
+  padding: 1rem 4rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.08rem;
+  background-color: white;
+  border-radius: 0.35rem;
+  position: relative;
+  cursor: pointer;
+}
+a.custom-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #4267B2;
+  z-index: -1;
+  border-radius: 0.35rem;
+  border: solid 2px black;
+  transition: all 0.3s ease-in-out;
+  border: 0;
+  box-shadow: 0px 0px 0px 2px black;
+  top: 0.5rem;
+  left: 0.5rem;
+}
+a.custom-button:hover::after {
+  top: -0.5rem;
+  left: -0.5rem;
+  width: calc(100% + 0.5rem * 2);
+  height: calc(100% + 0.5rem * 2);
+}
+
+
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: rgba(31, 31, 31, 0.5);
+  }
+  
+  .separator::before,
+  .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(31, 31, 31, 0.5);
+  }
+  
+  .separator:not(:empty)::before {
+    margin-right: .25em;
+  }
+  
+  .separator:not(:empty)::after {
+    margin-left: .25em;
+  }
+
+
+
+
+  /*
+ CSS for tabs
+*/
+.tabset > input[type="radio"] {
+    position: absolute;
+    left: -200vw;
+  }
+  
+  .tabset .tab-panel {
+    display: none;
+  }
+  
+  .tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+  .tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
+  .tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
+  .tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
+  .tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
+  .tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
+    display: block;
+  }
+  
+ 
+  
+  .tabset > label {
+    position: relative;
+    display: inline-block;
+    padding: 5px 5px 25px;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  
+  .tabset > label::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    width: 25px;
+    height: 4px;
+    background: #8d8d8d;
+  }
+  
+  .tabset > label:hover,
+  .tabset > input:focus + label {
+    color: #06c;
+  }
+  
+  .tabset > label:hover::after,
+  .tabset > input:focus + label::after,
+  .tabset > input:checked + label::after {
+    background: #06c;
+  }
+  
+  .tabset > input:checked + label {
+    border-color: #ccc;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
+  }
+  
+  .tab-panel {
+    padding: 30px 0;
+    border-top: 1px solid #ccc;
+  }
+  
+  /*
+   Demo purposes only
+  */
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+  
+  
+  .tabset {
+    max-width: 70em;
+  }
