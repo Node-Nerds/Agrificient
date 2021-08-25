@@ -55,8 +55,15 @@
             link.target = "_Blank"
             link.innerText = "Location";
 
+            var more = document.createElement('a');
+            more.href = "/warehouse/" + data[i].id;
+            more.target = "_Blank";
+            more.innerText = "More";
+
             mainContainer.appendChild(div);
             mainContainer.appendChild(link);
+            mainContainer.appendChild(document.createTextNode("  "));
+            mainContainer.appendChild(more);
           }
         })
 
