@@ -1,13 +1,13 @@
 require("dotenv").config();
 const express = require("express");
-const session = require('express-session');
+const session = require("express-session");
 const bodyParser = require("body-parser");
 var cors = require("cors");
-var flash = require('connect-flash');
+var flash = require("connect-flash");
 const passport = require("passport");
-const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
-const ejs  = require("ejs");
+const ejs = require("ejs");
 
 const routes = require("./routes/");
 require("./db/conn.js");
@@ -22,110 +22,132 @@ app.use(
     extended: true,
   })
 );
-app.use(session({
-  secret: process.env.SECRETKEY,
-  resave: false,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: process.env.SECRETKEY,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 app.use(flash());
 
 app.use(bodyParser.json());
 
 app.use(express.static("public"));
 
-passport.use("local",new LocalStrategy((username, password, cb) => {
-  pool.connect((err, client, done) => {
+passport.use(
+  "local",
+  new LocalStrategy((username, password, cb) => {
+    pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
         cb(err);
       }
-        client
-        .query("select * from public.users where phno=$1;",[username])
+      client
+        .query("select * from public.users where phno=$1;", [username])
         .then((res) => {
           // console.log(res);
           if (res.rowCount == 0) {
-              cb(null, false, {message: 'User not found'});
-          }
-          else {
-              const first = res.rows[0]
-              
-              bcrypt.compare(password, first.password, function(err, res) {
-                  if(res) {
-                    delete first.password;
-                    cb(null,first)
-                   } else {
-                    cb(null, false, {message: 'Incorrect password'})
-                  }
-              })
+            cb(null, false, { message: "User not found" });
+          } else {
+            const first = res.rows[0];
+
+            bcrypt.compare(password, first.password, function (err, res) {
+              if (res) {
+                delete first.password;
+                cb(null, first);
+              } else {
+                cb(null, false, { message: "Incorrect password" });
+              }
+            });
           }
         })
         .catch((e) => {
           cb(e);
         });
       done();
-  });
-  
-}));
+    });
+  })
+);
+
+passport.use(
+  "otp",
+  new LocalStrategy((username, password, cb) => {
+    pool.connect((err, client, done) => {
+      if (shouldAbort(err, done)) {
+        cb(err);
+      }
+      client
+        .query("select * from public.users where phno=$1;", [username])
+        .then((res) => {
+          // console.log(res);
+          if (res.rowCount == 0) {
+            cb(null, false, { message: "User not found" });
+          } else {
+            const first = res.rows[0];
+            cb(null, first);
+          }
+        })
+        .catch((e) => {
+          cb(e);
+        });
+      done();
+    });
+  })
+);
 
 passport.serializeUser((user, done) => {
-  done(null, user.id)
-})
+  done(null, user.id);
+});
 
 passport.deserializeUser((id, cb) => {
   pool.connect((err, client, done) => {
-      if (shouldAbort(err, done)) {
-        cb(err);
-      }
+    if (shouldAbort(err, done)) {
+      cb(err);
+    }
 
-        client
-        .query("select * from public.users where id=$1;",[id])
-        .then((res) => {
-          // console.log(res);
-          if (res.rowCount == 0) {
-              cb("error");
-          }
-          else {
-              cb(null, res.rows[0]);
-          }
-        })
-        .catch((e) => {
-          cb(e);
-        });
-      done();
+    client
+      .query("select * from public.users where id=$1;", [id])
+      .then((res) => {
+        // console.log(res);
+        if (res.rowCount == 0) {
+          cb("error");
+        } else {
+          cb(null, res.rows[0]);
+        }
+      })
+      .catch((e) => {
+        cb(e);
+      });
+    done();
   });
-  
-})
+});
 
-const {bootstrap, bootstrap_enum} = require("./db/models/bootstrap");
+const { bootstrap, bootstrap_enum } = require("./db/models/bootstrap");
 
-bootstrap_enum((err, done)=>{
-  if(err){
+bootstrap_enum((err, done) => {
+  if (err) {
     // console.log(err);
-    bootstrap((err, done)=>{
-      if(err){
+    bootstrap((err, done) => {
+      if (err) {
         console.log(err);
-      }
-      else{
+      } else {
         console.log("DB ready");
       }
-    })
-  }
-  else{
-    bootstrap((err, done)=>{
-      if(err){
+    });
+  } else {
+    bootstrap((err, done) => {
+      if (err) {
         console.log(err);
-      }
-      else{
+      } else {
         console.log("DB ready");
       }
-    })
+    });
   }
-})
-
-
+});
 
 //  Connect all our routes to our application
 app.use("/", routes);
