@@ -10,7 +10,7 @@ const bid_history = require("./bid_history");
 const fetch_user_products = require("./fetch_user_products");
 
 router.use("/", add_product);
-router.use("/",bidbox);
+router.use("/", bidbox);
 router.use("/", search_open_bid);
 router.use("/", product);
 router.use("/", create_bid);

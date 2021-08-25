@@ -19,59 +19,124 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
   <title>Document</title>
+
+
+   <!-- Bootstrap core CSS -->
+   <link rel="stylesheet" href="/bootstrap.min.css">
+
+   <!-- Custom styles for this template -->
+   <link rel="stylesheet" href="/bidbox/addproduct.css">
 </head>
 
-<style>
-  #map {
-    height: 600px;
-    width: 70%;
-    margin: auto;
-  }
+<body class="text-center">
 
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-</style>
+  <form class="form-add" action="/bidbox/add_product" method="post">
+    <img src="/logo.svg" alt="" width="150" height="150">
+    <h3 class="text-primary mb-3">Add Product</h3>
 
-<body>
+    <div class="form-group text-left">
+      <label for="product_name">Product Name</label>
+      <input type="text" id="name" name="product_name" class="form-control" placeholder="Name" required autofocus>
+    </div>
 
-    <h3>Add you Product for bid</h3>
+    <div class="form-group text-left">
+      <label for="product_cat">Product Category</label>
+      <select name="product_cat" id="product_cat" required>
+        <% categories.forEach((cat)=>{ %>
+            <option value="<%=cat%>"><%=cat%></option>
+        <% })%>
+      </select>  
+      <input type="tel" id="product_cat" name="product_cat" class="form-control" placeholder="Phone Number" required>
+    </div>
+
+    <div class="form-group text-left">
+      <label for="quantity">Quantity</label>
+      <input type="text" id="quantity" name="quantity" class="form-control" required>
+    </div>
+
+    <div class="form-group text-left">
+      <label for="unit">Unit</label>
+      <select name="unit" id="unit" required>
+        <option value="kg">Kilo grams(kg)</option>
+        <option value="mt">Metric ton (M. ton)</option>
+        <option value="qtl">Quintle</option>
+      </select> 
+    </div>
+
+
+    <div class="form-group text-left">
+      <label for="basePrice">Base Price</label>
+      <input type="text" id="basePrice" name="basePrice" class="form-control" required>
+    </div>
+
+    <div class="form-group text-left">
+      <label for="description">Description</label>
+      <input type="text" id="description" name="description" class="form-control" required>
+    </div>
+
+    <div id="inputDate">
+      <div class='input-group date' id='datetimepicker1'>
+        <label for="startTime">Start Date Time</label>
+        <input type='text' name="start_dt"  id="startTime" class="form-control" />
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+
+    <div class='input-group date' id='datetimepicker2'>
+      <label for="startTime">End Date Time</label>
+      <input type='text' name="end_dt" id="endTime" class="form-control" />
+      <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+
+             
+
+    <div class="form-group text-left">
+      <label for="x">Latitude</label>
+      <input type="text" id="latitude" name="x" class="form-control" required>
+    </div>
+
+    <div class="form-group text-left">
+      <label for="y">Longitute</label>
+      <input type="text" id="longitude" name="y" class="form-control" required>
+    </div>
+    <div id="map"></div> 
+
+    <div class="form-group text-left">
+      <label for="pincode">Pincode</label>
+      <input type="text" id="pincode" name="pincode" class="form-control" required>
+    </div>
+
+
+    <button onclick="return get_city()" class="btn btn-lg btn-secondary">Get details</button>
+        <div class="form-group text-left">
+            <label for="city">City</label>
+            <input type="text" name="city" id="city" class="form-control" required>  
+        </div>
+        <div class="form-group text-left">
+            <label for="district">District</label>
+            <input type="text" name="district" id="district" class="form-control" required>  
+        </div>
+        <div class="form-group text-left">
+            <label for="state">State</label>
+            <input type="text" name="state" id="state" class="form-control" required>  
+        </div>
+
+    
+
+
+    <button type="submit" class="btn btn-lg btn-primary"> Submit </button>
+
+  </form>
+
+
     <form action="/bidbox/add_product", method="POST">
-        <div>
-            <label for="product_name">Product Name</label>
-            <input type="text" name="product_name" id="name" required=True>     
-        </div>
-        <div>
-            <label for="product_cat">Product Category</label>
-            <select name="product_cat" id="product_cat">
-                <% categories.forEach((cat)=>{ %>
-                    <option value="<%=cat%>"><%=cat%></option>
-                <% })%>
-            </select>    
-        </div>
-        <div>
-            <label for="quantity">Quantity</label>
-            <input type="text" name="quantity" id="quantity" required=True>     
-        </div>
-        <div>
-            <label for="unit">Unit</label>
-            <select name="unit" id="unit">
-                <option value="kg">Kilo grams(kg)</option>
-                <option value="mt">Metric ton (M. ton)</option>
-                <option value="qtl">Quintle</option>
-            </select>    
-        </div>
-        <div>
-            <label for="basePrice">Base Price</label>
-            <input type="text" name="basePrice" id="basePrice" required=True>     
-        </div>
-        <div>
-            <label for="description">Description</label>
-            <input type="text" name="description" id="description" required=False>     
-        </div>
+       
+        
+        
         <!-- <div>
             <label for="startTime">Start Date Time</label>
             <input type="datetime-local" name="start_dt" id="startTime" required=True>     

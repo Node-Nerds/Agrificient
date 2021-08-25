@@ -12,7 +12,7 @@ class Warehouse {
 
   save(callback) {
     const queryText =
-      "insert into agrificient.warehouse(warehouse_name, phone, latitude, longitude, pincode, address) values ($1,$2,$3,$4,$5,$6);";
+      "insert into public.warehouse(warehouse_name, phone, latitude, longitude, pincode, address) values ($1,$2,$3,$4,$5,$6);";
 
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
@@ -62,7 +62,7 @@ class Warehouse {
 
   findByPos(latitude, longitude, callback) {
     var searchQuery =
-      "select * from agrificient.warehouse order by |/ ((latitude-$1)^2 + (longitude-$2)^2) limit 5";
+      "select * from public.warehouse order by |/ ((latitude-$1)^2 + (longitude-$2)^2) limit 5";
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
         callback(err, null);
@@ -87,7 +87,7 @@ class Warehouse {
   }
 
   findByPincode(pincode, callback) {
-    var searchQuery = "select * from agrificient.warehouse where pincode = $1";
+    var searchQuery = "select * from public.warehouse where pincode = $1";
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
         callback(err, null);
