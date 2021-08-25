@@ -36,7 +36,7 @@ router.post("/search_open_bid",(req, res) => {
           }
     }
     else{
-        res.redirect("/login");
+        res.redirect("/");
     }
 })
 

@@ -20,7 +20,13 @@ function bootstrap(callback){
         if (shouldAbort(err, done)) {
           callback(err, null);
         }
-        
+        client
+          .query(query)
+          .then((res) => {
+            // console.log(res);
+            if (res.rowCount == 0) {
+              callback(null, null);
+            } else {
         query = "CREATE  TABLE if not exists public.wallet  ( id                   uuid DEFAULT uuid_generate_v4() NOT NULL ,user_id              uuid  NOT NULL ,available_amt        numeric(12,2)  NOT NULL ,blocked_amt          numeric(12,2)  NOT NULL ,CONSTRAINT pk_wallet_wallet_id PRIMARY KEY ( id ),CONSTRAINT unq_wallet UNIQUE ( user_id ) );"
         let alter_query = "ALTER TABLE public.wallet DROP CONSTRAINT IF EXISTS fk_wallet_users";
 
@@ -268,6 +274,12 @@ function bootstrap(callback){
             //console.log(e);
             callback("error");
           });
+        }
+      })
+      .catch((e) => {
+        //console.log(e);
+        callback("error");
+      });
         done();
     });
 }

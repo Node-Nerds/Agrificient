@@ -70,6 +70,31 @@ passport.use("local",new LocalStrategy((username, password, cb) => {
   
 }));
 
+passport.use("otp",new LocalStrategy((username,password, cb) => {
+  pool.connect((err, client, done) => {
+      if (shouldAbort(err, done)) {
+        cb(err);
+      }
+        client
+        .query("select * from public.users where phno=$1;",[username])
+        .then((res) => {
+          // console.log(res);
+          if (res.rowCount == 0) {
+              cb(null, false, {message: 'User not found'});
+          }
+          else {
+              const first = res.rows[0];
+              cb(null,first)
+          }
+        })
+        .catch((e) => {
+          cb(e);
+        });
+      done();
+  });
+  
+}));
+
 passport.serializeUser((user, done) => {
   done(null, user.id)
 })
