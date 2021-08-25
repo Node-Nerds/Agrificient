@@ -22,7 +22,7 @@ router.get("/add_product",(req, res) => {
         
     }
     else{
-        res.redirect("/login");
+        res.redirect("/");
     }
 })
 
@@ -45,7 +45,7 @@ router.post("/add_product",(req, res) => {
         })
     }
     else{
-        res.redirect("/login");
+        res.redirect("/");
     }
 })
 

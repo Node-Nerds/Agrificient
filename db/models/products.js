@@ -106,7 +106,7 @@ class Products{
         client
           .query(query, [user_id])
           .then((res) => {
-            console.log(res);
+            // console.log(res);
             if (res.rowCount == 0) {
               callback(null, null);
             } else {
@@ -137,6 +137,7 @@ class Products{
       }
       
       let date = formatDate(new Date());
+      
 
       let query = "select * from public.products where start_dt <= $1 and end_dt >= $1;";
       pool.connect((err, client, done) => {
@@ -178,7 +179,6 @@ class Products{
       }
       
       let date = formatDate(new Date());
-
       var searchQuery =
       "select * from public.products where start_dt <= $1 and end_dt >= $1 and user_id != $4 order by sqrt(pow(latitude-$2,2) + pow(longitude-$3, 2));";
     

@@ -97,6 +97,10 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
+        let e = '<%-e%>';
+        if(e != ""){
+          alert(e);
+        }
         let otp_verified = false;
         let password_confirmed = false;
         document.getElementById("sign_up").disabled = true;

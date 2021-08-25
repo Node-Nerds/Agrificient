@@ -8,6 +8,10 @@
 </form>
 
 <script>
+    let e = "<%-e%>";
+    if(e != ""){
+          alert(e);
+        }
     function check(){
         if(document.getElementById("pan").value.length == 10){
             return true;

@@ -1,20 +1,19 @@
 const Bid = require("../../../db/models/bid");
-const Products = require("../../../db/models/products");
 
 const router = require("express").Router();
 
 
-router.get("/fetch_user_products",(req, res) => {
+router.get("/bid_history/:bid_id",(req, res) => {
     if(req.isAuthenticated()){
-        let product = new Products()
+        let bid = new Bid();
 
-        product.fetch_user_products(req.user.id, (err, found)=>{
+        bid.get_by_id(req.params.bid_id, (err, found)=>{
             if(err){
                 console.log(err);
                 res.render("error500");
             }
             else{
-                res.send(found);
+                res.render("bidbox/bid_details",{bid: found});
             }
         })
     }

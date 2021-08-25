@@ -1,0 +1,14 @@
+<%=JSON.stringify(bid)%>
+<br>
+<br>
+Status = <%if(bid[0].status == "0"){ %>
+    under_process
+<% }else if(bid[0].status == "1"){ %>
+    accepted
+<% }else{ %>
+    refunded
+<% } %>
+<br>
+Alloted = <%=bid[0].alloted%>
+
+

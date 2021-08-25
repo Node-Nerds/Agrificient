@@ -54,21 +54,21 @@
   </head>
 
   <body class="text-center">
-    <form class="form-signin">
+    <form class="form-signin" action="/otpLogin" method="POST" id="otp_login">
       <img class="mb-3" src="logo.svg" alt="" width="250" height="250">
       <div class="form-group text-left" id="phoneNumber">
         <label for="phonenumber">Phone Number</label>
-        <input type="tel" id="inputPhoneNumber" value="+91" name="phno" class="form-control" onkeyup="check_ph()" placeholder="Phone Number" required>
+        <input type="tel" id="inputPhoneNumber" value="+91" name="username" class="form-control" placeholder="Phone Number" required>
       </div>
-
       <div class="input-group mb-3 text-left">
         <input type="number" class="form-control" id="verificationcode" placeholder="Enter The OTP">
           <div class="input-group-append">
-            <button class="btn btn-sm btn-secondary" id="sendCode" type="button">Send OTP</button>
-            <button class="btn btn-sm btn-success"  type="button" onclick="myFunction()">Verify OTP</button>
+            
+            <button class="btn btn-sm btn-success"  type="button" id="sendCode" onclick="myFunction()">Send OTP</button>
           </div>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+      <input type="password" name="password" id="" value="null" hidden>
+      <a type="button" class="btn btn-lg btn-primary btn-block" onclick="myFunction()" >Log In</a>
       <div class="separator">or</div>
       <a type="button" href="/" class="btn btn-lg btn-success btn-block mt-2">Log In Using Password</a>
       
@@ -79,8 +79,7 @@
 
   <script>
     let otp_verified = false;
-    let password_confirmed = false;
-    document.getElementById("sign_up").disabled = true;
+  
     // firebase.auth().languageCode = 'it';
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sendCode', {
       'size': 'invisible',
@@ -107,21 +106,7 @@
               // SMS sent. Prompt user to type the code from the message, then sign the
               // user in with confirmationResult.confirm(code).
               window.confirmationResult = confirmationResult;
-              if(confirmationResult.hasOwnProperty('code')){
-                  if(confirmationResult.code == "auth/invalid-verification-code"){
-                      alert("Incorrect otp");
-                  }
-                  else{
-                      alert("Error! try after some time");
-                  }
-              }
-              else{
-                  if(password_confirmed == true){
-                    document.getElementById("sign_up").disabled = false;
-                  }
-                  otp_verified = true;
-
-              }
+              
               
               // ...
             }).catch((error) => {
@@ -136,39 +121,26 @@
       window.confirmationResult.confirm(document.getElementById("verificationcode").value)
       .then(function(result) {
         console.log(result);
+        if(result.hasOwnProperty('code')){
+                  if(result.code == "auth/invalid-verification-code"){
+                      alert("Incorrect otp");
+                  }
+                  else{
+                      alert("Error! try after some time");
+                  }
+              }
+              else{
+                if(result.hasOwnProperty('user')){
+                  document.getElementById('otp_login').submit();
+                }
+
+              }
       }).catch(function(error) {
         console.log(error);
       });
     };
 
-    function check(){
-        let pass = document.getElementById("password").value;
-        let confirm_pass = document.getElementById("confirm_password").value;
-        console.log(pass, confirm_pass);
-        console.log(pass == confirm_pass && otp_verified==true);
-        console.log(pass == confirm_pass)
-        if(pass == confirm_pass && otp_verified==true){
-            document.getElementById("sign_up").disabled = false;
-            password_confirmed = true;
-        }
-        else if(pass == confirm_pass){
-            password_confirmed = true;
-            document.getElementById("sign_up").disabled = true;
-        }
-        else{
-            document.getElementById("sign_up").disabled = true;
-        }
-    }
-
-    function check_form(){
-        if(otp_verified == true && password_confirmed == true && document.getElementById('inputPhoneNumber').value==13){
-           return true;
-        }
-        else{
-            alert("Please check the input information");
-            return false;
-        }
-    }
+    
 </script>
 
 </html>

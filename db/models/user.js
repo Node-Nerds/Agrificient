@@ -167,8 +167,8 @@ class User {
           }
         })
         .catch((e) => {
-          console.log(e);
-          callback("error");
+
+          callback(e);
         });
       done();
     });
