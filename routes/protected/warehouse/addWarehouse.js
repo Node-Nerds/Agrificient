@@ -1,11 +1,11 @@
 const Warehouse = require("./../../../db/models/warehouse");
 const router = require("express").Router();
 
-router.get("/addwarehouse", (req, res) => {
+router.get("/", (req, res) => {
   res.render("warehouse/addwarehouse.ejs");
 });
 
-router.post("/addwarehouse", (req, res) => {
+router.post("/", (req, res) => {
   console.log(req.body);
 
   const warehouse = new Warehouse(

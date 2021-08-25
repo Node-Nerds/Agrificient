@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Agrificient</title>
+    <title>Warehousing</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
 
@@ -22,41 +22,29 @@
 <body class="text-center">
 
     <div class="cover-container d-flex h-50 w-100 p-3 mx-auto flex-column">
-        <header class="masthead mb-auto">
+        <header class="masthead mb-5">
             <div class="inner">
                 <h3 class="masthead-brand">Agrificient</h3>
                 <nav class="nav nav-masthead justify-content-center">
-                    <a class="nav-link active" href="#">Home</a>
-                    <a class="nav-link" href="#">Features</a>
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="/dashboard">Home</a>
+                    <a class="nav-link" href="/profile">Profile</a>
+                    <a class="nav-link" href="/wallet">Wallet</a>
                 </nav>
             </div>
         </header>
 
         <main role="main" class="inner cover">
-            <h1 class="cover-heading">WAREHOUSE HOMEPAGE!!!👋</h1>
+            <h1 class="cover-heading">Warehousing</h1>
             <p class="lead"></p>
-            <p class="lead">
-                <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-            </p>
 
-            <p class="lead">
-                <form action="/addwarehouse" method="get">
-                    <button class="btn btn-lg btn-secondary" name="process" value="add"> ADD WAREHOUSE</button>
-                </form>
-            </p>
-
-            <p class="lead">
-                <form action="/searchwarehouse" method="get">
-                    <button class="btn btn-lg btn-secondary" name="process" value="search"> SEARCH WAREHOUSE</button>
-                </form>
-            </p>
-
-            <p class="lead">
-                <form action="/bidbox" method="get">
-                    <button class="btn btn-lg btn-secondary" name="process" value="search">Bidbox</button>
-                </form>
-            </p>
+            <div class="row">
+                <div class="col-12">
+                  <a type="button" href="/warehouse/addwarehouse" class="btn btn-lg btn-secondary custom-button">Add Warehouse</a>
+                </div>
+                <div class="col-12">
+                  <a type="button" href="/warehouse/searchwarehouse" class="btn btn-lg btn-secondary custom-button">Search Warehouse</a>
+                </div>
+            </div>
 
         </main>
     </div>

@@ -1,11 +1,11 @@
 const Warehouse = require("./../../../db/models/warehouse");
 const router = require("express").Router();
 
-router.get("/searchwarehouse", (req, res) => {
+router.get("/", (req, res) => {
   res.render("warehouse/searchwarehouse.ejs");
 });
 
-router.post("/searchwarehouse", (req, res) => {
+router.post("/", (req, res) => {
   const warehouse = new Warehouse();
 
   if (req.body.pincode != null) {

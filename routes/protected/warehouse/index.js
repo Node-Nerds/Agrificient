@@ -5,8 +5,8 @@ const addWarehouse = require("./addWarehouse");
 const searchWarehouse = require("./searchWarehouse");
 
 
-router.use("/home", warehouseHome);
-router.use("./addWarehouse", addWarehouse);
-router.use("./searchWareHouse", searchWarehouse);
+router.use("/", warehouseHome);
+router.use("/addwarehouse", addWarehouse);
+router.use("/searchwarehouse", searchWarehouse);
 
 module.exports = router;

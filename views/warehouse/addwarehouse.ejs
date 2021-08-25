@@ -5,45 +5,50 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Add Warehouse</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="/warehouse/addwarehouse.css">
 </head>
 
-<style>
-  #map {
-    height: 600px;
-    width: 70%;
-    margin: auto;
-  }
+<body class="text-center">
 
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-</style>
+  <form class="form-add" action="/warehouse/addwarehouse" method="post">
+    <img src="/logo.svg" alt="" width="150" height="150">
+    <h3 class="text-primary mb-3">Add Warehouse</h3>
+    <div class="form-group text-left">
+      <label for="name">Name of Warehouse</label>
+      <input type="text" id="name" name="name" class="form-control" placeholder="Name" required autofocus>
+    </div>
+    <div class="form-group text-left">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phoneNo" name="name" class="form-control" placeholder="Phone Number" required>
+    </div>
+    <div class="form-group text-left">
+      <label for="x">Latitude</label>
+      <input type="text" id="latitude" name="x" class="form-control" required>
+    </div>
+    <div class="form-group text-left">
+      <label for="y">Longitute</label>
+      <input type="text" id="longitude" name="y" class="form-control" required>
+    </div>
+    <div id="map"></div> 
+    <div class="form-group text-left">
+      <label for="pincode">Pincode</label>
+      <input type="text" id="pincode" name="pincode" class="form-control" placeholder="Pincode" required>
+    </div>
+    <div class="form-group text-left">
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" class="form-control" placeholder="Address" required>
+    </div>
 
-<body>
 
-  <h1>NEW ADD</h1>
-
-  <form action="/addwarehouse" method="post">
-
-    <label for="name">Name</label> <input name="name" type="text">
-    <label for="phone">Phone</label> <input name="phone" type="text">
-    <label for="x">X</label> <input id="latitude" name="x" type="text">
-    <label for="y">Y</label> <input id="longitude" name="y" type="text">
-    <label for="pincode">Pincode</label> <input name="pincode" type="text">
-    <label for="address">Address</label> <input name="address" type="text">
-
-    <button type="submit"> Submit </button>
+    <button type="submit" class="btn btn-lg btn-primary"> Submit </button>
 
   </form>
-
-  <br>
-  <br>
-
-  <div id="map"></div>
 
   <!-- Google Map Script -->
   <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtLZdve7jf15PETQYF6TgR05sHZnVdFc4">
