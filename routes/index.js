@@ -1,13 +1,9 @@
 const router = require("express").Router();
 
-const addwarehouse = require("./protected/addWarehouse");
-const searchwarehouse = require("./protected/searchWarehouse");
-const warehouse = require("./protected/warehouse");
-const proposal = require("./protected/proposal");
+const public = require("./public/index");
+const protected = require("./protected/index");
 
-router.use("/", addwarehouse);
-router.use("/", searchwarehouse);
-router.use("/", warehouse);
-router.use("/", proposal);
+router.use("/", public);
+router.use("/", protected);
 
 module.exports = router;

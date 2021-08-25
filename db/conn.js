@@ -6,6 +6,8 @@ const pool = new Pool({
     connectionTimeoutMillis: 2000,
 });
 
+const client = new Client();
+
 
 pool.query("select now();",async (err, res) => {
     
