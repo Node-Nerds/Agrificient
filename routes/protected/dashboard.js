@@ -3,8 +3,13 @@ const router = require("express").Router();
 
 
 router.get("/",(req, res) => {
-    
-    res.render("dashboard");
+    if(req.isAuthenticated()){
+        res.render("dashboard");
+
+    }
+    else{
+        res.redirect("/");
+    }
 })
 
 

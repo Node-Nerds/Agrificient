@@ -1,0 +1,15 @@
+<h1>Withdraw funds</h1>
+
+<form action="/wallet/quick_transact/debit" method="POST">
+    Amount = <input type="number" name="amount">
+
+    <button type="submit">Withdraw funds</button>
+</form>
+
+<script>
+    let e = '<%-e%>';
+
+    if(e!=""){
+        alert(e);
+    }
+</script>

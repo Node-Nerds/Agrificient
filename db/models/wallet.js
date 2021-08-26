@@ -105,7 +105,7 @@ class Wallet{
     }
 
     transaction_history(id, callback){
-      var searchQuery = "select * from public.wallet_trans where wallet_id=$1;";
+      var searchQuery = "select * from public.wallet_trans where wallet_id=$1 order by trans_date desc, trans_time desc;";
         pool.connect((err, client, done) => {
           if (shouldAbort(err, done)) {
             callback(err, null);
