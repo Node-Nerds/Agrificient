@@ -11,7 +11,7 @@ class Proposal {
 
   save(callback) {
     const queryText =
-      "insert into public.proposal(user_id, warehouse_id, start_date, end_date, quantity, status) values ($1,$2,$3,$4,$5,$6);";
+      "insert into public.proposal(user_id, warehouse_id, start_date, end_date, quantity, current_status) values ($1,$2,$3,$4,$5,$6);";
 
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
@@ -31,7 +31,7 @@ class Proposal {
               this.start_date,
               this.end_date,
               this.quantity,
-              0,
+              "pending",
             ])
             .then((res) => {
               if (shouldAbort(err, done)) {
@@ -61,7 +61,7 @@ class Proposal {
 
   findInbox(id, callback) {
     var searchQuery =
-      "select p.id,fname,warehouse_name,start_date,end_date,quantity,status,phno from public.proposal as p INNER JOIN public.users as u ON p.user_id = u.id  INNER JOIN public.warehouse as w ON p.warehouse_id = w.id where p.warehouse_id IN (select id from public.warehouse where user_id = $1)";
+      "select p.id,fname,warehouse_name,start_date,end_date,quantity,current_status,phno from public.proposal as p INNER JOIN public.users as u ON p.user_id = u.id  INNER JOIN public.warehouse as w ON p.warehouse_id = w.id where p.warehouse_id IN (select id from public.warehouse where user_id = $1)";
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
         callback(err, null);
@@ -112,7 +112,8 @@ class Proposal {
   }
 
   approve(id, callback) {
-    var searchQuery = "update public.proposal set status = true where id = $1";
+    var searchQuery =
+      "update public.proposal set current_status = 'approved' where id = $1";
     pool.connect((err, client, done) => {
       if (shouldAbort(err, done)) {
         callback(err, null);

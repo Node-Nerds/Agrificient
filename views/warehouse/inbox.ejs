@@ -18,13 +18,14 @@
         <a href="">User</a>: <%=inbox.fname%> Warehouse_name: <%=inbox.warehouse_name%> Start_Date:
         <%=inbox.start_date%> End_Date: <%=inbox.end_date%>
 
-        <% if(inbox.status){%>
-        <span style="color: green;"> Approved </span>
-        <%}else{ %>
+        <% if(inbox.current_status == 'pending'){%>
         <button id=<%=inbox.id%> class="approve">Approve</button>
+        <span class=<%=inbox.id%> style="color: green;" hidden="true"> Approved </span>
+        <%}else if(inbox.current_status == 'approved'){ %>
+        <span style=" color: green;"> Approved </span>
+        <% }else{ %>
+        <span style="color: green;"> Paid </span>
         <% } %>
-
-
     </div>
 
     <%})%>
@@ -44,8 +45,10 @@
 
             $.post("/warehouse/inbox", data, function (data, status) {
 
-                button.innerHTML = "Approved";
-                button.class = "";
+                console.log("hq");
+                $("#" + pid).attr("hidden", "true");
+                $("." + pid).removeAttr("hidden");
+                console.log("kk");
 
             })
         })
