@@ -1,0 +1,13 @@
+<%=JSON.stringify(wallet)%>
+<hr>
+Available amount = <%=wallet[0].available_amt%>
+<br>
+Blocked amount = <%=wallet[0].blocked_amt%>
+<hr>
+<a type="button" href="/wallet/transaction_history">Statement</a>
+<hr>
+
+<a type="button" href="/wallet/add_money">Add funds</a>
+<a type="button" href="/wallet/withdraw_money">Withdraw funds</a>
+<a type="button" href="/wallet/normal_transfer">Transfer funds</a>
+

@@ -3,6 +3,19 @@ const Wallet = require("../../../db/models/wallet");
 
 const router = require("express").Router();
 
+router.get("/add_money", (req, res) => {
+    
+    let wallet = new Wallet;
+
+
+    if(req.isAuthenticated() ){
+        res.render("wallet/add_funds",{wallet: wallet});
+    }
+    else{
+        res.redirect("/");
+    }
+});
+
 
 router.post("/add_money", (req, res) => {
     let {phno, amount} = req.body;

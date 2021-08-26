@@ -3,6 +3,38 @@ const Wallet = require("../../../db/models/wallet");
 
 const router = require("express").Router();
 
+router.get("/transaction_history", (req,res)=>{
+    if(req.isAuthenticated()){
+        let wallet = new Wallet;
+
+        wallet.get_by_user_id(req.user.id, (err, found)=>{
+            if(err){
+                res.render("error500");
+            }
+            else{
+                wallet.transaction_history(found[0].id , (err, history)=>{
+                    if(err){
+                        console.log(err);
+                        if(err = "no user found"){
+                            res.render("error404");
+                        }
+                        else{
+                            res.render("error500");
+                        }
+                    }
+                    else{
+                        
+                        res.render("wallet/statement",{history: history});
+                    }
+                })
+            }
+        })
+    }
+    else{
+        res.redirect("/");
+    }
+})
+
 
 router.post("/transaction_history", (req, res) => {
     let {phno} = req.body;

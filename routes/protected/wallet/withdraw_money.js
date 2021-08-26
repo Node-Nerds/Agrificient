@@ -3,6 +3,18 @@ const Wallet = require("../../../db/models/wallet");
 
 const router = require("express").Router();
 
+router.get("/withdraw_money", (req, res) => {
+    
+    let wallet = new Wallet;
+
+
+    if(req.isAuthenticated() ){
+        res.render("wallet/withdraw_funds",{wallet: wallet , e:""});
+    }
+    else{
+        res.redirect("/");
+    }
+});
 
 router.post("/withdraw_money", (req, res) => {
     let {phno, amount} = req.body;
@@ -15,7 +27,7 @@ router.post("/withdraw_money", (req, res) => {
                         res.send("no account with given ph no");
                     }
                     else{
-                        res.sendStatus(500);
+                        res.render("error500");
                     }
                 }
                 else{
@@ -25,10 +37,10 @@ router.post("/withdraw_money", (req, res) => {
                             if(err){
                                 console.log(err);
                                 if(err = "no user found"){
-                                    res.sendStatus(404);
+                                    res.render("error404");
                                 }
                                 else{
-                                    res.sendStatus(500);
+                                    res.render("error500");
                                 }
                             }
                             else{
@@ -48,7 +60,7 @@ router.post("/withdraw_money", (req, res) => {
         else{
             wallet.get_by_user_id(req.user.id, (err, found)=>{
                 if(err){
-                    res.sendStatus(500);
+                    res.render("error500");
                 }
                 else{
                     if(found[0].available_amt > amount){
@@ -56,10 +68,10 @@ router.post("/withdraw_money", (req, res) => {
                             if(err){
                                 console.log(err);
                                 if(err = "no user found"){
-                                    res.sendStatus(404);
+                                    res.render("error404");
                                 }
                                 else{
-                                    res.sendStatus(500);
+                                    res.render("error500");
                                 }
                             }
                             else{

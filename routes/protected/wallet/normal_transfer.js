@@ -3,6 +3,19 @@ const Wallet = require("../../../db/models/wallet");
 
 const router = require("express").Router();
 
+router.get("/normal_transfer", (req, res) => {
+    
+    let wallet = new Wallet;
+
+
+    if(req.isAuthenticated() ){
+        res.render("wallet/transfer_funds",{wallet: wallet, e:""});
+    }
+    else{
+        res.redirect("/");
+    }
+});
+
 
 router.post("/normal_transfer", (req, res) => {
     let {sender, reciever, amount, desc} = req.body;
@@ -19,20 +32,20 @@ router.post("/normal_transfer", (req, res) => {
             wallet.get_by_phone_no(sender, (err, sender)=>{
                 if(err){
                     if(err == "no user found"){
-                        res.send("no account with sender's ph no");
+                        res.render("wallet/transfer_funds",{wallet: wallet, e:"reciever not found"});
                     }
                     else{
-                        res.sendStatus(500);
+                        res.render("error500");
                     }
                 }
                 else{
                     wallet.get_by_phone_no(reciever, (err, reciever)=>{
                         if(err){
                             if(err == "no user found"){
-                                res.send("no account with reciever's ph no");
+                                res.render("wallet/transfer_funds",{wallet: wallet, e:"reciever not found"});
                             }
                             else{
-                                res.sendStatus(500);
+                                res.render("error500");
                             }
                         }
                         else{
@@ -45,20 +58,20 @@ router.post("/normal_transfer", (req, res) => {
                                     if(err){
                                         console.log(err);
                                         if(err = "no user found"){
-                                            res.sendStatus(404);
+                                            res.render("error404");
                                         }
                                         else{
-                                            res.sendStatus(500);
+                                            res.render("error500");
                                         }
                                     }
                                     else{
 
-                                        res.send("successfull");
+                                        res.redirect("/wallet/")
                                     }
                                 })
                             }
                             else{
-                                res.send("Insufficient balance");
+                                res.render("wallet/transfer_funds",{wallet: wallet, e:"Insufficient balance"});
                             }
                     }
                     })
@@ -70,16 +83,16 @@ router.post("/normal_transfer", (req, res) => {
         else{
             wallet.get_by_user_id(req.user.id, (err, sender)=>{
                 if(err){
-                    res.sendStatus(500);
+                    res.render("error500");
                 }
                 else{
                     wallet.get_by_phone_no(reciever, (err, reciever)=>{
                         if(err){
                             if(err == "no user found"){
-                                res.send("no account with reciever's ph no");
+                                res.render("wallet/transfer_funds",{wallet: wallet, e:"reciever not found"});
                             }
                             else{
-                                res.sendStatus(500);
+                                res.render("error500");
                             }
                         }
                         else{
@@ -92,10 +105,10 @@ router.post("/normal_transfer", (req, res) => {
                                     if(err){
                                         console.log(err);
                                         if(err = "no user found"){
-                                            res.sendStatus(404);
+                                            res.render("wallet/transfer_funds",{wallet: wallet, e:"reciever not found"});
                                         }
                                         else{
-                                            res.sendStatus(500);
+                                            res.render("error500");
                                         }
                                     }
                                     else{
@@ -105,7 +118,7 @@ router.post("/normal_transfer", (req, res) => {
                                 })
                             }
                             else{
-                                res.send("Insufficient balance");
+                                res.render("wallet/transfer_funds",{wallet: wallet, e:"Insufficient balance"});
                             }
                         }
                     })
