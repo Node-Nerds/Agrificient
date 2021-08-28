@@ -24,6 +24,13 @@ body {
   }
 
 
+.output {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    margin: 0 auto;
+  }
+
   .separator {
     display: flex;
     align-items: center;

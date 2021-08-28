@@ -35,9 +35,22 @@
     <a class="btn btn-lg btn-success btn-block mt-1" id="useLocation" type="button"> Use My Location </a>
   </form>
 
+  <div class="output">
+    <div id="myOutput" class="mt-4">
+      <div class="jumbotron">
+        <p class="lead font-weight-bold text-muted">Please select the location to view nearby Warehouse</p>
+      </div>
+    </div>
+    <div id="nowarehouse" class="mt-4" style="display: none;">
+      <div class="jumbotron">
+        <p class="lead font-weight-bold text-muted">No Warehouse found in this location.</p>
+      </div>
+    </div>
+  </div>
+  
 
+  
 
-  <div id="myOutput"></div>
 
   <!-- Google Map Script -->
   <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtLZdve7jf15PETQYF6TgR05sHZnVdFc4">
@@ -63,27 +76,43 @@
 
           mainContainer.innerHTML = "";
 
+          if(data.length==0){
+            $("#nowarehouse").show()
+          }
+
           for (var i = 0; i < data.length; i++) {
             var div = document.createElement("div");
-            div.innerHTML = 'WarehouseName: ' + data[i].warehouse_name + ' Phone: ' + data[i]
-              .phone + ' Pincode: ' + data[i].pincode + ' Address: ' + data[i]
-              .address;
 
-            var link = document.createElement('a');
-            link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
-              data[i].longitude;
-            link.target = "_Blank"
-            link.innerText = "Location";
+            console.log(data[i]);
+            div.innerHTML = 
+              "<div class='card mt-2 mb-2'>" +
+                "<div class='card-body'>" +
+                  "<div class='row'>" +
+                    "<div class='col-8'>" +
+                      "<h5 class='text-uppercase text-primary text-left'>" + data[i].warehouse_name + "</h5>" +
+                    "</div>"+
+                    "<div class='col-4 text-right'>"+
+                      "<h6 class='text-right text-dark'> Base Price: " + "60 Rs. </h6>" +
+                    "</div>" +
+                  "</div>"+
 
-            var more = document.createElement('a');
-            more.href = "/warehouse/custom/" + data[i].id;
-            more.target = "_Blank";
-            more.innerText = "More";
+                  "<div class='row text-left'>" +
+                    "<div class='col-12'>" +
+                        "<span class='text-muted'>Contact: </span>" + data[i].phone +
+                    "</div>" +
+                  "</div>" + 
+                  "<div class='row text-left'>" +
+                    "<div class='col-12'>" +
+                        "<span class='text-muted'>Location: </span><a href='https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
+            data[i].longitude + "' target = '_Blank'>" + data[i].address + ", " + data[i].pincode + "</a>"
+                    "</div>" +
+                  "</div>" + 
+                  "<a href='/warehouse/custom/"+data[i].id+"' class='btn btn-primary btn-sm mt-2'> View More </a>" +
+                "</div>" +
+              "</div>";
 
             mainContainer.appendChild(div);
-            mainContainer.appendChild(link);
-            mainContainer.appendChild(document.createTextNode("  "));
-            mainContainer.appendChild(more);
+
           }
         })
 
@@ -115,27 +144,46 @@
           var mainContainer = document.getElementById("myOutput");
           mainContainer.innerHTML = "";
 
+
+          if(data.length==0){
+            $("#nowarehouse").show()
+          }
+
           for (var i = 0; i < data.length; i++) {
             var div = document.createElement("div");
-            div.innerHTML = 'WarehouseName: ' + data[i].warehouse_name + ' Phone: ' + data[i]
-              .phone + ' Pincode: ' + data[i].pincode + ' Address: ' + data[i]
-              .address;
 
-            var link = document.createElement('a');
-            link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
-              data[i].longitude;
-            link.target = "_Blank"
-            link.innerText = "Location";
+            div.innerHTML = 
+              "<div class='card mt-2 mb-2'>" +
+                "<div class='card-body'>" +
 
-            var more = document.createElement('a');
-            more.href = "/warehouse/custom/" + data[i].id;
-            more.target = "_Blank";
-            more.innerText = "More";
+                  "<div class='row'>" +
+                    "<div class='col-8'>" +
+                      "<h5 class='text-uppercase text-primary text-left'>" + data[i].warehouse_name + "</h5>" +
+                    "</div>"+
+                    "<div class='col-4 text-right'>"+
+                      "<h6 class='text-right text-dark'> Base Price: " + "60 Rs. </h6>" +
+                    "</div>" +
+                  "</div>"+
+
+                  "<div class='row text-left'>" +
+                    "<div class='col-12'>" +
+                        "<span class='text-muted'>Contact: </span>" + data[i].phone +
+                    "</div>" +
+                  "</div>" + 
+                  "<div class='row text-left'>" +
+                    "<div class='col-12'>" +
+                        "<span class='text-muted'>Location: </span><a href='https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
+            data[i].longitude + "' target = '_Blank'>" + data[i].address + ", " + data[i].pincode + "</a>"
+                    "</div>" +
+                  "</div>" + 
+                  "<a href='/warehouse/custom/" + data[i].id +"' class='btn btn-primary btn-sm mt-2' target='_Blank'> View More </a>"+
+                "</div>" +
+              "</div>";
+
+
+           
 
             mainContainer.appendChild(div);
-            mainContainer.appendChild(link);
-            mainContainer.appendChild(document.createTextNode("  "));
-            mainContainer.appendChild(more);
           }
         })
       }

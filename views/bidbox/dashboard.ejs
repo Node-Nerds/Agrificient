@@ -277,19 +277,19 @@
                 "</div>" +
               "</div>";
 
-          var link = document.createElement('a');
-          link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
-            data[i].longitude;
-          link.target = "_Blank"
-          link.innerText = "Location";
+          // var link = document.createElement('a');
+          // link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
+          //   data[i].longitude;
+          // link.target = "_Blank"
+          // link.innerText = "Location";
 
-          var link1 = document.createElement('a');
-          link1.href = "/bidbox/product/"+data[i].id;
-          link1.innerText = "View More";
+          // var link1 = document.createElement('a');
+          // link1.href = "/bidbox/product/"+data[i].id;
+          // link1.innerText = "View More";
 
           mainContainer.appendChild(div);
-          mainContainer.appendChild(link);
-          mainContainer.appendChild(link1);
+          // mainContainer.appendChild(link);
+          // mainContainer.appendChild(link1);
         }
       })
 
@@ -361,18 +361,10 @@
                 "</div>" +
               "</div>";
 
-          var link = document.createElement('a');
-          link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
-            data[i].longitude;
-          link.target = "_Blank"
-          link.innerText = "Location";
-          var link1 = document.createElement('a');
-          link1.href = "/bidbox/product/"+data[i].id;
-          link1.innerText = "View More";
+         
 
           mainContainer.appendChild(div);
-          mainContainer.appendChild(link);
-          mainContainer.appendChild(link1);
+
         }
       })
     }
