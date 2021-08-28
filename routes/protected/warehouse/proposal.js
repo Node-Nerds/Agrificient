@@ -1,11 +1,12 @@
-const Warehouse = require("../../db/models/warehouse");
-const Proposal = require("../../db/models/proposal");
+const Warehouse = require("../../../db/models/warehouse");
+const Proposal = require("../../../db/models/proposal");
 const router = require("express").Router();
 
-router.get("/proposal", (req, res) => {
+router.get("/", (req, res) => {
   var proposal = new Proposal();
+  var warehouse = new Warehouse();
 
-  proposal.findById("CodeSocks12", (err, data) => {
+  proposal.findMyProposal(req.user.id, (err, data) => {
     if (err) {
       console.log(err);
       res.sendStatus(500);

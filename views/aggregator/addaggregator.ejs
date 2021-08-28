@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Aggregator</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="/warehouse/addwarehouse.css">
+</head>
+
+<body class="text-center">
+
+  <form class="form-add" action="/aggregator/addaggregator" method="post">
+    <img src="/logo.svg" alt="" width="150" height="150">
+    <h3 class="text-primary mb-3">Add Aggregator</h3>
+    <div class="form-group text-left">
+      <label for="name">Name of Aggregator</label>
+      <input type="text" id="name" name="name" class="form-control" placeholder="Name" required autofocus>
+    </div>
+    <div class="form-group text-left">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phoneNo" name="phone" class="form-control" placeholder="Phone Number" required>
+    </div>
+    <div class="form-group text-left">
+      <label for="x">Latitude</label>
+      <input type="text" id="latitude" name="x" class="form-control" required>
+    </div>
+    <div class="form-group text-left">
+      <label for="y">Longitute</label>
+      <input type="text" id="longitude" name="y" class="form-control" required>
+    </div>
+    <div id="map"></div>
+    <div class="form-group text-left">
+      <label for="pincode">Pincode</label>
+      <input type="text" id="pincode" name="pincode" class="form-control" placeholder="Pincode" required>
+    </div>
+    <div class="form-group text-left">
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" class="form-control" placeholder="Address" required>
+    </div>
+    <div class="form-group text-left">
+      <label for="description">Description</label>
+      <input type="text" id="description" name="description" class="form-control" placeholder="Description" required>
+    </div>
+    <div class="form-group text-left">
+      <label for="whatsapp">Whatsapp Group Link</label>
+      <input type="text" id="whatsapp" name="whatsapp" class="form-control" placeholder="whatsapp">
+    </div>
+
+
+    <button type="submit" class="btn btn-lg btn-primary"> Submit </button>
+
+  </form>
+
+  <!-- Google Map Script -->
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtLZdve7jf15PETQYF6TgR05sHZnVdFc4">
+  </script>
+
+  <script>
+    window.addEventListener('load', (event) => {
+
+      var position = [40.748774, -73.985763];
+
+      //Success Callback 
+      const successCallback = (coords) => {
+        document.getElementById("latitude").value = coords.coords.latitude;
+        document.getElementById("longitude").value = coords.coords.longitude;
+
+        position[0] = coords.coords.latitude;
+        position[1] = coords.coords.longitude;
+
+        //Load google map
+        google.maps.event.addDomListener(window, 'load', initialize());
+      }
+
+      //Error Callback
+      const errorCallback = (error) => {
+        console.log(error);
+      }
+
+      //Get Location
+      const watchId = navigator.geolocation.watchPosition(successCallback, errorCallback, {
+        enableHighAccuracy: true,
+        timeout: 5000,
+      });
+
+      //Initialise
+      function initialize() {
+        var latlng = new google.maps.LatLng(position[0], position[1]);
+        var myOptions = {
+          zoom: 10,
+          center: latlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+        marker = new google.maps.Marker({
+          position: latlng,
+          map: map,
+          title: "Latitude:" + position[0] + " | Longitude:" + position[1]
+        });
+
+        google.maps.event.addListener(map, 'click', function (event) {
+          var result = [event.latLng.lat(), event.latLng.lng()];
+
+          document.getElementById("latitude").value = result[0];
+          document.getElementById("longitude").value = result[1];
+
+          transition(result);
+        });
+      }
+
+      var numDeltas = 100;
+      var delay = 10; //milliseconds
+      var i = 0;
+      var deltaLat;
+      var deltaLng;
+
+      function transition(result) {
+        i = 0;
+        deltaLat = (result[0] - position[0]) / numDeltas;
+        deltaLng = (result[1] - position[1]) / numDeltas;
+        moveMarker();
+      }
+
+      function moveMarker() {
+        position[0] += deltaLat;
+        position[1] += deltaLng;
+        var latlng = new google.maps.LatLng(position[0], position[1]);
+        marker.setTitle("Latitude:" + position[0] + " | Longitude:" + position[1]);
+        marker.setPosition(latlng);
+        if (i != numDeltas) {
+          i++;
+          setTimeout(moveMarker, delay);
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>

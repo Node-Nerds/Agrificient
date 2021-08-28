@@ -1,9 +1,9 @@
-const Warehouse = require("./../../../db/models/warehouse");
+const Aggregator = require("../../../db/models/aggregator");
 const router = require("express").Router();
 
 router.get("/", (req, res) => {
   if (req.isAuthenticated()) {
-    res.render("warehouse/searchwarehouse.ejs");
+    res.render("aggregator/searchaggregator.ejs");
   } else {
     res.sendStatus(401);
   }
@@ -11,27 +11,27 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   if (req.isAuthenticated()) {
-    const warehouse = new Warehouse();
+    const aggregator = new Aggregator();
 
     if (req.body.pincode != null) {
-      warehouse.findByPincode(req.body.pincode, (err, warehouses) => {
+      aggregator.findByPincode(req.body.pincode, (err, aggregators) => {
         if (err) {
           console.log(err);
           res.sendStatus(500);
         } else {
-          res.send(warehouses);
+          res.send(aggregators);
         }
       });
     } else {
-      warehouse.findByPos(
+      aggregator.findByPos(
         req.body.latitude,
         req.body.longitude,
-        (err, warehouses) => {
+        (err, aggregators) => {
           if (err) {
             console.log(err);
             res.sendStatus(500);
           } else {
-            res.send(warehouses);
+            res.send(aggregators);
           }
         }
       );

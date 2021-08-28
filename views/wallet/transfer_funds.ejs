@@ -1,0 +1,19 @@
+<h1>Transfer funds</h1>
+
+<form action="/wallet/normal_transfer" method="POST">
+    Phone Number = <input type="tel", name="reciever" value="+91">
+
+    Amount = <input type="number" name="amount">
+
+    Description = <input type="text" name="desc" id="">
+
+    <button type="submit">Transfer funds</button>
+</form>
+
+<script>
+    let e = '<%-e%>';
+
+    if(e!=""){
+        alert(e);
+    }
+</script>

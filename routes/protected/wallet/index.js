@@ -12,6 +12,7 @@ const normal_transfer = require("./normal_transfer");
 const blocked_transfer = require("./blocked_transfer");
 const transaction_history = require("./transaction_history");
 const get_sender_info = require("./get_sender_info");
+const wallet = require("./wallet");
 
 router.use("/", get_wallet_details);
 router.use("/", add_money);
@@ -24,5 +25,6 @@ router.use("/", normal_transfer);
 router.use("/", blocked_transfer);
 router.use("/", transaction_history);
 router.use("/", get_sender_info);
+router.use("/", wallet);
 
 module.exports = router;

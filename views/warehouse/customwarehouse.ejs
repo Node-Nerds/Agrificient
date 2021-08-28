@@ -12,10 +12,8 @@
 
     <h1><%=warehouse_name%></h1>
 
-    <form action="/warehouse/<%=id%>" method="POST">
+    <form action="/warehouse/custom/<%=id%>" method="POST">
 
-        <label for="name">Name</label> <input id="name" name="name" type="text">
-        <label for="phone">Phone</label> <input id="phone" name="phone" type="text">
         <label for="start_date">Start_Date</label> <input id="start_date" name="start_date" type="date">
         <label for="end_date">End_Date</label> <input id="end_date" name="end_date" type="date">
         <label for="quantity">Quantity</label> <input id="quantity" name="quantity" type="number">
