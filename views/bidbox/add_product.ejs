@@ -1,28 +1,29 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/bootstrap.min.css">
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>   -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
   <title>Document</title>
 
 
    <!-- Bootstrap core CSS -->
-   <link rel="stylesheet" href="/bootstrap.min.css">
+   
 
    <!-- Custom styles for this template -->
    <link rel="stylesheet" href="/bidbox/addproduct.css">
@@ -41,12 +42,11 @@
 
     <div class="form-group text-left">
       <label for="product_cat">Product Category</label>
-      <select name="product_cat" id="product_cat" required>
+      <select name="product_cat" id="product_cat" class="form-control" required>
         <% categories.forEach((cat)=>{ %>
             <option value="<%=cat%>"><%=cat%></option>
         <% })%>
       </select>  
-      <input type="tel" id="product_cat" name="product_cat" class="form-control" placeholder="Phone Number" required>
     </div>
 
     <div class="form-group text-left">
@@ -56,7 +56,7 @@
 
     <div class="form-group text-left">
       <label for="unit">Unit</label>
-      <select name="unit" id="unit" required>
+      <select name="unit" id="unit" class="form-control" required>
         <option value="kg">Kilo grams(kg)</option>
         <option value="mt">Metric ton (M. ton)</option>
         <option value="qtl">Quintle</option>
@@ -74,23 +74,26 @@
       <input type="text" id="description" name="description" class="form-control" required>
     </div>
 
-    <div id="inputDate">
-      <div class='input-group date' id='datetimepicker1'>
-        <label for="startTime">Start Date Time</label>
-        <input type='text' name="start_dt"  id="startTime" class="form-control" />
-        <span class="input-group-addon">
+    <div id="inputDate" class="form-group text-left">
+      <label for="startTime">Start Date Time</label>
+      <div class='input-group date' id='datetimepicker1' data-provider="datepicker">
+        <input type='date' name="start_dt"  id="startTime" class="form-control" />
+        <div class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
-        </span>
+        </div>
       </div>
     </div>
 
-    <div class='input-group date' id='datetimepicker2'>
+    <div class="form-group text-left">
       <label for="startTime">End Date Time</label>
-      <input type='text' name="end_dt" id="endTime" class="form-control" />
-      <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-      </span>
+        <div class='input-group date' id='datetimepicker2'>
+          <input type='date' name="end_dt" id="endTime" class="form-control" />
+          <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
     </div>
+    
 
              
 
@@ -111,7 +114,7 @@
     </div>
 
 
-    <button onclick="return get_city()" class="btn btn-lg btn-secondary">Get details</button>
+    <a type="button" onclick="return get_city()" class="btn btn-lg btn-secondary">Get details</a>
         <div class="form-group text-left">
             <label for="city">City</label>
             <input type="text" name="city" id="city" class="form-control" required>  
@@ -133,71 +136,12 @@
   </form>
 
 
-    <form action="/bidbox/add_product", method="POST">
-       
-        
-        
-        <!-- <div>
-            <label for="startTime">Start Date Time</label>
-            <input type="datetime-local" name="start_dt" id="startTime" required=True>     
-        </div> -->
-        <div id="inputDate">
-          <div class='input-group date' id='datetimepicker1'>
-            <label for="startTime">Start Date Time</label>
-            <input type='text' name="start_dt"  id="startTime" class="form-control" />
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-          </div>
-        </div>
-        
-        <div class='input-group date' id='datetimepicker2'>
-          <label for="startTime">End Date Time</label>
-          <input type='text' name="end_dt" id="endTime" class="form-control" />
-          <span class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
-          </span>
-        </div>
-        <!-- <div>
-            <label for="endTime">End Date Time</label>
-            <input type="datetime-local" name="end_dt" id="endTime" required=True>     
-        </div> -->
-        <div>
-            <label for="location">Location</label>
-            <input type="text" name="latitude" id="latitude" >     
-            <input type="text" name="longitude" id="longitude" >     
-            
-        </div>
-        <div>
-            <label for="pincode">Pincode</label>
-            <input type="text" name="pincode" id="pincode" required=True>     
-        </div>
-        <button onclick="return get_city()">Get details</button>
-        <div>
-            <label for="city">City</label>
-            <input type="text" name="city" id="city" required=True>  
-        </div>
-        <div>
-            <label for="district">District</label>
-            <input type="text" name="district" id="district" required=True>  
-        </div>
-        <div>
-            <label for="state">State</label>
-            <input type="text" name="state" id="state" required=True>  
-        </div>
 
-    
-        <div>
-            <button type='submit'>Add</button>
-        </div>
-    </form>
-  <br>
-  <br>
-
-  <div id="map"></div>
 
   <!-- Google Map Script -->
-  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtLZdve7jf15PETQYF6TgR05sHZnVdFc4">
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtLZdve7jf15PETQYF6TgR05sHZnVdFc4"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
   </script>
 

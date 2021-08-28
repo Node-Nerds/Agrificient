@@ -41,6 +41,10 @@ a:hover {
   border-radius: 0.5;
 }
 
+a.btn {
+  color: #f5f5f5 !important;
+}
+
 
 /*
  * Base structure

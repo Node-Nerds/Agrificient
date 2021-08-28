@@ -59,18 +59,23 @@
                     <input type="text" id="pincode" name="pincode" class="form-control" placeholder="Pincode" required>
                   </div>
                     
-                  <button class="btn btn-primary" onclick="usePincode()"> Use Pincode </button>
+                  <a type="button" class="btn btn-primary" onclick="usePincode()"> Use Pincode </a>
       
                 </form>
       
                 <form class="form-add">
                     <div class="separator">or</div>
-                    <button class="btn btn-success"  onclick="useLocation()"> Use My Location </button>
+                    <a type="button" class="btn btn-success"  onclick="useLocation()"> Use My Location </a>
                 </form>
       
                 <div id="myOutput" class="mt-4">
                   <div class="jumbotron">
                     <p class="lead font-weight-bold text-muted">Please select the location to view Open Bids</p>
+                  </div>
+                </div>
+                <div id="nobids" class="mt-4" style="display: none;">
+                  <div class="jumbotron">
+                    <p class="lead font-weight-bold text-muted">No Open Bids in this location.</p>
                   </div>
                 </div>
               </section>
@@ -132,14 +137,40 @@
         }
         for (var i = 0; i < data.length; i++) {
           var div = document.createElement("div");
-          div.innerHTML = JSON.stringify(data[i]);
+          div.innerHTML = 
+          "<div class='card'>" +
+            "<div class='card-body'>" +
+              "<div class='row'>" +
+                "<div class='col-8'>" +
+                  "<h5 class='text-uppercase text-primary text-left'>" + data[i].product_name + "</h5>" +
+                "</div>"+
+                "<div class='col-4 text-right'>"+
+                  "<h6 class='text-right text-dark'> Base Price: " + data[i].base_price + "Rs. </h6>" +
+                "</div>" +
+              "</div>"+
 
-          var link1 = document.createElement('a');
-          link1.href = "/bidbox/bid_history/"+data[i].id;
-          link1.innerText = "View More";
-
-          mainContainer.appendChild(div);
-          mainContainer.appendChild(link1);
+              "<div class='row'>" +
+                "<div class='col-3'>" +
+                    "<span class='text-muted'>Quantity: </span>" + data[i].quantity + " " + data[i].unit +
+                "</div>" +
+                "<div class='col-6'>" +
+                    "<span class='text-muted'>Location: </span>" + data[i].district + ", " + data[i].state_name +
+                "</div>" +
+              "</div>" + 
+              "<div class='row mt-1'>" +
+                "<div class='col-12 text-left font-weight-bold text-dark'>Bid Timing</div><br/>" +
+                "<div class='col-6'>" +
+                    "<span class='text-muted'>Start on: </span>" + data[i].start_dt +
+                "</div>" +
+                "<div class='col-6'>" +
+                    "<span class='text-muted'>Ends on: </span>" + data[i].end_dt +
+                "</div>" +
+              "</div>" +
+ 
+              "<a href='/bidbox/fetch_user_products/"+ data[i].id +"' class='btn btn-primary btn-sm mt-2'>View More</a>"+
+            "</div>" +
+          "</div>";
+        mainContainer.appendChild(div);
         }
       })
 
@@ -152,12 +183,41 @@
         }
       for (var i = 0; i < data.length; i++) {
         var div = document.createElement("div");
-        div.innerHTML = JSON.stringify(data[i]);
-        var link1 = document.createElement('a');
-        link1.href = "/bidbox/fetch_user_products/"+data[i].id;
-        link1.innerText = "View More";
+        div.innerHTML = 
+          "<div class='card'>" +
+            "<div class='card-body'>" +
+              "<div class='row'>" +
+                "<div class='col-8'>" +
+                  "<h5 class='text-uppercase text-primary text-left'>" + data[i].product_name + "</h5>" +
+                "</div>"+
+                "<div class='col-4 text-right'>"+
+                  "<h6 class='text-right text-dark'> Base Price: " + data[i].base_price + "Rs. </h6>" +
+                "</div>" +
+              "</div>"+
+
+              "<div class='row'>" +
+                "<div class='col-3'>" +
+                    "<span class='text-muted'>Quantity: </span>" + data[i].quantity + " " + data[i].unit +
+                "</div>" +
+                "<div class='col-6'>" +
+                    "<span class='text-muted'>Location: </span>" + data[i].district + ", " + data[i].state_name +
+                "</div>" +
+              "</div>" + 
+              "<div class='row mt-1'>" +
+                "<div class='col-12 text-left font-weight-bold text-dark'>Bid Timing</div><br/>" +
+                "<div class='col-6'>" +
+                    "<span class='text-muted'>Start on: </span>" + data[i].start_dt +
+                "</div>" +
+                "<div class='col-6'>" +
+                    "<span class='text-muted'>Ends on: </span>" + data[i].end_dt +
+                "</div>" +
+              "</div>" +
+ 
+              "<a href='/bidbox/fetch_user_products/"+ data[i].id +"' class='btn btn-primary btn-sm mt-2'>View More</a>"+
+            "</div>" +
+          "</div>";
         mainContainer.appendChild(div);
-        mainContainer.appendChild(link1);
+    
       }
     })
 
@@ -176,9 +236,46 @@
         var mainContainer = document.getElementById("myOutput");
         mainContainer.innerHTML = "";
 
+        if(data.length==0){
+            $("#nobids").show()
+        }
+
         for (var i = 0; i < data.length; i++) {
           var div = document.createElement("div");
-          div.innerHTML = JSON.stringify(data[i]);
+          div.innerHTML = 
+              "<div class='card'>" +
+                "<div class='card-body'>" +
+                  "<div class='row'>" +
+                    "<div class='col-8'>" +
+                      "<h5 class='text-uppercase text-primary text-left'>" + data[i].product_name + "</h5>" +
+                    "</div>"+
+                    "<div class='col-4 text-right'>"+
+                      "<h6 class='text-right text-dark'> Base Price: " + data[i].base_price + "Rs. </h6>" +
+                    "</div>" +
+                  "</div>"+
+
+                  "<div class='row'>" +
+                    "<div class='col-3'>" +
+                        "<span class='text-muted'>Quantity: </span>" + data[i].quantity + " " + data[i].unit +
+                    "</div>" +
+                    "<div class='col-6'>" +
+                        "<span class='text-muted'>Location: </span><a href='https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
+            data[i].longitude + "' target = '_Blank'>" + data[i].district + ", " + data[i].state_name + "</a>"
+                    "</div>" +
+                  "</div>" + 
+                  "<div class='row mt-1'>" +
+                    "<div class='col-12 text-left font-weight-bold text-dark'>Bid Timing</div><br/>" +
+                    "<div class='col-6'>" +
+                        "<span class='text-muted'>Start on: </span>" + data[i].start_dt +
+                    "</div>" +
+                    "<div class='col-6'>" +
+                        "<span class='text-muted'>Ends on: </span>" + data[i].end_dt +
+                    "</div>" +
+                  "</div>" +
+    
+                  "<a href='/bidbox/fetch_user_products/"+ data[i].id +"' class='btn btn-primary btn-sm mt-2'>View More</a>"+
+                "</div>" +
+              "</div>";
 
           var link = document.createElement('a');
           link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
@@ -224,10 +321,45 @@
         console.log(data);
         var mainContainer = document.getElementById("myOutput");
         mainContainer.innerHTML = "";
-
+        if(data.length==0){
+            $("#nobids").show()
+        }
         for (var i = 0; i < data.length; i++) {
           var div = document.createElement("div");
-          div.innerHTML = JSON.stringify(data[i]);
+          div.innerHTML = 
+              "<div class='card'>" +
+                "<div class='card-body'>" +
+                  "<div class='row'>" +
+                    "<div class='col-8'>" +
+                      "<h5 class='text-uppercase text-primary text-left'>" + data[i].product_name + "</h5>" +
+                    "</div>"+
+                    "<div class='col-4 text-right'>"+
+                      "<h6 class='text-right text-dark'> Base Price: " + data[i].base_price + "Rs. </h6>" +
+                    "</div>" +
+                  "</div>"+
+
+                  "<div class='row'>" +
+                    "<div class='col-3'>" +
+                        "<span class='text-muted'>Quantity: </span>" + data[i].quantity + " " + data[i].unit +
+                    "</div>" +
+                    "<div class='col-6'>" +
+                        "<span class='text-muted'>Location: </span><a href='https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
+            data[i].longitude + "' target = '_Blank'>" + data[i].district + ", " + data[i].state_name + "</a>"
+                    "</div>" +
+                  "</div>" + 
+                  "<div class='row mt-1'>" +
+                    "<div class='col-12 text-left font-weight-bold text-dark'>Bid Timing</div><br/>" +
+                    "<div class='col-6'>" +
+                        "<span class='text-muted'>Start on: </span>" + data[i].start_dt +
+                    "</div>" +
+                    "<div class='col-6'>" +
+                        "<span class='text-muted'>Ends on: </span>" + data[i].end_dt +
+                    "</div>" +
+                  "</div>" +
+    
+                  "<a href='/bidbox/fetch_user_products/"+ data[i].id +"' class='btn btn-primary btn-sm mt-2'>View More</a>"+
+                "</div>" +
+              "</div>";
 
           var link = document.createElement('a');
           link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
