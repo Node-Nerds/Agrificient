@@ -47,9 +47,9 @@
       </div>
     </div>
   </div>
-  
 
-  
+
+
 
 
   <!-- Google Map Script -->
@@ -76,39 +76,41 @@
 
           mainContainer.innerHTML = "";
 
-          if(data.length==0){
+          if (data.length == 0) {
             $("#nowarehouse").show()
           }
 
           for (var i = 0; i < data.length; i++) {
             var div = document.createElement("div");
 
-            console.log(data[i]);
-            div.innerHTML = 
-              "<div class='card mt-2 mb-2'>" +
-                "<div class='card-body'>" +
-                  "<div class='row'>" +
-                    "<div class='col-8'>" +
-                      "<h5 class='text-uppercase text-primary text-left'>" + data[i].warehouse_name + "</h5>" +
-                    "</div>"+
-                    "<div class='col-4 text-right'>"+
-                      "<h6 class='text-right text-dark'> Base Price: " + "60 Rs. </h6>" +
-                    "</div>" +
-                  "</div>"+
 
-                  "<div class='row text-left'>" +
-                    "<div class='col-12'>" +
-                        "<span class='text-muted'>Contact: </span>" + data[i].phone +
-                    "</div>" +
-                  "</div>" + 
-                  "<div class='row text-left'>" +
-                    "<div class='col-12'>" +
-                        "<span class='text-muted'>Location: </span><a href='https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
-            data[i].longitude + "' target = '_Blank'>" + data[i].address + ", " + data[i].pincode + "</a>"
-                    "</div>" +
-                  "</div>" + 
-                  "<a href='/warehouse/custom/"+data[i].id+"' class='btn btn-primary btn-sm mt-2'> View More </a>" +
-                "</div>" +
+            div.innerHTML =
+              "<div class='card mt-2 mb-2'>" +
+              "<div class='card-body'>" +
+              "<div class='row'>" +
+              "<div class='col-8'>" +
+              "<h5 class='text-uppercase text-primary text-left'>" + data[i].warehouse_name + "</h5>" +
+              "</div>" +
+              "<div class='col-4 text-right'>" +
+              "<h6 class='text-right text-dark'> Base Price: " + "60 Rs. </h6>" +
+              "</div>" +
+              "</div>" +
+
+              "<div class='row text-left'>" +
+              "<div class='col-12'>" +
+              "<span class='text-muted'>Contact: </span>" + data[i].phone +
+              "</div>" +
+              "</div>" +
+              "<div class='row text-left'>" +
+              "<div class='col-12'>" +
+              "<span class='text-muted'>Location: </span><a href='https://www.google.com/maps/search/?api=1&query=" +
+              data[i].latitude + "%2C" +
+              data[i].longitude + "' target = '_Blank'>" + data[i].address + ", " + data[i].pincode + "</a>" +
+              "</div>" +
+              "</div>" +
+              "<a href='/warehouse/custom/" + data[i].id +
+              "' class='btn btn-primary btn-sm mt-2'> View More </a>" +
+              "</div>" +
               "</div>";
 
             mainContainer.appendChild(div);
@@ -145,43 +147,45 @@
           mainContainer.innerHTML = "";
 
 
-          if(data.length==0){
+          if (data.length == 0) {
             $("#nowarehouse").show()
           }
 
           for (var i = 0; i < data.length; i++) {
             var div = document.createElement("div");
 
-            div.innerHTML = 
+            div.innerHTML =
               "<div class='card mt-2 mb-2'>" +
-                "<div class='card-body'>" +
+              "<div class='card-body'>" +
 
-                  "<div class='row'>" +
-                    "<div class='col-8'>" +
-                      "<h5 class='text-uppercase text-primary text-left'>" + data[i].warehouse_name + "</h5>" +
-                    "</div>"+
-                    "<div class='col-4 text-right'>"+
-                      "<h6 class='text-right text-dark'> Base Price: " + "60 Rs. </h6>" +
-                    "</div>" +
-                  "</div>"+
+              "<div class='row'>" +
+              "<div class='col-8'>" +
+              "<h5 class='text-uppercase text-primary text-left'>" + data[i].warehouse_name + "</h5>" +
+              "</div>" +
+              "<div class='col-4 text-right'>" +
+              "<h6 class='text-right text-dark'> Base Price: " + "60 Rs. </h6>" +
+              "</div>" +
+              "</div>" +
 
-                  "<div class='row text-left'>" +
-                    "<div class='col-12'>" +
-                        "<span class='text-muted'>Contact: </span>" + data[i].phone +
-                    "</div>" +
-                  "</div>" + 
-                  "<div class='row text-left'>" +
-                    "<div class='col-12'>" +
-                        "<span class='text-muted'>Location: </span><a href='https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
-            data[i].longitude + "' target = '_Blank'>" + data[i].address + ", " + data[i].pincode + "</a>"
-                    "</div>" +
-                  "</div>" + 
-                  "<a href='/warehouse/custom/" + data[i].id +"' class='btn btn-primary btn-sm mt-2' target='_Blank'> View More </a>"+
-                "</div>" +
+              "<div class='row text-left'>" +
+              "<div class='col-12'>" +
+              "<span class='text-muted'>Contact: </span>" + data[i].phone +
+              "</div>" +
+              "</div>" +
+              "<div class='row text-left'>" +
+              "<div class='col-12'>" +
+              "<span class='text-muted'>Location: </span><a href='https://www.google.com/maps/search/?api=1&query=" +
+              data[i].latitude + "%2C" +
+              data[i].longitude + "' target = '_Blank'>" + data[i].address + ", " + data[i].pincode + "</a>"
+            "</div>" +
+            "</div>" +
+            "<a href='/warehouse/custom/" + data[i].id +
+              "' class='btn btn-primary btn-sm mt-2' target='_Blank'> View More </a>" +
+              "</div>" +
               "</div>";
 
 
-           
+
 
             mainContainer.appendChild(div);
           }
