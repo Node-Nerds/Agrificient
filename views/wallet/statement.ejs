@@ -1,8 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
+    <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/bootstrap.min.css">
 
-<%history.forEach((h)=>{%>
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="/wallet/statements.css">
+</head>
+<body class="text-center">
+    <% const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; %> 
+    <div class="output mt-5">
+        <h2 class="mb-3">Statements</h2>
+        <% if(history.length==0){ %>
+            <div id="nowarehouse" class="mt-4">
+                <div class="jumbotron">
+                  <p class="lead font-weight-bold text-muted">No Warehouse found in this location.</p>
+                </div>
+              </div>
+        <%}else{%>
+            <%history.forEach((h)=>{%>
+                <div class="card mt-2 mb-2">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <% var date = new Date(h.trans_date); %>  
+                                <h5 class='text-uppercase text-primary text-left' style="float: left; display: inline;"><%= date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear() %> </h5>
+                                <h6 class='text-right' style="float: right; display: inline;">
+                                    <% if(h.transaction_type=="debit"){%>
+                                        <span class="text-danger"> <%= h.transaction_amt %> Rs.  <b>-</b></span>
+                                    <% } %>
+                                    <% if(h.transaction_type=="credit"){%>
+                                        <span class="text-success"> <%= h.transaction_amt %> Rs.  <b>+</b></span>
+                                    <% } %>  
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-left">
+                                <span class='text-muted'>Description: </span> <%= h.description %> 
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            <%})%>
+        <% } %> 
+      </div>
+
+    
+</body>
+</html>
+
+<!-- <%history.forEach((h)=>{%>
     <%=JSON.stringify(h)%>
     <hr>
 <%})%>
 
-<a href="/wallet/">Back to wallet</a>
+<a href="/wallet/">Back to wallet</a> -->
