@@ -1,8 +1,35 @@
 const { Pool, Client } = require("pg");
+const connectionString =
+  "postgres://" +
+  process.env.PGUSER +
+  ":" +
+  process.env.PGPASSWORD +
+  "@" +
+  process.env.PGHOST +
+  ":" +
+  process.env.PGPORT +
+  "/" +
+  process.env.PGDATABASE +
+  "?";
 
-const pool = new Pool();
+const pool = new Pool({
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+  max: 50,
+  idleTimeoutMillis: 50000,
+  connectionTimeoutMillis: 20000,
+});
 
-const client = new Client();
+const client = new Client({
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+client.connect();
 
 pool.query("select now();", async (err, res) => {
   if (err) {
