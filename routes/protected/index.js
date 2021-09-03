@@ -7,6 +7,7 @@ const warehouse = require("./warehouse/index");
 const update_pan = require("./update_pan");
 const bidbox = require("./bidbox");
 const aggregator = require("./aggregator");
+const forecasting = require("./forecasting");
 
 router.use("/dashboard", dashboard);
 router.use("/get_user_profile", get_user_profile);
@@ -15,5 +16,6 @@ router.use("/warehouse", warehouse);
 router.use("/update_pan", update_pan);
 router.use("/bidbox", bidbox);
 router.use("/aggregator", aggregator);
+router.use("/forecasting", forecasting);
 
 module.exports = router;
