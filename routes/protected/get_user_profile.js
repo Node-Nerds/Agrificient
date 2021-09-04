@@ -2,7 +2,11 @@
 const User = require("./../../db/models/user");
 const router = require("express").Router();
 
-router.post("/get_user_profile", (req, res) => {
+router.get("/", (req, res) => {
+    res.render("profile");
+})
+
+router.post("/", (req, res) => {
     let {phno} = req.body;
     if(req.isAuthenticated()){
         if(req.user.phno == "0000000000"){

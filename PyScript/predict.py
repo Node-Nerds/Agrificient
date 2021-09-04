@@ -5,7 +5,7 @@ import sys
 import argparse
 
 
-MODEL_DIR = "D:\Web\Agrificient\PyScript\models"
+MODEL_DIR = "PyScript/models"
 
 
 def loadModel(season, dir=MODEL_DIR):
