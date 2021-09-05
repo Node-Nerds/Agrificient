@@ -10,6 +10,9 @@ router.get("/", (req, res) => {
       console.log(err);
       res.sendStatus(500);
     } else {
+      if(data==null){
+        data = [];
+      }
       res.render("warehouse/inbox.ejs", {
         inboxes: data,
       });

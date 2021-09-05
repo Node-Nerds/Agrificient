@@ -2,18 +2,15 @@
 const User = require("./../../db/models/user");
 const router = require("express").Router();
 
-router.get("/", (req, res) => {
-    res.render("profile");
-})
 
-router.post("/", (req, res) => {
-    let {phno} = req.body;
+
+router.get("/", (req, res) => {
     if(req.isAuthenticated()){
         if(req.user.phno == "0000000000"){
             if(typeof(phno) != "undefined"){
                 let user = new User();
 
-                user.findByPhno(phno, (err, found)=>{
+                user.findbyId(req.user.id, (err, found)=>{
                     if(err){
                         console.log(err);
                         escape.sendStatus(500);
@@ -25,7 +22,7 @@ router.post("/", (req, res) => {
                         else{
                             console.log(found);
                             delete found[0].password;
-                            res.send(found[0]);
+                            res.render("profile", {user: found[0]});
                         }
                     }
                 })

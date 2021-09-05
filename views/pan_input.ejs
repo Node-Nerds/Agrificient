@@ -1,11 +1,45 @@
-<form action="/update_pan" onsubmit="return check()" method="POST">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Pancard No</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="/warehouse/addwarehouse.css">
+</head>
+
+<body class="text-center">
+
+  <form class="form-add" action="/update_pan" onsubmit="return check()" method="post">
+    <img src="/logo.svg" alt="" width="150" height="150">
+    <h3 class="text-primary mb-3">Add Pan Number</h3>
+    <div class="form-group text-left">
+      <label for="pan">Pan Number</label>
+      <input type="text" maxlength="10" id="pan" name="pan" class="form-control" placeholder="Number" required autofocus>
+    </div>
+    
+    <button type="submit" class="btn btn-lg btn-primary"> Submit </button>
+
+  </form>
+</body>
+
+</html>
+
+
+<!-- <form action="/update_pan" onsubmit="return check()" method="POST">
     Pan no:
     <input type="text" id="pan" maxlength="10" name="pan">
 
     <input type="text" name="product_id" value="<%=product_id%>" hidden>
 
     <button type="submit">Submit</button>
-</form>
+</form> -->
 
 <script>
     let e = "<%-e%>";
