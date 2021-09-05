@@ -102,6 +102,7 @@ To get a copy of the website running on your local system follow these steps :
 
 - Warehouse
 <img src="./public/images/warehouse.png" alt="not found">
+<img src="./public/images/addWarehouse.png" alt="not found">
 
 - Aggregation
 <img src="./public/images/aggregate.png" alt="not found">
