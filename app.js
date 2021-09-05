@@ -39,19 +39,18 @@ app.use(bodyParser.json());
 
 app.use(express.static("public"));
 
-
 const { bootstrap, bootstrap_enum } = require("./db/models/bootstrap");
 
 bootstrap_enum((err, done) => {
   if (err) {
-    // console.log(err);
-    bootstrap((err, done) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("DB ready");
-      }
-    });
+    console.log(err);
+    // bootstrap((err, done) => {
+    //   if (err) {
+    //     console.log(err);
+    //   } else {
+    //     console.log("DB ready");
+    //   }
+    // });
   } else {
     bootstrap((err, done) => {
       if (err) {
@@ -149,8 +148,6 @@ passport.deserializeUser((id, cb) => {
     done();
   });
 });
-
-
 
 //  Connect all our routes to our application
 app.use("/", routes);

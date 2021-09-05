@@ -3,7 +3,7 @@
 
 ##### A Unified platform that connects farmers (producers) with wholesalers, agribusiness corporations, processors, exporters, and large retailers.
 
-
+##### Deployed on Heroku: <a href="https://agrificient-nodeapp.herokuapp.com/">Link</a>
 
 ## Table of Contents
 
@@ -101,16 +101,17 @@ To get a copy of the website running on your local system follow these steps :
 <img src="./public/images/bidbox.png" alt="not found">
 
 - Warehouse
-<img src="./public/images/bidbox.png" alt="not found">
+<img src="./public/images/warehouse.png" alt="not found">
 
 - Aggregation
-<img src="./public/images/bidbox.png" alt="not found">
+<img src="./public/images/aggregate.png" alt="not found">
+<img src="./public/images/addAggregator.png" alt="not found">
 
 - Wallet
-<img src="./public/images/bidbox.png" alt="not found">
+<img src="./public/images/wallet.png" alt="not found">
 
 - Forecasting
-<img src="./public/images/bidbox.png" alt="not found">
+<img src="./public/images/forecast.png" alt="not found">
 
 
 ## Tools-Used
@@ -119,8 +120,7 @@ To get a copy of the website running on your local system follow these steps :
 - <a href="https://jquery.com/">JavaScript (JQuery)</a> - jQuery is a fast, small, and feature-rich JavaScript library.
 - <a href="https://www.python.org/">Python</a> - Python is a programming language that lets you work more quickly and integrate your systems more effectively.
 - <a href="https://expressjs.com/">Express</a> - Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
-- <a href="https://numpy.org/">Numpy</a> - NumPy is a library for the Python programming language, adding support for large, multi-dimensional arrays and matrices, along with a large collection of high-level mathematical functions to operate on these arrays.
-- <a href="https://pandas.pydata.org/">Pandas</a> - Pandas is a software library written for the Python programming language for data manipulation and analysis.
+- <a href="https://seaborn.pydata.org/">Seaborn</a> - Seaborn is a Python data visualization library based on matplotlib. It provides a high-level interface for drawing attractive and informative statistical graphics..
 - <a href="https://scikit-learn.org/stable/">Scikit-learn</a> - Scikit-learn is a free software machine learning library for the Python programming language.
 - <a href="https://www.scipy.org/">Scipy</a> - SciPy is a free and open-source Python library used for scientific computing and technical computing.
 - <a href="https://getbootstrap.com/">Bootstrap</a> - Bootstrap, the world’s most popular front-end open source toolkit.
@@ -131,5 +131,6 @@ To get a copy of the website running on your local system follow these steps :
         <td align="center"><a href="https://github.com/shrushti22"><img src="https://avatars.githubusercontent.com/shrushti22" width="100px;" alt=""/><br /><sub><b>Shrushti Vasaniya</b></sub></a><br /></td>
         <td align="center"><a href="https://github.com/RutvijDv"><img src="https://avatars.githubusercontent.com/RutvijDv" width="100px;" alt=""/><br /><sub><b>Rutvij Vamja</b></sub></a><br /></td>
         <td align="center"><a href="https://github.com/vrutikrabadia"><img src="https://avatars.githubusercontent.com/vrutikrabadia" width="100px;" alt=""/><br /><sub><b>Vrutik Rabadia</b></sub></a><br /></td>
+        <td align="center"><a href="https://github.com/YashMaxy"><img src="https://avatars.githubusercontent.com/YashMaxy" width="100px;" alt=""/><br /><sub><b>Yash Vadi</b></sub></a><br /></td>
     </tr>
 </table>    
