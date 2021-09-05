@@ -6,19 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+     <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="/warehouse/addwarehouse.css">
 </head>
 
-<body>
+<body class="text-center">
 
-    <h1><%=warehouse_name%></h1>
+    
 
-    <form action="/warehouse/custom/<%=id%>" method="POST">
+    <form class="form-add" action="/warehouse/custom/<%=id%>" method="POST">
+        <img src="/logo.svg" alt="" width="150" height="150">
+        <h3 class="mb-3">Book Warehouse</h3>
+        <p class="text-left"> <span class="text-muted">Name:</span>  <b class="text-uppercase" style="font-size: 1.5rem;"><%=warehouse_name%></b></p>
+        <div class="form-group text-left">
+            <label for="start_date">Start Date</label>
+            <input type="date" id="start_date" name="start_date" class="form-control" placeholder="date" required>
+        </div>
+        <div class="form-group text-left">
+            <label for="end_date">End Date</label>
+            <input type="date" id="end_date" name="end_date" class="form-control" placeholder="date" required>
+        </div>
+        <div class="form-group text-left">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Quantity" required>
+        </div>
 
-        <label for="start_date">Start_Date</label> <input id="start_date" name="start_date" type="date">
-        <label for="end_date">End_Date</label> <input id="end_date" name="end_date" type="date">
-        <label for="quantity">Quantity</label> <input id="quantity" name="quantity" type="number">
-
-        <button type="submit">Send Proposal</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Send Proposal</button>
 
     </form>
 

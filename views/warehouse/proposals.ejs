@@ -6,27 +6,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/bootstrap.min.css">
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="/warehouse/proposals.css">
 </head>
 
-<body>
+<body class="text-center">
+    <% const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; %> 
 
-    <h1>Proposals</h1>
+    <div class="center-align">
+        <img src="/logo.svg" alt="" width="150" height="150">
+        <h3>Your Proposals</h3>
 
-    <% proposals.forEach(function (proposal) {%>
+        <% if(proposals.length==0){ %>
+            <div class="mt-4">
+                <div class="jumbotron">
+                <p class="lead font-weight-bold text-muted">You do not have any past proposals</p>
+                </div>
+            </div>
+        <% }else{ %>  
+        <% proposals.forEach(function (proposal) {%>
 
-    <div>
-        <a href="/warehouse/custom/<%=proposal.warehouse_id%>">Warehouse </a>: <%=proposal.warehouse_name%>
-        Start_Date: <%=proposal.start_date%>
-        End_Date: <%=proposal.end_date%>
-        Status: <%=proposal.current_status%>
+            <div>
+                <div class='card mt-2'> 
+                    <div class='card-body'> 
+                    <div class='row'> 
+                        <div class='col-12'> 
+                        <h5 class='text-uppercase text-primary text-left'>  <%=proposal.warehouse_name%>  </h5> 
+                        </div>
+                    </div> 
+                    <div class='row mt-1 text-left'> 
+                        <div class='col-12 text-left font-weight-bold text-dark'>Duration</div><br/> 
+                        <div class='col-12'> 
+                            <% var date = new Date(proposal.start_date); %>  
+                            <span class='text-muted'>Start Date:</span> <%=date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear() %>    
+                        </div> 
+                        <div class='col-12'> 
+                            <% var date = new Date(proposal.end_date); %>  
+                            <span class='text-muted'>Ends Date: </span>  <%=date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear() %>
+                        </div> 
+                    </div> 
+                    <% if(proposal.current_status == 'approved'){ %>
+                        <button class="btn btn-sm btn-primary p-2 px-3 mt-2">Pay</button>
+                        <% } %>
+                    </div> 
+                </div>
 
-        <% if(proposal.current_status == 'approved'){ %>
-        <button>Pay</button>
-        <% } %>
+                
 
+            </div>
+
+        <%})%>
+        <% } %> 
     </div>
-
-    <%})%>
+    
 </body>
 
 </html>

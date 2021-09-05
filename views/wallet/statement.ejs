@@ -31,10 +31,10 @@
                                 <% var date = new Date(h.trans_date); %>  
                                 <h5 class='text-uppercase text-primary text-left' style="float: left; display: inline;"><%= date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear() %> </h5>
                                 <h6 class='text-right' style="float: right; display: inline;">
-                                    <% if(h.transaction_type=="debit"){%>
+                                    <% if(h.transaction_type=="debit" || h.transaction_type=="transfer_debit" || h.transaction_type=="block"){%>
                                         <span class="text-danger"> <%= h.transaction_amt %> Rs.  <b>-</b></span>
                                     <% } %>
-                                    <% if(h.transaction_type=="credit"){%>
+                                    <% if(h.transaction_type=="credit" || h.transaction_type=="transfer_credit" || h.transaction_type=="unblock"){%>
                                         <span class="text-success"> <%= h.transaction_amt %> Rs.  <b>+</b></span>
                                     <% } %>  
                                 </h6>
@@ -43,6 +43,11 @@
                         <div class="row">
                             <div class="col-12 text-left">
                                 <span class='text-muted'>Description: </span> <%= h.description %> 
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-left">
+                                <span class='text-muted'>Transaction Type: </span> <%= h.transaction_type %> 
                             </div>
                         </div>
                     </div>

@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
       console.log(err);
       res.sendStatus(500);
     } else {
+      console.log(data);
       res.render("warehouse/proposals.ejs", {
         proposals: data,
       });

@@ -6,29 +6,76 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="/warehouse/proposals.css">
 </head>
 
-<body>
+<body class="text-center">
+    <% const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; %> 
+    <div class="center-align">
+        <img src="/logo.svg" alt="" width="150" height="150">
+        <h3>Your Inbox</h3>
+        <% if(inboxes.length==0){ %>
+            <div class="mt-4">
+                <div class="jumbotron">
+                <p class="lead font-weight-bold text-muted">You do not have any proposal for your land</p>
+                </div>
+            </div>
+        <% }else{ %> 
+        <% inboxes.forEach(function (inbox) {%>
 
-    <h1>Inbox</h1>
+            <div>
+                <div class='card mt-2'> 
+                    <div class='card-body'> 
+                    <div class='row'> 
+                        <div class='col-12'> 
+                            <h5 class='text-uppercase text-primary text-left'> User:  <%=inbox.fname%>  </h5> 
+                        </div>
+                    </div> 
+                    <div class='row mt-1'> 
+                        <div class='col-12'> 
+                            <p class='text-uppercase text-left'> Warehouse Name:  <b><%=inbox.warehouse_name%></b>  </p> 
+                        </div>
+                    </div> 
+                    <div class='row  text-left'> 
+                        <div class='col-12 text-left font-weight-bold text-dark'>Duration</div><br/> 
+                        <div class='col-12'> 
+                            <% var date = new Date(inbox.start_date); %>  
+                            <span class='text-muted'>Start Date:</span> <%=date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear() %>    
+                        </div> 
+                        <div class='col-12'> 
+                            <% var date = new Date(inbox.end_date); %>  
+                            <span class='text-muted'>Ends Date: </span>  <%=date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear() %>
+                        </div> 
+                    </div> 
+                    <div class="row text-right">
+                        <div class="col-12">
+                            <% if(inbox.current_status == 'pending'){%>
+                                <button id=<%=inbox.id%> class="approve btn btn-sm btn-primary p-2 px-3 mt-2">Approve</button>
+                                
+                                <%}else if(inbox.current_status == 'approved'){ %>
+                                <span style=" color: green;"> Approved </span>
+                                <% }else{ %>
+                                <span style="color: green;"> Paid </span>
+                                <% } %>
+                        </div>
+                        
+                    </div>
+                    
+                    </div> 
+                </div>
 
-    <% inboxes.forEach(function (inbox) {%>
+                
 
-    <div>
-        <a href="">User</a>: <%=inbox.fname%> Warehouse_name: <%=inbox.warehouse_name%> Start_Date:
-        <%=inbox.start_date%> End_Date: <%=inbox.end_date%>
-
-        <% if(inbox.current_status == 'pending'){%>
-        <button id=<%=inbox.id%> class="approve">Approve</button>
-        <span class=<%=inbox.id%> style="color: green;" hidden="true"> Approved </span>
-        <%}else if(inbox.current_status == 'approved'){ %>
-        <span style=" color: green;"> Approved </span>
-        <% }else{ %>
-        <span style="color: green;"> Paid </span>
-        <% } %>
+            </div>
+            
+        
+            <%})%>
+        <% } %> 
     </div>
 
-    <%})%>
+    
 
     <!-- Jquery Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

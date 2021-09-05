@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/bootstrap.min.css">
 
   <!-- Custom styles for this template -->
-  <link rel="stylesheet" href="/aggregator/searchaggregator.css">
+  <link rel="stylesheet" href="/warehouse/addwarehouse.css">
 </head>
 
 <body class="text-center">
@@ -33,11 +33,22 @@
     <div class="separator">or</div>
 
     <a class="btn btn-lg btn-success btn-block mt-1" id="useLocation" type="button"> Use My Location </a>
+    <div class="output">
+      <div id="myOutput" class="mt-4">
+        <div class="jumbotron">
+          <p class="lead font-weight-bold text-muted">Please select the location to view Aggregator</p>
+        </div>
+      </div>
+      <div id="nowarehouse" class="mt-4" style="display: none;">
+        <div class="jumbotron">
+          <p class="lead font-weight-bold text-muted">No aggregator found in this location.</p>
+        </div>
+      </div>
+    </div>
   </form>
 
+  
 
-
-  <div id="myOutput"></div>
 
   <!-- Google Map Script -->
   <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtLZdve7jf15PETQYF6TgR05sHZnVdFc4">
@@ -63,27 +74,57 @@
 
           mainContainer.innerHTML = "";
 
+          if (data.length == 0) {
+            $("#nowarehouse").show()
+          }
+
           for (var i = 0; i < data.length; i++) {
             var div = document.createElement("div");
-            div.innerHTML = 'AggregatorName: ' + data[i].aggregator_name + ' Phone: ' + data[i]
-              .phone + ' Pincode: ' + data[i].pincode + ' Address: ' + data[i]
-              .address + ' Description: ' + data[i].description;
 
-            var link = document.createElement('a');
-            link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
-              data[i].longitude;
-            link.target = "_Blank"
-            link.innerText = "Location";
+            div.innerHTML =
+              "<div class='card mt-2 mb-2'>" +
+              "<div class='card-body'>" +
+              "<div class='row'>" +
+              "<div class='col-12'>" +
+              "<h5 class='text-uppercase text-primary text-left'>" + data[i].aggregator_name + "</h5>" +
+              "</div>" +
+              "</div>" +
 
-            var Whatsapplink = document.createElement('a');
-            Whatsapplink.href = data[i].whatsapp;
-            Whatsapplink.target = "_Blank"
-            Whatsapplink.innerText = "Whatsapp";
+              "<div class='row text-left'>" +
+              "<div class='col-12'>" +
+              "<span class='text-muted'>Contact: </span>" + data[i].phone +
+              "</div>" +
+              "</div>" +
+              "<div class='row text-left'>" +
+              "<div class='col-12'>" +
+              "<span class='text-muted'>Location: </span><a href='https://www.google.com/maps/search/?api=1&query=" +
+              data[i].latitude + "%2C" +
+              data[i].longitude + "' target = '_Blank'>" + data[i].address + ", " + data[i].pincode + "</a>" +
+              "</div>" +
+              "</div>" +
+              "<a href='"+data[i].whatsapp+"' class='btn btn-primary btn-sm mt-2' target = '_Blank'> Connect </a>" +
+              "</div>" +
+              "</div>";
+
+            // div.innerHTML = 'AggregatorName: ' + data[i].aggregator_name + ' Phone: ' + data[i]
+            //   .phone + ' Pincode: ' + data[i].pincode + ' Address: ' + data[i]
+            //   .address + ' Description: ' + data[i].description;
+
+            // var link = document.createElement('a');
+            // link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
+            //   data[i].longitude;
+            // link.target = "_Blank"
+            // link.innerText = "Location";
+
+            // var Whatsapplink = document.createElement('a');
+            // Whatsapplink.href = data[i].whatsapp;
+            // Whatsapplink.target = "_Blank"
+            // Whatsapplink.innerText = "Whatsapp";
 
             mainContainer.appendChild(div);
-            mainContainer.appendChild(link);
-            mainContainer.appendChild(document.createTextNode("  "));
-            mainContainer.appendChild(Whatsapplink);
+            // mainContainer.appendChild(link);
+            // mainContainer.appendChild(document.createTextNode("  "));
+            // mainContainer.appendChild(Whatsapplink);
           }
         })
 
@@ -115,27 +156,57 @@
           var mainContainer = document.getElementById("myOutput");
           mainContainer.innerHTML = "";
 
+          if (data.length == 0) {
+            $("#nowarehouse").show()
+          }
+
           for (var i = 0; i < data.length; i++) {
             var div = document.createElement("div");
-            div.innerHTML = 'AggregatorName: ' + data[i].aggregator_name + ' Phone: ' + data[i]
-              .phone + ' Pincode: ' + data[i].pincode + ' Address: ' + data[i]
-              .address + ' Description: ' + data[i].description;
+            
+            div.innerHTML =
+              "<div class='card mt-2 mb-2'>" +
+              "<div class='card-body'>" +
+              "<div class='row'>" +
+              "<div class='col-12'>" +
+              "<h5 class='text-uppercase text-primary text-left'>" + data[i].aggregator_name + "</h5>" +
+              "</div>" +
+              "</div>" +
 
-            var link = document.createElement('a');
-            link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
-              data[i].longitude;
-            link.target = "_Blank"
-            link.innerText = "Location";
+              "<div class='row text-left'>" +
+              "<div class='col-12'>" +
+              "<span class='text-muted'>Contact: </span>" + data[i].phone +
+              "</div>" +
+              "</div>" +
+              "<div class='row text-left'>" +
+              "<div class='col-12'>" +
+              "<span class='text-muted'>Location: </span><a href='https://www.google.com/maps/search/?api=1&query=" +
+              data[i].latitude + "%2C" +
+              data[i].longitude + "' target = '_Blank'>" + data[i].address + ", " + data[i].pincode + "</a>" +
+              "</div>" +
+              "</div>" +
+              "<a href='"+data[i].whatsapp+"' class='btn btn-primary btn-sm mt-2' target = '_Blank'> Connect </a>" +
+              "</div>" +
+              "</div>";
 
-            var Whatsapplink = document.createElement('a');
-            Whatsapplink.href = data[i].whatsapp;
-            Whatsapplink.target = "_Blank"
-            Whatsapplink.innerText = "Whatsapp";
+            // div.innerHTML = 'AggregatorName: ' + data[i].aggregator_name + ' Phone: ' + data[i]
+            //   .phone + ' Pincode: ' + data[i].pincode + ' Address: ' + data[i]
+            //   .address + ' Description: ' + data[i].description;
+
+            // var link = document.createElement('a');
+            // link.href = "https://www.google.com/maps/search/?api=1&query=" + data[i].latitude + "%2C" +
+            //   data[i].longitude;
+            // link.target = "_Blank"
+            // link.innerText = "Location";
+
+            // var Whatsapplink = document.createElement('a');
+            // Whatsapplink.href = data[i].whatsapp;
+            // Whatsapplink.target = "_Blank"
+            // Whatsapplink.innerText = "Whatsapp";
 
             mainContainer.appendChild(div);
-            mainContainer.appendChild(link);
-            mainContainer.appendChild(document.createTextNode("  "));
-            mainContainer.appendChild(Whatsapplink);
+            // mainContainer.appendChild(link);
+            // mainContainer.appendChild(document.createTextNode("  "));
+            // mainContainer.appendChild(Whatsapplink);
 
           }
         })
@@ -145,5 +216,4 @@
   </script>
 
 </body>
-
 </html>
