@@ -39,6 +39,30 @@ app.use(bodyParser.json());
 
 app.use(express.static("public"));
 
+
+const { bootstrap, bootstrap_enum } = require("./db/models/bootstrap");
+
+bootstrap_enum((err, done) => {
+  if (err) {
+    // console.log(err);
+    bootstrap((err, done) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("DB ready");
+      }
+    });
+  } else {
+    bootstrap((err, done) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("DB ready");
+      }
+    });
+  }
+});
+
 passport.use(
   "local",
   new LocalStrategy((username, password, cb) => {
@@ -126,28 +150,7 @@ passport.deserializeUser((id, cb) => {
   });
 });
 
-const { bootstrap, bootstrap_enum } = require("./db/models/bootstrap");
 
-bootstrap_enum((err, done) => {
-  if (err) {
-    // console.log(err);
-    bootstrap((err, done) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("DB ready");
-      }
-    });
-  } else {
-    bootstrap((err, done) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("DB ready");
-      }
-    });
-  }
-});
 
 //  Connect all our routes to our application
 app.use("/", routes);

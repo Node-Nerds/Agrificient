@@ -12,6 +12,9 @@ router.get("/", (req, res) => {
       res.sendStatus(500);
     } else {
       console.log(data);
+      if(data==null){
+        data = [];
+      }
       res.render("warehouse/proposals.ejs", {
         proposals: data,
       });
