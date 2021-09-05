@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Node-Nerds/Agrificient#readme",
   "dependencies": {
+    "axios": "^0.21.3",
     "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",

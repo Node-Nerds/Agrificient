@@ -28,23 +28,23 @@ def preEncodeFeatures(crop, district, dir=MODEL_DIR):
     return le_crop.transform([crop]), le_district.transform([district])
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
-    )
-    parser.add_argument("--year", help="Year to predict", type=int)
-    parser.add_argument("--season", help="Type the season", default="Rabi")
-    parser.add_argument(
-        "--district",
-        help="Name of District",
-    )
-    parser.add_argument("--crop", help="Name of Crop")
-    args = parser.parse_args()
+def predict(year, season, district, crop):
+    # parser = argparse.ArgumentParser(
+    #     formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    # )
+    # parser.add_argument("--year", help="Year to predict", type=int)
+    # parser.add_argument("--season", help="Type the season", default="Rabi")
+    # parser.add_argument(
+    #     "--district",
+    #     help="Name of District",
+    # )
+    # parser.add_argument("--crop", help="Name of Crop")
+    # args = parser.parse_args()
 
-    year = args.year
-    season = args.season
-    district = args.district
-    crop = args.crop
+    # year = args.year
+    # season = args.season
+    # district = args.district
+    # crop = args.crop
 
     model = loadModel(season=season)
     crop, district = preEncodeFeatures(crop=crop, district=district)
@@ -54,7 +54,3 @@ def main():
 
     print(prediction)
     return prediction
-
-
-if __name__ == "__main__":
-    main()
