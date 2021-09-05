@@ -1,0 +1,495 @@
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='1680' height='894' viewBox='0 0 1680 894' >
+  <script type='text/ecmascript'>
+  <![CDATA[
+  function hghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','highlight');  }  }
+  function uhghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','scene'); }  } 
+  ]]>
+  </script> 
+
+<style type='text/css'>
+  text                { fill:#000000; font-family: Trebuchet MS, 'Trebuchet MS', Dialog; font-size:13.0px; }
+  a text:hover        { fill:#0d196f; text-shadow: 0px 0px 6px #d0ce00; font-size:13px; font-weight: bold;}
+  text.highlight      { fill:#0d196f; text-shadow: 0px 0px 4px #eac533; font-size:13px; font-weight: bold;}
+  text.white          { fill:#ffffff; }
+  text.colType        { fill:#b3b3b3; }
+  text.relName        { fill:#9c9a9a; }
+  text.legendTitle    { fill:#d65c68; font-weight:bold; }
+  text.legendSubTitle { fill:#717171; font-size:11px; }
+  path                { stroke:#857f70; stroke-width:1.45; fill:none;}
+  path.virtual        { stroke:#a67822; }
+  path.logo           { fill:#fbeac0;fill-opacity:1;stroke-width:0.3;stroke:#222222; }
+  path.dotted         { stroke-dasharray:4,2; }
+  path.scene          { stroke-width:10; opacity:0;}
+  path.highlight      { stroke-width:3; stroke:#0054c5; opacity:0.8;}
+  rect.entity         { fill:#ffffff; stroke:#777; stroke-width:1;shape-rendering:crispEdges; filter:url(#shadow); }
+  line.delim          { stroke-width:1; shape-rendering:crispEdges; }
+  text.callout        { fill:#000000; font-family: Trebuchet MS, 'Trebuchet MS', Dialog; font-size:14.0px; }
+  rect.callout        { fill:url(#calloutGradient); stroke:#bebdbd; stroke-width:0.5; }
+  rect.grp            { stroke:#a1a1a1; stroke-width:3; opacity:0.25; }
+  path.bgPattern      { fill:none;stroke-width:0.6;stroke:#e5e9ed; }
+</style>
+<defs>
+  <radialGradient id='layoutBgB' cx='100%' cy='100%' r='100%'  >
+    <stop offset='0%' stop-color='#dfdfdf' />
+    <stop offset='100%' stop-color='#f2f2f2' />
+  </radialGradient>
+  <pattern id="layoutBgA" width="60" height="34.64" patternUnits="userSpaceOnUse">
+    <rect width="100%" height="100%" fill="#f0f1f3" />
+    <path class='bgPattern' d='M 0 17.32 L 10 0 L 30 0 L 40 17.326 L 30 34.64 L 10 34.64 Z' />
+    <path class='bgPattern' d='M 40 17.32 L 60 17.32 Z' />
+  </pattern>
+  <!-- https://norbat.de/svg-pattern-3d-webmuster/ -->
+  <linearGradient id='groupUnderTitleLine' x1='0%' y1='0%' x2='100%' y2='0%' >
+    <stop offset='0%' stop-color='#999999' stop-opacity='0.7'/>
+    <stop offset='100%' stop-color='#999999' stop-opacity='0' />
+  </linearGradient>
+  <radialGradient id='calloutGradient' cx='25%' cy='20%' r='80%' fx='10%' fy='10%'>
+    <stop offset='0%' stop-color='#ffffff' />
+    <stop offset='100%' stop-color='#f8f6d1' />
+  </radialGradient>
+  <filter id="shadow" width="120%" height="120%">
+    <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#333" flood-opacity="0.2" />
+  </filter>
+  <!--
+  <filter id='shadow2' width='120%' height='120%'>
+    <feOffset result='offOut' in='SourceGraphic' dx='0' dy='0' />
+    <feColorMatrix result='matrixOut' in='offOut'
+                   values='0.5 0 0 0 0 0 0.5 0 0 0 0 0 0.5 0 0 0 0 0 0.5 0' />
+    <feGaussianBlur result='blurOut' in='matrixOut' stdDeviation='3' />
+    <feBlend in='SourceGraphic' in2='blurOut' />
+  </filter>
+  -->
+  <filter id='fkShadow' height='130%'>
+    <feGaussianBlur in='SourceAlpha' stdDeviation='1.5'/> <!-- stdDeviation is how much to blur -->
+    <feOffset dx='1.2' dy='1.2' result='offsetblur'/> <!-- how much to offset -->
+    <feMerge>
+      <feMergeNode/> <!-- this contains the offset blurred image -->
+      <feMergeNode in='SourceGraphic'/> <!-- this contains the element that the filter is applied to -->
+    </feMerge>
+  </filter>
+  <radialGradient id='legendGradient' cx='5%' cy='5%' r='100%' >
+    <stop offset='0%' stop-color='#e4eeff' stop-opacity='1'/>
+    <stop offset='100%' stop-color='#c3d2ea' stop-opacity='1' />
+  </radialGradient>
+  <symbol id='calloutArrowDown' >
+    <path d='M 0,0 L 8,12 L 16,0 z' style='fill:#f8f6d1;stroke:none; filter: url(#shadow);' />
+    <path d='M 0,0 L 8,12 L 16,0' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='calloutArrowUp' >
+    <path d='M 0,16 L 8,4 L 16,16 z' style='fill:#ffffff; stroke:none; filter: url(#shadow);' />
+    <path d='M 0,16 L 8,4 L 16,16' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='pk' >
+    <g transform='scale(0.99)'>
+      <path style='fill:#f0d938;stroke:#906b25;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;'
+            d='M 9.3678877,3.5695485 C 9.1030218,3.2729386 9.0796382,2.7628519 9.3396185,2.4517097 9.5449651,2.1956495 9.9040386,2.0980533 10.199638,2.2169415 10.533525,2.3415459 10.775153,2.706942 10.750675,3.0842709 10.737029,3.3980003 10.541153,3.699122 10.258248,3.8066067 9.966649,3.9250429 9.6169668,3.8418805 9.4008073,3.6062324 9.3894892,3.5943518 9.3785264,3.582104 9.3678886,3.5695487 z M 11.226617,6.9916004 C 11.888137,6.3548946 12.293488,5.4172188 12.311087,4.442353 12.378144,2.7379364 11.248678,1.0541269 9.7322318,0.44767357 8.3887112,-0.1280313 6.7865012,0.26822889 5.8918395,1.4007929 5.080823,2.3839145 4.9336815,3.8452096 5.3635544,5.101615 L 4.3670905,5.315913 C 4.0664984,5.3682645 4.0967703,5.6316724 4.2574957,5.8208829 L 4.9124,6.5655244 4.1543436,7.2512357 3.2136002,7.2163506 3.1674775,8.5586827 2.0406832,8.5086512 1.5965306,8.9299953 1.5471661,10.179833 0.75616674,10.195223 0.2112857,10.758575 0.15354288,11.735988 0.07199052,12.765553 c 0.36440953,0.238225 0.79006967,0.195492 1.44938278,-0.02675 L 6.3033562,8.1282037 6.8217102,8.6765688 C 6.9985465,8.8799427 7.3003699,8.7497574 7.358381,8.5016252 L 7.4938877,7.5084164 c 0.8537488,0.3985387 1.8303125,0.4711541 2.6851793,0.1427713 0.393927,-0.1407258 0.746858,-0.3701772 1.04755,-0.6595873 z'/>
+      <path d='M 6.8014948,6.3102123 0.15369063,13.024481 0.21560535,12.141962 6.0062342,6.2683782 z'
+            style='fill:#ffe5a5;fill-opacity:1;stroke:#906b25;stroke-width:0.06912433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'/>
+    </g>
+  </symbol>
+  <symbol id='idx1' >
+    <g transform='scale(0.99)'>
+      <rect width='4' height='4' x='7' y='1' style='fill:#ffff3f;stroke:#b48333;stroke-width:0.6;' ry='0.83'/>
+      <rect width='4' height='4' x='1' y='7' style='fill:#ffff3f;stroke:#b48333;stroke-width:0.6;' ry='0.832'/>
+      <rect width='4' height='4' x='7' y='7' style='fill:#ffff3f;stroke:#b48333;stroke-width:0.6;' ry='0.832'/>
+    </g>
+  </symbol>
+  <symbol id='idx2' >
+    <g transform='scale(0.99)'>
+      <rect width='4' height='3' x='6' y='1' style='fill:#7fc8e9;stroke:#2f6f8c;stroke-width:0.6;' ry='0.83'/>
+      <rect width='7' height='3' x='3' y='6' style='fill:#7fc8e9;stroke:#2f6f8c;stroke-width:0.6;' ry='0.832'/>
+    </g>
+  </symbol>
+  <symbol id='unq' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:none;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+            width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+            transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+      <text x='5.8' y='7.4' style='font-size:7px;fill:#8a8a8a;'>1</text>
+    </g>
+  </symbol>
+  <symbol id='idx' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:none;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+            width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+            transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+    </g>
+  </symbol>
+  <symbol id='fk' >
+    <g transform='scale(0.87)'>
+      <path style='fill:#6a88cd;stroke:#5a72a8;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='M 12.48,0.33 7.07,0.89 9.067,2.974 0.329,11.731 1.073,12.597 9.811,3.841 11.77,5.78 z' />
+    </g>
+  </symbol>
+  <symbol id='ref' >
+    <g transform='scale(0.87)'>
+      <path style='fill:#f0d938;stroke:#906b25;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='M 0.10,12.70 5.31,12.15 3.40,10.06 11.82,1.32 11.11,0.45 2.68,9.19 0.80,7.24 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag0' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag1' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#f4a393;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag2' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#77ec8b;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+            d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='nn' >
+    <path style='stroke:#9b3e50;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0,0 3,3 M 0,3 3,0 z'/>
+  </symbol>
+  <symbol id='view' >
+    <g transform='scale(0.99)'>
+      <line x1='12' y1='6' x2='19' y2='0' stroke='black' stroke-width='0.5' />
+      <line x1='0' y1='6' x2='7' y2='0' stroke='black' stroke-width='0.5' />
+      <circle cx='3' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+      <circle cx='10' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+    </g>
+  </symbol>
+</defs>
+
+<defs>  <marker id='arrow01' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 8.000,4.000 L 16.000,4.000 L 8.000,0.000 L 16.000,4.000 L 8.000,8.000' />
+  </marker>
+  <marker id='arrow1' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 8.000,4.000 L 16.000,4.000 L 8.000,0.000 L 16.000,4.000 L 8.000,8.000' />
+  </marker>
+  <marker id='foot01' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+    <circle cx='12.00' cy='4.00' r='2.67' style='fill:white;stroke:#5e554d;' />
+    <path d='M 4.00,0.00 L 4.00, 8.00 z' />
+  </marker>
+  <marker id='foot0p' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+    <circle cx='12.00' cy='4.00' r='2.67' style='fill:white;stroke:#5e554d;' />
+    <path d='M 0.00,0.00 L 8.00,4.00 L 0.00,8.00' />
+  </marker>
+  <marker id='foot1' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+    <path d='M 8.00,0.00 L 8.00, 8.00 z' />
+    <path d='M 4.00,0.00 L 4.00, 8.00 z' />
+  </marker>
+  <marker id='foot1p' viewBox='0 0 16.00 8.00' refX='8.00' refY='4.00' markerWidth='16.00' markerHeight='8.00' orient='auto'>
+    <path d='M 0.00,4.00 L 16.00,4.00 z' />
+    <path d='M 8.00,0.00 L 8.00, 8.00 z' />
+    <path d='M 0.00,0.00 L 8.00,4.00 L 0.00,8.00' />
+  </marker>
+  <linearGradient id='tbg_3986C1' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#E3F2FE' /> 
+     <stop offset='40%' stop-color='#CEE9FF' /> 
+     <stop offset='100%' stop-color='#B3CFE5' /> 
+  </linearGradient>
+  <linearGradient id='tbg_BED3F4' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#E3EDFE' /> 
+     <stop offset='40%' stop-color='#CEE1FF' /> 
+     <stop offset='100%' stop-color='#B3C6E5' /> 
+  </linearGradient>
+</defs>
+
+<!-- == Desktop == -->
+<rect x='1' y='1' width='1678' height='892' rx='8' ry='8' style='fill:url(#layoutBgA); stroke:#84827b; stroke-width:0.5;' />
+<rect x='1' y='1' width='1678' height='892' rx='8' ry='8' style='fill:url(#layoutBgTr);' />
+
+<!-- == Legend == -->
+<g transform='translate(10,10)'>
+  <rect x='10' y='10' width='230' height='56' rx='6' ry='6' style='fill:url(#legendGradient);filter:url(#shadow);'/> 
+  <text x='20' y='25' class='legendTitle' >PostgreSQL</text> 
+  <a xlink:href='https://dbschema.com'><text x='20' y='39' class='legendSubTitle'><tspan>(c) DbSchema</tspan></text></a> 
+  <text x='20' y='53' class='legendSubTitle'><tspan>Hover columns to read the comments.</tspan></text> 
+</g>
+
+<g transform='translate(0,110)'>
+<!-- == Fk 'aggregator_fk_aggregator_users' == -->
+<path id='aggregator_fk_aggregator_users'  onmouseover="hghl(['aggregator_fk_aggregator_users','public.aggregator.user_id','public.users.id'])" onmouseout="uhghl(['aggregator_fk_aggregator_users','public.aggregator.user_id','public.users.id'])" transform='translate(8,0)' class='scene' d='M 768,384L 768,272' >
+	<title>Fk fk_aggregator_users
+aggregator ref users ( user_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 768,384L 768,272' ><title>Fk fk_aggregator_users
+aggregator ref users ( user_id -&gt; id )</title></path>
+<text x='771' y='382' transform='rotate(270 771,382)' class='relName'>user_id</text>
+<!-- == Fk 'bid_fk_bid_products' == -->
+<path id='bid_fk_bid_products'  onmouseover="hghl(['bid_fk_bid_products','public.bid.product_id','public.products.id'])" onmouseout="uhghl(['bid_fk_bid_products','public.bid.product_id','public.products.id'])" transform='translate(8,0)' class='scene' d='M 1440,208L 1328,208' >
+	<title>Fk fk_bid_products
+bid ref products ( product_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 1440,208L 1328,208' ><title>Fk fk_bid_products
+bid ref products ( product_id -&gt; id )</title></path>
+<text x='1387' y='203' transform='rotate(0 1387,203)' class='relName'>product_id</text>
+<!-- == Fk 'bid_fk_bid_users' == -->
+<path id='bid_fk_bid_users'  onmouseover="hghl(['bid_fk_bid_users','public.bid.user_id','public.users.id'])" onmouseout="uhghl(['bid_fk_bid_users','public.bid.user_id','public.users.id'])" transform='translate(8,0)' class='scene' d='M 1440,96L 928,96' >
+	<title>Fk fk_bid_users
+bid ref users ( user_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 1440,96L 928,96' ><title>Fk fk_bid_users
+bid ref users ( user_id -&gt; id )</title></path>
+<text x='1407' y='91' transform='rotate(0 1407,91)' class='relName'>user_id</text>
+<!-- == Fk 'products_fk_bid_users_0' == -->
+<path id='products_fk_bid_users_0'  onmouseover="hghl(['products_fk_bid_users_0','public.products.user_id','public.users.id'])" onmouseout="uhghl(['products_fk_bid_users_0','public.products.user_id','public.users.id'])" transform='translate(8,0)' class='scene' d='M 1104,192L 928,192' >
+	<title>Fk fk_bid_users_0
+products ref users ( user_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 1104,192L 928,192' ><title>Fk fk_bid_users_0
+products ref users ( user_id -&gt; id )</title></path>
+<text x='1071' y='187' transform='rotate(0 1071,187)' class='relName'>user_id</text>
+<!-- == Fk 'proposal_fk_proposal_warehouse' == -->
+<path id='proposal_fk_proposal_warehouse'  onmouseover="hghl(['proposal_fk_proposal_warehouse','public.proposal.warehouse_id','public.warehouse.id'])" onmouseout="uhghl(['proposal_fk_proposal_warehouse','public.proposal.warehouse_id','public.warehouse.id'])" transform='translate(8,0)' class='scene' d='M 432,560L 432,496' >
+	<title>Fk fk_proposal_warehouse
+proposal ref warehouse ( warehouse_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 432,560L 432,496' ><title>Fk fk_proposal_warehouse
+proposal ref warehouse ( warehouse_id -&gt; id )</title></path>
+<text x='435' y='558' transform='rotate(270 435,558)' class='relName'>warehouse_id</text>
+<!-- == Fk 'wallet_fk_wallet_users' == -->
+<path id='wallet_fk_wallet_users'  onmouseover="hghl(['wallet_fk_wallet_users','public.wallet.user_id','public.users.id'])" onmouseout="uhghl(['wallet_fk_wallet_users','public.wallet.user_id','public.users.id'])" transform='translate(8,0)' class='scene' d='M 512,80L 736,80' >
+	<title>Fk fk_wallet_users
+wallet ref users ( user_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 512,80L 736,80' ><title>Fk fk_wallet_users
+wallet ref users ( user_id -&gt; id )</title></path>
+<text x='521' y='75' transform='rotate(0 521,75)' class='relName'>user_id</text>
+<!-- == Fk 'wallet_trans_fk_wallet_transactions_wallet' == -->
+<path id='wallet_trans_fk_wallet_transactions_wallet'  onmouseover="hghl(['wallet_trans_fk_wallet_transactions_wallet','public.wallet_trans.wallet_id','public.wallet.id'])" onmouseout="uhghl(['wallet_trans_fk_wallet_transactions_wallet','public.wallet_trans.wallet_id','public.wallet.id'])" transform='translate(8,0)' class='scene' d='M 272,224L 272,152Q 272,144 280,144L 288,144' >
+	<title>Fk fk_wallet_transactions_wallet
+wallet_trans ref wallet ( wallet_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 272,224L 272,152Q 272,144 280,144L 288,144' ><title>Fk fk_wallet_transactions_wallet
+wallet_trans ref wallet ( wallet_id -&gt; id )</title></path>
+<text x='275' y='222' transform='rotate(270 275,222)' class='relName'>wallet_id</text>
+<!-- == Fk 'warehouse_fk_warehouse_users' == -->
+<path id='warehouse_fk_warehouse_users'  onmouseover="hghl(['warehouse_fk_warehouse_users','public.warehouse.user_id','public.users.id'])" onmouseout="uhghl(['warehouse_fk_warehouse_users','public.warehouse.user_id','public.users.id'])" transform='translate(8,0)' class='scene' d='M 576,304L 576,248Q 576,240 584,240L 736,240' >
+	<title>Fk fk_warehouse_users
+warehouse ref users ( user_id -&gt; id )</title>
+</path>
+<path transform='translate(8,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 576,304L 576,248Q 576,240 584,240L 736,240' ><title>Fk fk_warehouse_users
+warehouse ref users ( user_id -&gt; id )</title></path>
+<text x='579' y='302' transform='rotate(270 579,302)' class='relName'>user_id</text>
+<!-- == Table 'aggregator' == -->
+<rect class='entity' style='stroke:none;' x='752' y='392' width='224' height='208' rx='8' ry='8' />
+<path d='M 752 420 L 752 400 Q 752 392 760 392 L 968 392 Q 976 392 976 400 L 976 420 L752 420 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='752' y='392' width='224' height='208' rx='8' ry='8' style='fill:none;stroke:#CBDBE8'/>
+<a xlink:href='#public.aggregator'><text x='829' y='411' >aggregator</text><title>Table public.aggregator</title></a>
+  <use id='nn' x='754' y='429' xlink:href='#nn'/><a xlink:href='#public.aggregator_id'><text id='public.aggregator.id' x='771' y='439'>id</text><title>id
+* uuid default uuid_generate_v4()</title></a>
+<text x='960' y='440' text-anchor='end' class='colType'>uuid</text>  <use id='nn' x='754' y='445' xlink:href='#nn'/><a xlink:href='#public.aggregator_user_id'><text id='public.aggregator.user_id' x='771' y='455' onmouseover="hghl(['aggregator_fk_aggregator_users','public.users.id'])" onmouseout="uhghl(['aggregator_fk_aggregator_users','public.users.id'])">user_id</text><title>user_id
+* uuid</title></a>
+<text x='960' y='456' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.aggregator.user_id'><use id='fk' x='964' y='444' xlink:href='#fk'/><title>References users ( user_id -&gt; id ) </title></a>
+  <a xlink:href='#public.aggregator_aggregator_name'><text id='public.aggregator.aggregator_name' x='771' y='471'>aggregator_name</text><title>aggregator_name
+varchar(255)</title></a>
+<text x='960' y='472' text-anchor='end' class='colType'>varchar(255)</text>  <a xlink:href='#public.aggregator_phone'><text id='public.aggregator.phone' x='771' y='487'>phone</text><title>phone
+varchar(10)</title></a>
+<text x='960' y='488' text-anchor='end' class='colType'>varchar(10)</text>  <a xlink:href='#public.aggregator_latitude'><text id='public.aggregator.latitude' x='771' y='503'>latitude</text><title>latitude
+numeric(100,10)</title></a>
+<text x='960' y='504' text-anchor='end' class='colType'>numeric(100,10)</text>  <a xlink:href='#public.aggregator_longitude'><text id='public.aggregator.longitude' x='771' y='519'>longitude</text><title>longitude
+numeric(100,10)</title></a>
+<text x='960' y='520' text-anchor='end' class='colType'>numeric(100,10)</text>  <a xlink:href='#public.aggregator_pincode'><text id='public.aggregator.pincode' x='771' y='535'>pincode</text><title>pincode
+numeric(6,0)</title></a>
+<text x='960' y='536' text-anchor='end' class='colType'>numeric(6,0)</text>  <a xlink:href='#public.aggregator_address'><text id='public.aggregator.address' x='771' y='551'>address</text><title>address
+varchar(255)</title></a>
+<text x='960' y='552' text-anchor='end' class='colType'>varchar(255)</text>  <a xlink:href='#public.aggregator_description'><text id='public.aggregator.description' x='771' y='567'>description</text><title>description
+varchar(10000)</title></a>
+<text x='960' y='568' text-anchor='end' class='colType'>varchar(10000)</text>  <a xlink:href='#public.aggregator_whatsapp'><text id='public.aggregator.whatsapp' x='771' y='583'>whatsapp</text><title>whatsapp
+varchar(255)</title></a>
+<text x='960' y='584' text-anchor='end' class='colType'>varchar(255)</text>
+<!-- == Table 'bid' == -->
+<rect class='entity' style='stroke:none;' x='1456' y='40' width='176' height='208' rx='8' ry='8' />
+<path d='M 1456 68 L 1456 48 Q 1456 40 1464 40 L 1624 40 Q 1632 40 1632 48 L 1632 68 L1456 68 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1456' y='40' width='176' height='208' rx='8' ry='8' style='fill:none;stroke:#CBDBE8'/>
+<a xlink:href='#public.bid'><text x='1531' y='59' >bid</text><title>Table public.bid</title></a>
+  <use id='nn' x='1458' y='77' xlink:href='#nn'/><use id='pk' x='1458' y='76' xlink:href='#pk'><title>Pk pk_bid_id_0 ( id ) </title></use><a xlink:href='#public.bid_id'><text id='public.bid.id' x='1475' y='87'>id</text><title>id
+* uuid default uuid_generate_v4()</title></a>
+<text x='1616' y='88' text-anchor='end' class='colType'>uuid</text>  <use id='nn' x='1458' y='93' xlink:href='#nn'/><a xlink:href='#public.bid_user_id'><text id='public.bid.user_id' x='1475' y='103' onmouseover="hghl(['bid_fk_bid_users','public.users.id'])" onmouseout="uhghl(['bid_fk_bid_users','public.users.id'])">user_id</text><title>user_id
+* uuid</title></a>
+<text x='1616' y='104' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.bid.user_id'><use id='fk' x='1620' y='92' xlink:href='#fk'/><title>References users ( user_id -&gt; id ) </title></a>
+  <use id='nn' x='1458' y='109' xlink:href='#nn'/><a xlink:href='#public.bid_product_id'><text id='public.bid.product_id' x='1475' y='119' onmouseover="hghl(['bid_fk_bid_products','public.products.id'])" onmouseout="uhghl(['bid_fk_bid_products','public.products.id'])">product_id</text><title>product_id
+* uuid</title></a>
+<text x='1616' y='120' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.bid.product_id'><use id='fk' x='1620' y='108' xlink:href='#fk'/><title>References products ( product_id -&gt; id ) </title></a>
+  <use id='nn' x='1458' y='125' xlink:href='#nn'/><a xlink:href='#public.bid_min_quantity'><text id='public.bid.min_quantity' x='1475' y='135'>min_quantity</text><title>min_quantity
+* bigint</title></a>
+<text x='1616' y='136' text-anchor='end' class='colType'>bigint</text>  <use id='nn' x='1458' y='141' xlink:href='#nn'/><a xlink:href='#public.bid_max_quantity'><text id='public.bid.max_quantity' x='1475' y='151'>max_quantity</text><title>max_quantity
+* bigint</title></a>
+<text x='1616' y='152' text-anchor='end' class='colType'>bigint</text>  <use id='nn' x='1458' y='157' xlink:href='#nn'/><a xlink:href='#public.bid_rate'><text id='public.bid.rate' x='1475' y='167'>rate</text><title>rate
+* numeric(12,2)</title></a>
+<text x='1616' y='168' text-anchor='end' class='colType'>numeric(12,2)</text>  <use id='nn' x='1458' y='173' xlink:href='#nn'/><a xlink:href='#public.bid_amount'><text id='public.bid.amount' x='1475' y='183'>amount</text><title>amount
+* numeric(12,2)</title></a>
+<text x='1616' y='184' text-anchor='end' class='colType'>numeric(12,2)</text>  <use id='nn' x='1458' y='189' xlink:href='#nn'/><a xlink:href='#public.bid_bid_date'><text id='public.bid.bid_date' x='1475' y='199'>bid_date</text><title>bid_date
+* date</title></a>
+<text x='1616' y='200' text-anchor='end' class='colType'>date</text>  <use id='nn' x='1458' y='205' xlink:href='#nn'/><a xlink:href='#public.bid_bid_time'><text id='public.bid.bid_time' x='1475' y='215'>bid_time</text><title>bid_time
+* time</title></a>
+<text x='1616' y='216' text-anchor='end' class='colType'>time</text>  <use id='nn' x='1458' y='221' xlink:href='#nn'/><a xlink:href='#public.bid_status'><text id='public.bid.status' x='1475' y='231'>status</text><title>status
+* char(1) default 0</title></a>
+<text x='1616' y='232' text-anchor='end' class='colType'>char(1)</text>
+<!-- == Table 'products' == -->
+<rect class='entity' style='stroke:none;' x='1120' y='184' width='208' height='352' rx='8' ry='8' />
+<path d='M 1120 212 L 1120 192 Q 1120 184 1128 184 L 1320 184 Q 1328 184 1328 192 L 1328 212 L1120 212 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1120' y='184' width='208' height='352' rx='8' ry='8' style='fill:none;stroke:#CBDBE8'/>
+<a xlink:href='#public.products'><text x='1195' y='203' >products</text><title>Table public.products</title></a>
+  <use id='nn' x='1122' y='221' xlink:href='#nn'/><use id='pk' x='1122' y='220' xlink:href='#pk'><title>Pk pk_bid_id ( id ) </title></use><a xlink:href='#public.products_id'><text id='public.products.id' x='1139' y='231' onmouseover="hghl(['bid_fk_bid_products','public.bid.product_id'])" onmouseout="uhghl(['bid_fk_bid_products','public.bid.product_id'])">id</text><title>id
+* uuid default uuid_generate_v4()</title></a>
+<text x='1312' y='232' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.products.id'><use id='ref' x='1316' y='220' xlink:href='#ref'/><title>Referred by bid ( product_id -&gt; id ) </title></a>
+  <use id='nn' x='1122' y='237' xlink:href='#nn'/><a xlink:href='#public.products_user_id'><text id='public.products.user_id' x='1139' y='247' onmouseover="hghl(['products_fk_bid_users_0','public.users.id'])" onmouseout="uhghl(['products_fk_bid_users_0','public.users.id'])">user_id</text><title>user_id
+* uuid</title></a>
+<text x='1312' y='248' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.products.user_id'><use id='fk' x='1316' y='236' xlink:href='#fk'/><title>References users ( user_id -&gt; id ) </title></a>
+  <use id='nn' x='1122' y='253' xlink:href='#nn'/><a xlink:href='#public.products_product_name'><text id='public.products.product_name' x='1139' y='263'>product_name</text><title>product_name
+* varchar(100)</title></a>
+<text x='1312' y='264' text-anchor='end' class='colType'>varchar(100)</text>  <use id='nn' x='1122' y='269' xlink:href='#nn'/><a xlink:href='#public.products_quantity'><text id='public.products.quantity' x='1139' y='279'>quantity</text><title>quantity
+* bigint</title></a>
+<text x='1312' y='280' text-anchor='end' class='colType'>bigint</text>  <use id='nn' x='1122' y='285' xlink:href='#nn'/><a xlink:href='#public.products_unit'><text id='public.products.unit' x='1139' y='295'>unit</text><title>unit
+* quantity_unit</title></a>
+<text x='1312' y='296' text-anchor='end' class='colType'>quantity_unit</text>  <use id='nn' x='1122' y='301' xlink:href='#nn'/><a xlink:href='#public.products_base_price'><text id='public.products.base_price' x='1139' y='311'>base_price</text><title>base_price
+* numeric(12,2)</title></a>
+<text x='1312' y='312' text-anchor='end' class='colType'>numeric(12,2)</text>  <use id='nn' x='1122' y='317' xlink:href='#nn'/><a xlink:href='#public.products_description'><text id='public.products.description' x='1139' y='327'>description</text><title>description
+* varchar(256)</title></a>
+<text x='1312' y='328' text-anchor='end' class='colType'>varchar(256)</text>  <use id='nn' x='1122' y='333' xlink:href='#nn'/><a xlink:href='#public.products_start_dt'><text id='public.products.start_dt' x='1139' y='343'>start_dt</text><title>start_dt
+* date</title></a>
+<text x='1312' y='344' text-anchor='end' class='colType'>date</text>  <use id='nn' x='1122' y='349' xlink:href='#nn'/><a xlink:href='#public.products_end_dt'><text id='public.products.end_dt' x='1139' y='359'>end_dt</text><title>end_dt
+* date</title></a>
+<text x='1312' y='360' text-anchor='end' class='colType'>date</text>  <use id='nn' x='1122' y='365' xlink:href='#nn'/><a xlink:href='#public.products_pin_code'><text id='public.products.pin_code' x='1139' y='375'>pin_code</text><title>pin_code
+* numeric(6,0)</title></a>
+<text x='1312' y='376' text-anchor='end' class='colType'>numeric(6,0)</text>  <use id='nn' x='1122' y='381' xlink:href='#nn'/><a xlink:href='#public.products_city'><text id='public.products.city' x='1139' y='391'>city</text><title>city
+* varchar(64)</title></a>
+<text x='1312' y='392' text-anchor='end' class='colType'>varchar(64)</text>  <use id='nn' x='1122' y='397' xlink:href='#nn'/><a xlink:href='#public.products_state_name'><text id='public.products.state_name' x='1139' y='407'>state_name</text><title>state_name
+* varchar(64)</title></a>
+<text x='1312' y='408' text-anchor='end' class='colType'>varchar(64)</text>  <use id='nn' x='1122' y='413' xlink:href='#nn'/><a xlink:href='#public.products_result_status'><text id='public.products.result_status' x='1139' y='423'>result_status</text><title>result_status
+* char(1) default 0</title></a>
+<text x='1312' y='424' text-anchor='end' class='colType'>char(1)</text>  <use id='nn' x='1122' y='429' xlink:href='#nn'/><a xlink:href='#public.products_rating'><text id='public.products.rating' x='1139' y='439'>rating</text><title>rating
+* numeric(5,1) default 0</title></a>
+<text x='1312' y='440' text-anchor='end' class='colType'>numeric(5,1)</text>  <use id='nn' x='1122' y='445' xlink:href='#nn'/><a xlink:href='#public.products_no_rating'><text id='public.products.no_rating' x='1139' y='455'>no_rating</text><title>no_rating
+* bigint default 0</title></a>
+<text x='1312' y='456' text-anchor='end' class='colType'>bigint</text>  <use id='nn' x='1122' y='461' xlink:href='#nn'/><a xlink:href='#public.products_district'><text id='public.products.district' x='1139' y='471'>district</text><title>district
+* varchar(64)</title></a>
+<text x='1312' y='472' text-anchor='end' class='colType'>varchar(64)</text>  <use id='nn' x='1122' y='477' xlink:href='#nn'/><a xlink:href='#public.products_product_cat'><text id='public.products.product_cat' x='1139' y='487'>product_cat</text><title>product_cat
+* product_types</title></a>
+<text x='1312' y='488' text-anchor='end' class='colType'>product_types</text>  <a xlink:href='#public.products_latitude'><text id='public.products.latitude' x='1139' y='503'>latitude</text><title>latitude
+numeric</title></a>
+<text x='1312' y='504' text-anchor='end' class='colType'>numeric</text>  <a xlink:href='#public.products_longitude'><text id='public.products.longitude' x='1139' y='519'>longitude</text><title>longitude
+numeric</title></a>
+<text x='1312' y='520' text-anchor='end' class='colType'>numeric</text>
+<!-- == Table 'proposal' == -->
+<rect class='entity' style='stroke:none;' x='416' y='568' width='192' height='160' rx='8' ry='8' />
+<path d='M 416 596 L 416 576 Q 416 568 424 568 L 600 568 Q 608 568 608 576 L 608 596 L416 596 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='416' y='568' width='192' height='160' rx='8' ry='8' style='fill:none;stroke:#CBDBE8'/>
+<a xlink:href='#public.proposal'><text x='483' y='587' >proposal</text><title>Table public.proposal</title></a>
+  <use id='nn' x='418' y='605' xlink:href='#nn'/><a xlink:href='#public.proposal_warehouse_id'><text id='public.proposal.warehouse_id' x='435' y='615' onmouseover="hghl(['proposal_fk_proposal_warehouse','public.warehouse.id'])" onmouseout="uhghl(['proposal_fk_proposal_warehouse','public.warehouse.id'])">warehouse_id</text><title>warehouse_id
+* uuid</title></a>
+<text x='592' y='616' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.proposal.warehouse_id'><use id='fk' x='596' y='604' xlink:href='#fk'/><title>References warehouse ( warehouse_id -&gt; id ) </title></a>
+  <use id='nn' x='418' y='621' xlink:href='#nn'/><a xlink:href='#public.proposal_user_id'><text id='public.proposal.user_id' x='435' y='631'>user_id</text><title>user_id
+* uuid</title></a>
+<text x='592' y='632' text-anchor='end' class='colType'>uuid</text>  <use id='nn' x='418' y='637' xlink:href='#nn'/><a xlink:href='#public.proposal_start_date'><text id='public.proposal.start_date' x='435' y='647'>start_date</text><title>start_date
+* date</title></a>
+<text x='592' y='648' text-anchor='end' class='colType'>date</text>  <use id='nn' x='418' y='653' xlink:href='#nn'/><a xlink:href='#public.proposal_end_date'><text id='public.proposal.end_date' x='435' y='663'>end_date</text><title>end_date
+* date</title></a>
+<text x='592' y='664' text-anchor='end' class='colType'>date</text>  <a xlink:href='#public.proposal_quantity'><text id='public.proposal.quantity' x='435' y='679'>quantity</text><title>quantity
+numeric(1000,0)</title></a>
+<text x='592' y='680' text-anchor='end' class='colType'>numeric(1000,0)</text>  <use id='nn' x='418' y='685' xlink:href='#nn'/><a xlink:href='#public.proposal_id'><text id='public.proposal.id' x='435' y='695'>id</text><title>id
+* uuid default uuid_generate_v4()</title></a>
+<text x='592' y='696' text-anchor='end' class='colType'>uuid</text>  <a xlink:href='#public.proposal_current_status'><text id='public.proposal.current_status' x='435' y='711'>current_status</text><title>current_status
+status default &apos;pending&apos;::status</title></a>
+<text x='592' y='712' text-anchor='end' class='colType'>status</text>
+<!-- == Table 'users' == -->
+<rect class='entity' style='stroke:none;' x='752' y='72' width='176' height='192' rx='8' ry='8' />
+<path d='M 752 100 L 752 80 Q 752 72 760 72 L 920 72 Q 928 72 928 80 L 928 100 L752 100 ' style='fill:url(#tbg_BED3F4);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='752' y='72' width='176' height='192' rx='8' ry='8' style='fill:none;stroke:#CBD6E8'/>
+<a xlink:href='#public.users'><text x='821' y='91' >users</text><title>Table public.users</title></a>
+  <use id='nn' x='754' y='109' xlink:href='#nn'/><use id='pk' x='754' y='108' xlink:href='#pk'><title>Pk pk_users_id ( id ) </title></use><a xlink:href='#public.users_id'><text id='public.users.id' x='771' y='119' onmouseover="hghl(['aggregator_fk_aggregator_users','public.aggregator.user_id','bid_fk_bid_users','public.bid.user_id','products_fk_bid_users_0','public.products.user_id','wallet_fk_wallet_users','public.wallet.user_id','warehouse_fk_warehouse_users','public.warehouse.user_id'])" onmouseout="uhghl(['aggregator_fk_aggregator_users','public.aggregator.user_id','bid_fk_bid_users','public.bid.user_id','products_fk_bid_users_0','public.products.user_id','wallet_fk_wallet_users','public.wallet.user_id','warehouse_fk_warehouse_users','public.warehouse.user_id'])">id</text><title>id
+* uuid default uuid_generate_v4()</title></a>
+<text x='912' y='120' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.users.id'><use id='ref' x='916' y='108' xlink:href='#ref'/><title>Referred by aggregator ( user_id -&gt; id ) 
+Referred by bid ( user_id -&gt; id ) 
+Referred by products ( user_id -&gt; id ) 
+Referred by wallet ( user_id -&gt; id ) 
+Referred by warehouse ( user_id -&gt; id ) </title></a>
+  <use id='nn' x='754' y='125' xlink:href='#nn'/><use id='unq' x='754' y='124' xlink:href='#unq'><title>Unq idx_users_aadhar ( aadhar_no ) </title></use><a xlink:href='#public.users_aadhar_no'><text id='public.users.aadhar_no' x='771' y='135'>aadhar_no</text><title>aadhar_no
+* varchar(12)</title></a>
+<text x='912' y='136' text-anchor='end' class='colType'>varchar(12)</text>  <use id='unq' x='754' y='140' xlink:href='#unq'><title>Unq idx_users_pan ( pan_no ) </title></use><a xlink:href='#public.users_pan_no'><text id='public.users.pan_no' x='771' y='151'>pan_no</text><title>pan_no
+varchar(10)</title></a>
+<text x='912' y='152' text-anchor='end' class='colType'>varchar(10)</text>  <use id='nn' x='754' y='157' xlink:href='#nn'/><a xlink:href='#public.users_password'><text id='public.users.password' x='771' y='167'>password</text><title>password
+* varchar(512)</title></a>
+<text x='912' y='168' text-anchor='end' class='colType'>varchar(512)</text>  <use id='nn' x='754' y='173' xlink:href='#nn'/><a xlink:href='#public.users_fname'><text id='public.users.fname' x='771' y='183'>fname</text><title>fname
+* varchar(100)</title></a>
+<text x='912' y='184' text-anchor='end' class='colType'>varchar(100)</text>  <use id='nn' x='754' y='189' xlink:href='#nn'/><a xlink:href='#public.users_lname'><text id='public.users.lname' x='771' y='199'>lname</text><title>lname
+* varchar(100)</title></a>
+<text x='912' y='200' text-anchor='end' class='colType'>varchar(100)</text>  <use id='nn' x='754' y='205' xlink:href='#nn'/><use id='unq' x='754' y='204' xlink:href='#unq'><title>Unq idx_users_phno ( phno ) </title></use><a xlink:href='#public.users_phno'><text id='public.users.phno' x='771' y='215'>phno</text><title>phno
+* varchar(13)</title></a>
+<text x='912' y='216' text-anchor='end' class='colType'>varchar(13)</text>  <use id='nn' x='754' y='221' xlink:href='#nn'/><a xlink:href='#public.users_no_rating'><text id='public.users.no_rating' x='771' y='231'>no_rating</text><title>no_rating
+* bigint default 0</title></a>
+<text x='912' y='232' text-anchor='end' class='colType'>bigint</text>  <use id='nn' x='754' y='237' xlink:href='#nn'/><a xlink:href='#public.users_user_rating'><text id='public.users.user_rating' x='771' y='247'>user_rating</text><title>user_rating
+* bigint default 0</title></a>
+<text x='912' y='248' text-anchor='end' class='colType'>bigint</text>
+<!-- == Table 'wallet' == -->
+<rect class='entity' style='stroke:none;' x='304' y='56' width='208' height='112' rx='8' ry='8' />
+<path d='M 304 84 L 304 64 Q 304 56 312 56 L 504 56 Q 512 56 512 64 L 512 84 L304 84 ' style='fill:url(#tbg_BED3F4);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='304' y='56' width='208' height='112' rx='8' ry='8' style='fill:none;stroke:#CBD6E8'/>
+<a xlink:href='#public.wallet'><text x='386' y='75' >wallet</text><title>Table public.wallet</title></a>
+  <use id='nn' x='306' y='93' xlink:href='#nn'/><use id='pk' x='306' y='92' xlink:href='#pk'><title>Pk pk_wallet_wallet_id ( id ) </title></use><a xlink:href='#public.wallet_id'><text id='public.wallet.id' x='323' y='103' onmouseover="hghl(['wallet_trans_fk_wallet_transactions_wallet','public.wallet_trans.wallet_id'])" onmouseout="uhghl(['wallet_trans_fk_wallet_transactions_wallet','public.wallet_trans.wallet_id'])">id</text><title>id
+* uuid default uuid_generate_v4()</title></a>
+<text x='496' y='104' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.wallet.id'><use id='ref' x='500' y='92' xlink:href='#ref'/><title>Referred by wallet_trans ( wallet_id -&gt; id ) </title></a>
+  <use id='nn' x='306' y='109' xlink:href='#nn'/><use id='unq' x='306' y='108' xlink:href='#unq'><title>Unq unq_wallet ( user_id ) </title></use><a xlink:href='#public.wallet_user_id'><text id='public.wallet.user_id' x='323' y='119' onmouseover="hghl(['wallet_fk_wallet_users','public.users.id'])" onmouseout="uhghl(['wallet_fk_wallet_users','public.users.id'])">user_id</text><title>user_id
+* uuid</title></a>
+<text x='496' y='120' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.wallet.user_id'><use id='fk' x='500' y='108' xlink:href='#fk'/><title>References users ( user_id -&gt; id ) </title></a>
+  <use id='nn' x='306' y='125' xlink:href='#nn'/><a xlink:href='#public.wallet_available_amt'><text id='public.wallet.available_amt' x='323' y='135'>available_amt</text><title>available_amt
+* numeric(12,2)</title></a>
+<text x='496' y='136' text-anchor='end' class='colType'>numeric(12,2)</text>  <use id='nn' x='306' y='141' xlink:href='#nn'/><a xlink:href='#public.wallet_blocked_amt'><text id='public.wallet.blocked_amt' x='323' y='151'>blocked_amt</text><title>blocked_amt
+* numeric(12,2)</title></a>
+<text x='496' y='152' text-anchor='end' class='colType'>numeric(12,2)</text>
+<!-- == Table 'wallet_trans' == -->
+<rect class='entity' style='stroke:none;' x='48' y='232' width='240' height='176' rx='8' ry='8' />
+<path d='M 48 260 L 48 240 Q 48 232 56 232 L 280 232 Q 288 232 288 240 L 288 260 L48 260 ' style='fill:url(#tbg_BED3F4);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='48' y='232' width='240' height='176' rx='8' ry='8' style='fill:none;stroke:#CBD6E8'/>
+<a xlink:href='#public.wallet_trans'><text x='128' y='251' >wallet_trans</text><title>Table public.wallet_trans</title></a>
+  <use id='nn' x='50' y='269' xlink:href='#nn'/><use id='pk' x='50' y='268' xlink:href='#pk'><title>Pk pk_wallet_trans ( id, wallet_id ) </title></use><a xlink:href='#public.wallet_trans_id'><text id='public.wallet_trans.id' x='67' y='279'>id</text><title>id
+* uuid default uuid_generate_v4()</title></a>
+<text x='272' y='280' text-anchor='end' class='colType'>uuid</text>  <use id='nn' x='50' y='285' xlink:href='#nn'/><use id='pk' x='50' y='284' xlink:href='#pk'><title>Pk pk_wallet_trans ( id, wallet_id ) </title></use><a xlink:href='#public.wallet_trans_wallet_id'><text id='public.wallet_trans.wallet_id' x='67' y='295' onmouseover="hghl(['wallet_trans_fk_wallet_transactions_wallet','public.wallet.id'])" onmouseout="uhghl(['wallet_trans_fk_wallet_transactions_wallet','public.wallet.id'])">wallet_id</text><title>wallet_id
+* uuid</title></a>
+<text x='272' y='296' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.wallet_trans.wallet_id'><use id='fk' x='276' y='284' xlink:href='#fk'/><title>References wallet ( wallet_id -&gt; id ) </title></a>
+  <use id='nn' x='50' y='301' xlink:href='#nn'/><a xlink:href='#public.wallet_trans_transaction_type'><text id='public.wallet_trans.transaction_type' x='67' y='311'>transaction_type</text><title>transaction_type
+* transaction_type</title></a>
+<text x='272' y='312' text-anchor='end' class='colType'>transaction_type</text>  <use id='nn' x='50' y='317' xlink:href='#nn'/><a xlink:href='#public.wallet_trans_transaction_amt'><text id='public.wallet_trans.transaction_amt' x='67' y='327'>transaction_amt</text><title>transaction_amt
+* numeric(12,2)</title></a>
+<text x='272' y='328' text-anchor='end' class='colType'>numeric(12,2)</text>  <a xlink:href='#public.wallet_trans_description'><text id='public.wallet_trans.description' x='67' y='343'>description</text><title>description
+varchar(100)</title></a>
+<text x='272' y='344' text-anchor='end' class='colType'>varchar(100)</text>  <use id='nn' x='50' y='349' xlink:href='#nn'/><a xlink:href='#public.wallet_trans_trans_date'><text id='public.wallet_trans.trans_date' x='67' y='359'>trans_date</text><title>trans_date
+* date</title></a>
+<text x='272' y='360' text-anchor='end' class='colType'>date</text>  <use id='nn' x='50' y='365' xlink:href='#nn'/><a xlink:href='#public.wallet_trans_trans_time'><text id='public.wallet_trans.trans_time' x='67' y='375'>trans_time</text><title>trans_time
+* time</title></a>
+<text x='272' y='376' text-anchor='end' class='colType'>time</text>  <use id='nn' x='50' y='381' xlink:href='#nn'/><a xlink:href='#public.wallet_trans_trans_status'><text id='public.wallet_trans.trans_status' x='67' y='391'>trans_status</text><title>trans_status
+* trans_status</title></a>
+<text x='272' y='392' text-anchor='end' class='colType'>trans_status</text>
+<!-- == Table 'warehouse' == -->
+<rect class='entity' style='stroke:none;' x='368' y='312' width='224' height='176' rx='8' ry='8' />
+<path d='M 368 340 L 368 320 Q 368 312 376 312 L 584 312 Q 592 312 592 320 L 592 340 L368 340 ' style='fill:url(#tbg_3986C1);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='368' y='312' width='224' height='176' rx='8' ry='8' style='fill:none;stroke:#CBDBE8'/>
+<a xlink:href='#public.warehouse'><text x='445' y='331' >warehouse</text><title>Table public.warehouse</title></a>
+  <use id='nn' x='370' y='349' xlink:href='#nn'/><use id='unq' x='370' y='348' xlink:href='#unq'><title>Unq unq_warehouse_id ( id ) </title></use><a xlink:href='#public.warehouse_id'><text id='public.warehouse.id' x='387' y='359' onmouseover="hghl(['proposal_fk_proposal_warehouse','public.proposal.warehouse_id'])" onmouseout="uhghl(['proposal_fk_proposal_warehouse','public.proposal.warehouse_id'])">id</text><title>id
+* uuid default uuid_generate_v4()</title></a>
+<text x='576' y='360' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.warehouse.id'><use id='ref' x='580' y='348' xlink:href='#ref'/><title>Referred by proposal ( warehouse_id -&gt; id ) </title></a>
+  <use id='nn' x='370' y='365' xlink:href='#nn'/><a xlink:href='#public.warehouse_user_id'><text id='public.warehouse.user_id' x='387' y='375' onmouseover="hghl(['warehouse_fk_warehouse_users','public.users.id'])" onmouseout="uhghl(['warehouse_fk_warehouse_users','public.users.id'])">user_id</text><title>user_id
+* uuid</title></a>
+<text x='576' y='376' text-anchor='end' class='colType'>uuid</text><a xlink:href='#public.warehouse.user_id'><use id='fk' x='580' y='364' xlink:href='#fk'/><title>References users ( user_id -&gt; id ) </title></a>
+  <a xlink:href='#public.warehouse_warehouse_name'><text id='public.warehouse.warehouse_name' x='387' y='391'>warehouse_name</text><title>warehouse_name
+varchar(255)</title></a>
+<text x='576' y='392' text-anchor='end' class='colType'>varchar(255)</text>  <a xlink:href='#public.warehouse_phone'><text id='public.warehouse.phone' x='387' y='407'>phone</text><title>phone
+varchar(10)</title></a>
+<text x='576' y='408' text-anchor='end' class='colType'>varchar(10)</text>  <a xlink:href='#public.warehouse_latitude'><text id='public.warehouse.latitude' x='387' y='423'>latitude</text><title>latitude
+numeric(100,10)</title></a>
+<text x='576' y='424' text-anchor='end' class='colType'>numeric(100,10)</text>  <a xlink:href='#public.warehouse_longitude'><text id='public.warehouse.longitude' x='387' y='439'>longitude</text><title>longitude
+numeric(100,10)</title></a>
+<text x='576' y='440' text-anchor='end' class='colType'>numeric(100,10)</text>  <a xlink:href='#public.warehouse_pincode'><text id='public.warehouse.pincode' x='387' y='455'>pincode</text><title>pincode
+numeric(6,0)</title></a>
+<text x='576' y='456' text-anchor='end' class='colType'>numeric(6,0)</text>  <a xlink:href='#public.warehouse_address'><text id='public.warehouse.address' x='387' y='471'>address</text><title>address
+varchar(255)</title></a>
+<text x='576' y='472' text-anchor='end' class='colType'>varchar(255)</text>
+</g></svg>

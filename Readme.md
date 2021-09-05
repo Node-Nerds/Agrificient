@@ -10,11 +10,13 @@
 1. [Introduction](#Introduction)
 2. [Purpose](#Introduction)
 3. [Features](#Features)
-4. [Tools-Used](#Tools-Used)
-5. [Prerequisites](#Prerequirites)
+4. [Application Structure](#Application)
+5. [Database Schema](#Database)
+5. [Prerequisites](#Prerequisites)
 6. [Installation](#Installation)
 7. [Demonstration](#Demonstration)
-8. [Contributors](#Contributions)
+8. [Tools-Used](#Tools-Used)
+9. [Contributors](#Contributions)
 
 ## Introduction
 
@@ -50,6 +52,18 @@ Not Found
 - **Forecasting:** Price forecasts based on statistics to keep farmers informed about market prices.
 
 - **Easy to use UI:** Easy to User Interface so that the target audience can use it easily.
+
+## Application Wireframe
+<img src="./public/images/wireframe.png" />
+
+- **Express Server:** It serves response to the client.
+
+- **Flask app:** It runs python script to predict future price and production for forecasting. It uses Machine Learning models for prediction. <a href="https://github.com/Node-Nerds/forecast">Link to flask app repository.</a>
+
+- **PostgreSQL Database:** Database used to store data and query as per requirement. It is deployed using heroku-postgres.
+
+## Database Schema
+<img src="./public/images/layoutWithTools.svg" />
 
 ## Prerequisites
 
