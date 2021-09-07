@@ -38,13 +38,13 @@ To provide a solution, we have created a website which provides farmer to get su
 ## Features
 
 - **Bidding:** Farmers may use online bidding to directly present their goods to the market without the involvement of a middleman, allowing them to receive the highest price for their product without compromising on profit.
-Not Found
-<img src="./public/images/bidding.png" />
+
+<img src="./public/images/Bidding.png" />
 
 - **Logistics:** Farmers may considerably reduce expenses by employing an efficient warehouse and transportation facility to get their goods to customers in a timely and safe way. They can also acquire temporary warehousing from a local partner who operates local warehouses.
 
 - **Aggregation:** Aggregation is a multi-party agreement. It is one of the most effective strategies to help agricultural value chains achieve economies of scale. It reduces costs and maximizes throughput. Aggregation enables the delivery of costly and sophisticated services that would otherwise be unavailable on an individual basis.
-Not Found
+
 <img src="./public/images/aggregation.png" />
 
 - **Authentication:** To create a trustworthy platform, different mechanisms such as legal and government documentation are used to confirm the legitimacy of buyers and sellers. Increasing confidence and certainty across the supply chain.
@@ -103,10 +103,10 @@ To get a copy of the website running on your local system follow these steps :
 ## Demonstration 
 
 - SignIn Page
-<img src="./public/images/signin.png" alt="not found">
+<img src="./public/images/Signin.png" alt="not found">
 
 - SignUp page
-<img src="./public/images/signup.png" alt="not found">
+<img src="./public/images/Signup.png" alt="not found">
 
 - Dashboard
 <img src="./public/images/dashboard.png" alt="not found">
